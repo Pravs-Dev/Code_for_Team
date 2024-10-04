@@ -320,7 +320,7 @@ if (Array.isArray(coursesData)) {
 
 // Fetch faculties and courses from the API and populate the Swal modal, mark current courses
 async function fetchFacultiesForSwal(currentCourses) {
-    const API_BASE_URL = 'https://finalbackend2099.azurewebsites.net/api';
+    //const API_BASE_URL = 'https://finalbackend2099.azurewebsites.net/api';
 
     let facultiesData = [];
 
@@ -398,7 +398,7 @@ async function fetchFacultiesForSwal(currentCourses) {
 
 // Fetch the user's current courses
 async function getCurrentCourses() {
-    const API_BASE_URL = 'http://localhost:3000/api';  // Replace with your API endpoint
+    //const API_BASE_URL = 'https://finalbackend2099.azurewebsites.net/api';
     const userId = localStorage.getItem('userId');
     const token = localStorage.getItem('token');
     try {
