@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://finalbackend2099.azurewebsites.net/api';
+const API_BASE_URL = 'http://localhost:3000/api';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -111,3 +111,170 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+document.getElementById('courses').addEventListener('click', function () {
+    // Show a Swal modal with course selection
+    Swal.fire({
+        title: 'Select Courses',
+        html: `
+            <div class="main-content">
+                <div class="select-container">
+                    <label for="faculty">Select Faculty:</label>
+                    <select id="faculty" class="swal2-select custom-swal-select">
+                        <option value="" disabled selected>-- Select Faculty --</option>
+                    </select>
+                </div>
+                <div class="select-container" id="course-container" style="display:none;">
+                    <label for="course">Select Course:</label>
+                    <select id="course" class="swal2-select custom-swal-select">
+                        <option value="" disabled selected>-- Select Course --</option>
+                    </select>
+                </div>
+                <div class="select-container" id="year-container" style="display:none;">
+                    <label for="year">Select Year of Study:</label>
+                    <select id="year" class="swal2-select custom-swal-select">
+                        <option value="" disabled selected>-- Select Year --</option>
+                    </select>
+                </div>
+                <div class="course-list" id="course-list" style="display:none;">
+                    <h2>Modules Available for Selected Year</h2>
+                    <form id="module-form">
+                        <div id="course-list-ul"></div>
+                    </form>
+                </div>
+            </div>
+        `,
+        showCancelButton: true,
+        confirmButtonText: 'Select',
+        customClass: {
+            popup: 'custom-swal-popup',
+            title: 'custom-swal-title',
+            confirmButton: 'custom-swal-confirm',
+            cancelButton: 'custom-swal-cancel',
+            select: 'custom-swal-select',
+        },
+        preConfirm: () => {
+            const selectedModules = [];
+            document.querySelectorAll('#module-form input[type="checkbox"]:checked').forEach(checkbox => {
+                selectedModules.push(checkbox.value);
+            });
+    
+            if (selectedModules.length > 0) {
+                return selectedModules;
+            } else {
+                Swal.showValidationMessage('Please select at least one module');
+                return false;
+            }
+        }
+    }).then((result) => {
+        if (result.isConfirmed && result.value) {
+            // Get the original input field
+            const originalInput = document.getElementById('courses');
+    
+            // If the original input is empty, populate it with the first module
+            if (!originalInput.value) {
+                originalInput.value = result.value[0]; // Set the first selected module
+                result.value.shift(); // Remove the first module from the array
+            }
+    
+            // Add each remaining selected module as a new input field dynamically
+            const coursesGroup = document.getElementById('courses-group');
+            result.value.forEach(module => {
+                const newCourse = document.createElement('div');
+                newCourse.classList.add('input-group');
+                newCourse.innerHTML = `
+                    <input type="text" name="courses[]" value="${module}" readonly>
+                    <span class="remove" onclick="removeField(this)">- Remove</span>
+                `;
+                coursesGroup.appendChild(newCourse);
+            });
+        }
+    });
+    
+
+    // Fetch and load faculties and courses inside the Swal popup
+    fetchFacultiesForSwal();
+});
+
+// Fetch faculties and courses from the API and populate the Swal modal
+async function fetchFacultiesForSwal() {
+    const API_BASE_URL = 'http://localhost:3000/api';  // Your API endpoint
+    let facultiesData = [];
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/courses`);
+        facultiesData = await response.json();
+
+        const facultySelect = document.getElementById('faculty');
+        facultiesData.forEach(faculty => {
+            const option = document.createElement('option');
+            option.value = faculty._id;
+            option.textContent = faculty.faculty_name;
+            facultySelect.appendChild(option);
+        });
+
+        facultySelect.addEventListener('change', function () {
+            const selectedFacultyId = this.value;
+            const selectedFaculty = facultiesData.find(faculty => faculty._id === selectedFacultyId);
+            const courseSelect = document.getElementById('course');
+            courseSelect.innerHTML = '<option value="" disabled selected>-- Select Course --</option>';
+
+            if (selectedFaculty) {
+                selectedFaculty.courses.forEach(course => {
+                    const option = document.createElement('option');
+                    option.value = course._id;
+                    option.textContent = course.course_name;
+                    courseSelect.appendChild(option);
+                });
+                document.getElementById('course-container').style.display = 'block';
+            }
+
+            courseSelect.addEventListener('change', function () {
+                const selectedCourseId = this.value;
+                const selectedCourse = selectedFaculty.courses.find(course => course._id === selectedCourseId);
+                const yearSelect = document.getElementById('year');
+                yearSelect.innerHTML = '<option value="" disabled selected>-- Select Year --</option>';
+
+                if (selectedCourse) {
+                    selectedCourse.years_of_study.forEach(year => {
+                        const option = document.createElement('option');
+                        option.value = year.year;
+                        option.textContent = `Year ${year.year}`;
+                        yearSelect.appendChild(option);
+                    });
+                    document.getElementById('year-container').style.display = 'block';
+                }
+
+                yearSelect.addEventListener('change', function () {
+                    const selectedYearValue = this.value;
+                    const selectedYear = selectedCourse.years_of_study.find(year => year.year === parseInt(selectedYearValue));
+                    const courseListUl = document.getElementById('course-list-ul');
+                    courseListUl.innerHTML = '';
+
+                    if (selectedYear) {
+                        // Populate checkboxes for modules
+                        selectedYear.modules.forEach(module => {
+                            const div = document.createElement('div');
+                            div.innerHTML = `
+                                <label>
+                                    <input type="checkbox" value="${module.module}"> ${module.module}
+                                </label>
+                            `;
+                            courseListUl.appendChild(div);
+                        });
+                        document.getElementById('course-list').style.display = 'block';
+                    }
+                });
+            });
+        });
+    } catch (error) {
+        console.error('Error fetching faculties:', error);
+    }
+}
+
+// Remove a field dynamically
+function removeField(element) {
+    const inputGroup = element.parentElement;
+    inputGroup.parentElement.removeChild(inputGroup);
+}
+

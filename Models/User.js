@@ -37,10 +37,10 @@ const userSchema = new mongoose.Schema({
     type: String, 
   },
 },
-courses: {
+courses: [{
   type: [String],
-  default: [] 
-},
+  default: []
+}],
 subjects: {
   type: [String],
   default: [] 

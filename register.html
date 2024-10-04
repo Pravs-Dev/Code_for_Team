@@ -62,7 +62,7 @@
                     </div>
                     <div class="input-group" id="courses-group">
                         <label for="courses">Courses</label>
-                        <input type="text" id="courses" name="courses[]" placeholder="Enter your course">
+                        <input href="courses.html" type="text" id="courses" name="courses[]" placeholder="Please select ayour courses from the link below">
                         <span class="add-more" id="add-more-courses">+ Add more</span>
                     </div>
                 </div>
@@ -151,6 +151,7 @@
             newCourse.classList.add('input-group');
             newCourse.innerHTML = `
                 <input type="text" name="courses[]" placeholder="Enter another course">
+                <a href="courses.html">courses</a>
                 <span class="remove" onclick="removeField(this)">- Remove</span>
             `;
             coursesGroup.appendChild(newCourse);
@@ -186,6 +187,30 @@
             inputGroup.parentElement.removeChild(inputGroup);
         }
     </script>
+    <script>
+        // On page load, check if a module is stored in localStorage
+        document.addEventListener('DOMContentLoaded', function() {
+            const selectedModule = localStorage.getItem('selectedModule');
+            if (selectedModule) {
+                // Find the courses input
+                const coursesInput = document.getElementById('courses');
+                
+                // If there's already a value in the courses input, append the new course
+                if (coursesInput.value) {
+                    coursesInput.value += `, ${selectedModule}`;
+                } else {
+                    // Otherwise, just set the first selected course
+                    coursesInput.value = selectedModule;
+                }
+    
+                // Clear the module from localStorage after setting it
+                localStorage.removeItem('selectedModule');
+            }
+        });
+    </script>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./Client-servers/register.js"></script>
 </body>
 </html>

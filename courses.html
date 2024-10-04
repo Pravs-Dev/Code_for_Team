@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Courses</title>
+    <link rel="stylesheet" href="./Pagescss/courses.css"> <!-- Link to the external CSS file -->
+</head>
+<body>
+    <div class="main-content">
+        <h1>Select Courses</h1>
+
+        <div class="select-container">
+            <label for="faculty">Select Faculty:</label>
+            <select id="faculty">
+                <option value="" disabled selected>-- Select Faculty --</option>
+                <!-- Faculties will be dynamically added here -->
+            </select>
+        </div>
+
+        <div class="select-container" id="course-container" style="display:none;">
+            <label for="course">Select Course:</label>
+            <select id="course">
+                <option value="" disabled selected>-- Select Course --</option>
+                <!-- Courses will be dynamically added here -->
+            </select>
+        </div>
+
+        <div class="select-container" id="year-container" style="display:none;">
+            <label for="year">Select Year of Study:</label>
+            <select id="year">
+                <option value="" disabled selected>-- Select Year --</option>
+                <!-- Years will be dynamically added here -->
+            </select>
+        </div>
+
+        <div class="course-list" id="course-list" style="display:none;">
+            <h2>Modules Available for Selected Year</h2>
+            <ul id="course-list-ul">
+                <!-- Modules will be dynamically added here -->
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:3000/api';
+        const facultySelect = document.getElementById('faculty');
+        const courseSelect = document.getElementById('course');
+        const yearSelect = document.getElementById('year');
+        const courseContainer = document.getElementById('course-container');
+        const yearContainer = document.getElementById('year-container');
+        const courseList = document.getElementById('course-list');
+        const courseListUl = document.getElementById('course-list-ul');
+    
+        let facultiesData = []; // Store fetched faculty data
+    
+        // Fetch faculties and courses from the backend API
+        async function fetchFaculties() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/courses`);
+                facultiesData = await response.json(); // Store the response in the global variable
+                
+                // Populate faculties dropdown
+                facultiesData.forEach(faculty => {
+                    const option = document.createElement('option');
+                    option.value = faculty._id;
+                    option.textContent = faculty.faculty_name;
+                    facultySelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error fetching faculties:', error);
+            }
+        }
+    
+        // Fetch and populate the courses when a faculty is selected
+        facultySelect.addEventListener('change', function () {
+            const selectedFacultyId = this.value;
+    
+            // Clear previous courses and hide other sections
+            courseSelect.innerHTML = '<option value="" disabled selected>-- Select Course --</option>';
+            courseContainer.style.display = 'block';
+            yearContainer.style.display = 'none';
+            courseList.style.display = 'none';
+    
+            // Get the selected faculty from the already fetched data
+            const selectedFaculty = facultiesData.find(faculty => faculty._id === selectedFacultyId);
+    
+            if (selectedFaculty) {
+                selectedFaculty.courses.forEach(course => {
+                    const option = document.createElement('option');
+                    option.value = course._id;
+                    option.textContent = course.course_name;
+                    courseSelect.appendChild(option);
+                });
+            }
+        });
+    
+        // Show years of study when a course is selected
+        courseSelect.addEventListener('change', function () {
+            const selectedFacultyId = facultySelect.value;
+            const selectedCourseId = this.value;
+    
+            // Clear the years and hide the course list
+            yearSelect.innerHTML = '<option value="" disabled selected>-- Select Year --</option>';
+            yearContainer.style.display = 'block';
+            courseList.style.display = 'none';
+    
+            // Get the selected faculty and course from the already fetched data
+            const selectedFaculty = facultiesData.find(faculty => faculty._id === selectedFacultyId);
+            const selectedCourse = selectedFaculty.courses.find(course => course._id === selectedCourseId);
+    
+            if (selectedCourse) {
+                // Populate years dropdown
+                selectedCourse.years_of_study.forEach(year => {
+                    const option = document.createElement('option');
+                    option.value = year.year; // Use the year value directly (or if there's an id, use that)
+                    option.textContent = `Year ${year.year}`;
+                    yearSelect.appendChild(option);
+                });
+            }
+        });
+    
+        // Display available modules for the selected year
+        yearSelect.addEventListener('change', function () {
+            const selectedFacultyId = facultySelect.value;
+            const selectedCourseId = courseSelect.value;
+            const selectedYearValue = this.value; // The year number
+    
+            // Clear the module list
+            courseListUl.innerHTML = '';
+    
+            // Get the selected faculty and course from the already fetched data
+            const selectedFaculty = facultiesData.find(faculty => faculty._id === selectedFacultyId);
+            const selectedCourse = selectedFaculty.courses.find(course => course._id === selectedCourseId);
+            const selectedYear = selectedCourse.years_of_study.find(year => year.year === parseInt(selectedYearValue));
+    
+            if (selectedYear) {
+                // Populate the modules list and add click event listener to each module
+                selectedYear.modules.forEach(module => {
+                    const li = document.createElement('li');
+                    li.textContent = module.module;
+                    li.addEventListener('click', function () {
+                        // Save the selected module in localStorage
+                        localStorage.setItem('selectedModule', module.module);
+                        // Redirect back to the register page
+                        window.location.href = 'register.html';
+                    });
+                    courseListUl.appendChild(li);
+                });
+
+                courseList.style.display = 'block';
+            }
+        });
+    
+        // Initial fetch to load faculties
+        fetchFaculties();
+    </script>
+    
+</body>
+</html>

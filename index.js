@@ -10,6 +10,7 @@ import resourcefileRoutes from './Routes/Resourcefile_Routes/ResourcefileR.js'
 import bookingRoutes from './Routes/Booking_Routes/BookingR.js';
 import notificationRoutes from './Routes/Notification_Routes/NotificationR.js';
 import virtualtutoringRoutes from './Routes/VirtualTutoring_Routes/VirtualTutoringR.js';
+import coursesRoutes from './Routes/Courses_Route/CoursesR.js';
 import './Authentication/passport.js';
 import { authenticateToken} from './tokenmiddleware.js'; 
 
@@ -47,6 +48,7 @@ app.use('/api/bookings', bookingRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/virtualtutoring', virtualtutoringRoutes);
 app.use('/api/resourcesfile', resourcefileRoutes);
+app.use('/api/courses', coursesRoutes);
 
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
