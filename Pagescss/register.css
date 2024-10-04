@@ -215,3 +215,7 @@ button.section:hover {
     border: 1px solid #ccc;
     background-color: #fff;
 }
+
+#courses {
+    padding: 10px;
+}

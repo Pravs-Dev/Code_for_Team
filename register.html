@@ -62,8 +62,8 @@
                     </div>
                     <div class="input-group" id="courses-group">
                         <label for="courses">Courses</label>
-                        <input href="courses.html" type="text" id="courses" name="courses[]" placeholder="Please select ayour courses from the link below">
-                        <span class="add-more" id="add-more-courses">+ Add more</span>
+                        <input type="text" id="courses" name="courses[]" placeholder="Please click to add courses">
+                        <span class="add-more" id="add-more-courses">.</span>
                     </div>
                 </div>
 
@@ -80,12 +80,12 @@
                     <div class="input-group" id="subjects-group">
                         <label for="subjects">Subjects</label>
                         <input type="text" id="subjects" name="subjects[]" placeholder="Enter a subject you teach">
-                        <span class="add-more" id="add-more-subjects">+ Add more</span>
+                        <span class="add-more" id="add-more-subjects"></span>
                     </div>
                     <div class="input-group" id="qualification-group">
                         <label for="qualifications">Qualification</label>
                         <input type="text" id="qualification" name="qualification[]" placeholder="Enter a qualification">
-                        <span class="add-more" id="add-more-qualifications">+ Add more</span>
+                        <span disabled class="add-more" id="add-more-qualifications">+ Add more</span>
                     </div>
                 </div>
 
@@ -150,8 +150,7 @@
             const newCourse = document.createElement('div');
             newCourse.classList.add('input-group');
             newCourse.innerHTML = `
-                <input type="text" name="courses[]" placeholder="Enter another course">
-                <a href="courses.html">courses</a>
+                <input type="text" name="courses[]" placeholder="Enter another course" disabled>
                 <span class="remove" onclick="removeField(this)">- Remove</span>
             `;
             coursesGroup.appendChild(newCourse);
