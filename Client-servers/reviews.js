@@ -91,7 +91,7 @@ document.getElementById('submit-feedback').addEventListener('click', () => {
             timerProgressBar: true,
         }).then((result) => {
             if (result.isConfirmed || result.isDismissed) {
-                window.location.href = './dashboard.html';
+                window.location.href = './csessions.html';
             }
         });
 

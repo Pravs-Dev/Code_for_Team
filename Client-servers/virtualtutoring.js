@@ -55,9 +55,9 @@ function getVirtualTutoringSession() {
         })
         .catch(error => {
             console.error('Error fetching virtual tutoring session:', error);
-            document.getElementById('session-date').textContent = 'loading';
-            document.getElementById('session-time').textContent = 'loading';
-            document.getElementById('session-tutor').textContent = 'loading';
+            document.getElementById('session-date').textContent = 'no meeting available';
+            document.getElementById('session-time').textContent = 'no meeting available';
+            document.getElementById('session-tutor').textContent = 'no meeting available';
             document.getElementById('session-link').style.display = 'none'; // Hide the link
         });
 }

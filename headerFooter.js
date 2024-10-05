@@ -14,7 +14,6 @@ class AppHeader extends HTMLElement {
                     </a>
                 </li>
                 <li><a href="bus-schedule.html"><img src="./Icons/bus.svg" alt="Bus" width="30px"></a></li>
-                 <li><a href="csessions.html"><img src="./Icons/sessions.svg" alt="Sessions" width="30px"></a></li>
             </ul>
             <ul class="account-link">
                 <a href="Profile.html" id="profile-link">
@@ -122,7 +121,7 @@ class AppSidebar extends HTMLElement {
         <ul>
           <li><a href="dashboard.html"><img src="./Icons/dashboard-svgrepo-com.svg" alt="Dashboard"> <span>Dashboard</span></a></li>
           <li><a href="AvailableTutors.html"><img src="./Icons/people-svgrepo-com.svg" alt="Tutors"> <span>Tutors</span></a></li>
-          <li><a href="bookings.html"><img src="./Icons/schedule-svgrepo-com.svg" alt="Schedule"> <span>Schedule</span></a></li>
+          <li><a href="csessions.html"><img src="./Icons/sessions.svg" alt="Sessions" alt="Review sessions"><span>Review sessions</span></a></li>
           <li><a href="virtualTutoring.html"><img src="./Icons/schedule-svgrepo-com.svg" alt="Virtual Tutoring"> <span>Virtual Tutoring</span></a></li>
           <li><a href="resource-sharing.html"><img src="./Icons/resources-svgrepo-com.svg" alt="Resources"> <span>Resources</span></a></li>
           <li><a href="Events.html"><img src="./Icons/event.svg" alt="Event"> <span>Event</span></a></li>

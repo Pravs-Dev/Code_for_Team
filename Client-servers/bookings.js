@@ -305,6 +305,9 @@ function askToCheckBusSchedule() {
             // Redirect to the bus schedule page
             window.location.href = './bus-schedule.html';
         }
+        else{
+            window.location.href = './dashboard.html';
+        }
     });
 }
 
