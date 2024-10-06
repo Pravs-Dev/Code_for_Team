@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">47.29% </span>
+                <span class="strong">62.16% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>35/74</span>
+                <span class='fraction'>46/74</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">21.42% </span>
+                <span class="strong">28.57% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/14</span>
+                <span class='fraction'>4/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60% </span>
+                <span class="strong">70% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>6/10</span>
+                <span class='fraction'>7/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">47.29% </span>
+                <span class="strong">62.16% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>35/74</span>
+                <span class='fraction'>46/74</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -310,34 +310,34 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -480,35 +480,35 @@ export const modifyBooking = async (id, payload) =&gt; {
 };
 &nbsp;
 &nbsp;
-export const cancelBooking = <span class="fstat-no" title="function not covered" >as</span>ync (id, reason) =&gt; {
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const booking = <span class="cstat-no" title="statement not covered" >await Booking.findById(id);</span>
-<span class="cstat-no" title="statement not covered" >    if (!booking) {</span>
+export const cancelBooking = async (id, reason) =&gt; {
+  try {
+    const booking = await Booking.findById(id);
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (!booking) {
 <span class="cstat-no" title="statement not covered" >      throw new Error('Booking not found');</span>
     }
 &nbsp;
     
-<span class="cstat-no" title="statement not covered" >    booking.status = 'Cancelled';</span>
-<span class="cstat-no" title="statement not covered" >    booking.cancellationReason = reason;</span>
+    booking.status = 'Cancelled';
+    booking.cancellationReason = reason;
 &nbsp;
     
-    const cancelledBooking = <span class="cstat-no" title="statement not covered" >await booking.save();</span>
+    const cancelledBooking = await booking.save();
   
     
-    const studentCancellationNotification = <span class="cstat-no" title="statement not covered" >new Notification({</span>
+    const studentCancellationNotification = new Notification({
     message: `Your booking on ${cancelledBooking.sessionDate} was cancelled. Reason: ${reason}`,
     user: cancelledBooking.student, 
   });
-<span class="cstat-no" title="statement not covered" >  await studentCancellationNotification.save();</span>
+  await studentCancellationNotification.save();
   
   
-    const tutorCancellationNotification = <span class="cstat-no" title="statement not covered" >new Notification({</span>
+    const tutorCancellationNotification = new Notification({
     message: `The booking with ${cancelledBooking.studentName} on ${cancelledBooking.sessionDate} was cancelled. Reason: ${reason}`,
     user: cancelledBooking.tutor, 
   });
-<span class="cstat-no" title="statement not covered" >  await tutorCancellationNotification.save();</span>
+  await tutorCancellationNotification.save();
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return cancelledBooking;</span>
+    return cancelledBooking;
   } catch (error) {
 <span class="cstat-no" title="statement not covered" >    throw new Error(`Error cancelling booking: ${error.message}`);</span>
   }
@@ -583,7 +583,7 @@ export const markSessionAsReviewed = <span class="fstat-no" title="function not 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-10-06T16:40:32.695Z
+                at 2024-10-06T18:23:02.542Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

@@ -254,7 +254,7 @@ describe('Bookings Unit Test', () => {
     expect(res.body).toHaveProperty('_id', bookingId);
   });
 
-  it('should update or cancel the booking', async () => {
+  it('should update the booking to completed', async () => {
     const updatedBooking = { 
       status: 'Completed', 
       cancellationReason: 'No longer needed' 
@@ -266,12 +266,49 @@ describe('Bookings Unit Test', () => {
     expect(res.body.cancellationReason).toBe(updatedBooking.cancellationReason);
   });
 
+  it('should cancel a booking successfully', async () => {
+    const reason = 'Change of plans'; // Example cancellation reason
+
+    const res = await request(app)
+      .put(`/api/bookings/cancel/${bookingId}`)
+      .send({ reason }); 
+
+    expect(res.statusCode).toEqual(200); 
+    expect(res.body).toHaveProperty('status', 'Cancelled'); 
+    expect(res.body).toHaveProperty('cancellationReason', reason); 
+  });
+
+
+
   it('should delete the booking', async () => {
     const res = await request(app).delete(`/api/bookings/${bookingId}`);
     expect(res.statusCode).toEqual(200);
     expect(res.body.message).toBe('Booking deleted successfully');
   });
 
+  it('should check for a specific tutor by ID if they have one', async () => {
+    const tutorId = '6700f0e49e512370d343f340'; 
+    const res = await request(app).get(`/api/tutor/${tutorId}`);
+  
+    expect(res.statusCode).toEqual(404); 
+  });
+  // it('should return completed sessions for a specific student by ID', async () => {
+  //   const studentId = '60c72b2f9b1d8f4d2e3f8d6e'; // Replace with a valid student ID or mock it as needed
+  //   const res = await request(app).get(`/api/student/${studentId}/completed`);
+  
+  //   expect(res.statusCode).toEqual(200); // Expect successful response
+  //   expect(Array.isArray(res.body)).toBe(true); // Ensure the response is an array of sessions
+  //   expect(res.body.length).toBeGreaterThan(0); // Ensure that there are completed sessions returned
+  // });
+  
+  // it('should mark a session as reviewed', async () => {
+  //   const sessionId = '66e8cde3a9acf9ca9afcc5a1'; // Replace with a valid session ID or mock it as needed
+  //   const res = await request(app).put(`/api/${sessionId}/reviewed`);
+  
+  //   expect(res.statusCode).toEqual(200); // Expect successful response
+  //   expect(res.body).toHaveProperty('status', 'Reviewed'); // Check if the session status is updated
+  // });
+  
 
 });
 
