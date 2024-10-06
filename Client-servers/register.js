@@ -555,12 +555,12 @@ passwordInput.addEventListener('input', () => {
 });
 
 // Toggle tooltip display on hover
-passwordInput.addEventListener('mouseover', () => {
+passwordInput.addEventListener('focus', () => {
     const tooltip = document.getElementById('passwordTooltip');
     tooltip.style.color='white';
 });
 
-passwordInput.addEventListener('mouseout', () => {
+passwordInput.addEventListener('blur', () => {
     const tooltip = document.getElementById('passwordTooltip');
     tooltip.style.color ='rgb(80, 181, 220)';
 });
