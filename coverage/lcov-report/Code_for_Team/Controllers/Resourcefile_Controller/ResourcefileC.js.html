@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.7% </span>
+                <span class="strong">55.88% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/34</span>
+                <span class='fraction'>19/34</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>2/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>4/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.7% </span>
+                <span class="strong">55.88% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/34</span>
+                <span class='fraction'>19/34</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -160,9 +160,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -181,30 +181,30 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -232,10 +232,10 @@ export const createResourcefile = <span class="fstat-no" title="function not cov
 <span class="cstat-no" title="statement not covered" >  return await newResourcefile.save();</span>
 };
 &nbsp;
-export const getAllResourcesfile = <span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const resourcesfile = <span class="cstat-no" title="statement not covered" >await Resourcefile.find();</span>
-<span class="cstat-no" title="statement not covered" >    return resourcesfile;</span>
+export const getAllResourcesfile = async () =&gt; {
+  try {
+    const resourcesfile = await Resourcefile.find();
+    return resourcesfile;
   } catch (error) {
 <span class="cstat-no" title="statement not covered" >   throw new Error(`Error fetching resourcesfile: ${error.message}`);</span>
   }
@@ -253,31 +253,31 @@ export const getResourcefileById = <span class="fstat-no" title="function not co
   }
 };
 &nbsp;
-export const modifyResourcefile = <span class="fstat-no" title="function not covered" >as</span>ync (id, payload) =&gt; {
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const resourcefile = <span class="cstat-no" title="statement not covered" >await Resourcefile.findById(id);</span>
-<span class="cstat-no" title="statement not covered" >    if (!resourcefile) {</span>
+export const modifyResourcefile = async (id, payload) =&gt; {
+  try {
+    const resourcefile = await Resourcefile.findById(id);
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (!resourcefile) {
 <span class="cstat-no" title="statement not covered" >      throw new Error('Resourcefile not found');</span>
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    Object.keys(payload).forEach(<span class="fstat-no" title="function not covered" >(k</span>ey) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      resourcefile[key] = payload[key];</span>
+    Object.keys(payload).forEach((key) =&gt; {
+      resourcefile[key] = payload[key];
     });
 &nbsp;
-    const updatedResourcefile = <span class="cstat-no" title="statement not covered" >await resourcefile.save();</span>
-<span class="cstat-no" title="statement not covered" >    return updatedResourcefile;</span>
+    const updatedResourcefile = await resourcefile.save();
+    return updatedResourcefile;
   } catch (error) {
 <span class="cstat-no" title="statement not covered" >    throw new Error(`Error updating resourcefile: ${error.message}`);</span>
   }
 };
 &nbsp;
-export const deleteResourcefileById = <span class="fstat-no" title="function not covered" >as</span>ync (id) =&gt; {
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const result = <span class="cstat-no" title="statement not covered" >await Resourcefile.findByIdAndDelete(id);</span>
-<span class="cstat-no" title="statement not covered" >    if (!result) {</span>
+export const deleteResourcefileById = async (id) =&gt; {
+  try {
+    const result = await Resourcefile.findByIdAndDelete(id);
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (!result) {
 <span class="cstat-no" title="statement not covered" >      throw new Error('Resourcefile not found');</span>
     }
-<span class="cstat-no" title="statement not covered" >    return result;</span>
+    return result;
   } catch (error) {
 <span class="cstat-no" title="statement not covered" >    throw new Error(`Error deleting resourcefile: ${error.message}`);</span>
   }
@@ -289,7 +289,7 @@ export const deleteResourcefileById = <span class="fstat-no" title="function not
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-10-06T15:31:29.852Z
+                at 2024-10-06T16:40:32.695Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
