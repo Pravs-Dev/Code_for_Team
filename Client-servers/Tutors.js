@@ -155,7 +155,11 @@ document.addEventListener('DOMContentLoaded', async function () {
             localStorage.setItem('selectedSubject', selectedTutor.subjects[0]);
             window.location.href = './bookings.html';
         } else {
-            alert('Please select a day and time before booking.');
+            swal.fire({
+                title: 'Please select a day and time before booking.',
+                showCloseButton: true,
+                confirmButtonText: 'Close',
+            });
         }
     });
 });
