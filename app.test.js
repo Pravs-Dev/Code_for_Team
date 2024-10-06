@@ -7,6 +7,7 @@ import authRoutes from './Authentication/RouteA.js';
 import userRoutes from './Routes/User_Routes/UserR.js'; 
 import resourceRoutes from './Routes/Resource_Routes/ResourceR.js';
 import resourcefileRoutes from './Routes/Resourcefile_Routes/ResourcefileR.js';
+import Resourcefile from './Models/Resourcefile.js';
 import bookingRoutes from './Routes/Booking_Routes/BookingR.js';
 import notificationRoutes from './Routes/Notification_Routes/NotificationR.js';
 import virtualtutoringRoutes from './Routes/VirtualTutoring_Routes/VirtualTutoringR.js';
@@ -150,25 +151,19 @@ describe('User Unit Tests', () => {
 
 
 
-  // it('should update the user profile picture', async () => {
-  //   const updatedData = {
-  //     fname: 'Jane Updated',
-  //     lname: 'Doe Updated',
-  //   };
+  it('should update the user profile picture', async () => {
+    const updatedData = {
+      password: 'Password123!'
+    };
 
-  //   // Mock file upload using multer
-  //   const file = Buffer.from('new image data'); // Mock new image data
-  //   const res = await request(app)
-  //     .put(`/api/users/${userId}`)
-  //     .field('profilePicture', file, { filename: 'new-profile.png' }) // Simulate file upload
-  //     .send(updatedData); // Send the updated user data
+    // Create a form-data object to send along with the file
+    const res = await request(app)
+      .put(`/api/users/${userId}`)
+      .field('password', updatedData.password) 
+      .attach('profilePicture', Buffer.from('new image data'), { filename: 'new-profile.png' }); // Use attach for file upload
 
-  //   expect(res.statusCode).toEqual(200); // Expect success status
-  //   expect(res.body).toHaveProperty('_id', userId); // Ensure returned user has the correct ID
-  //   expect(res.body).toHaveProperty('fname', 'Jane Updated'); // Check updated name
-  //   expect(res.body).toHaveProperty('lname', 'Doe Updated'); // Check updated last name
-  //   expect(res.body).toHaveProperty('profilePicture'); // Check if profile picture is updated
-  // });
+    expect(res.statusCode).toEqual(200); // Expect success status
+  });
 
   it('should return 404 for non-existent user', async () => {
     const nonExistentUserId = '66e8a4235629979b7e8f6235';
@@ -186,12 +181,11 @@ describe('User Unit Tests', () => {
     expect(res.statusCode).toEqual(401); // Expecting unauthorized
   });
 
-  // it('should update the user', async () => {
-  //   const updatedUser = { fname: 'Jane' };
-  //   const res = await request(app).put(`/api/users/${userId}`).send(updatedUser);
-  //   expect(res.statusCode).toEqual(200);
-  //   expect(res.body.fname).toBe('Jane');
-  // });
+  it('should update the user', async () => {
+    const updatedUser = { password: 'Password123!' };
+    const res = await request(app).put(`/api/users/${userId}`).send(updatedUser);
+    expect(res.statusCode).toEqual(200);
+  });
 
   it('should delete the user', async () => {
     const res = await request(app).delete(`/api/users/${userId}`);
@@ -207,7 +201,79 @@ describe('User Unit Tests', () => {
   });
 });
 
+describe('Bookings Unit Test', () => {
+  let bookingId; // Variable to store the bookingId
 
+  // Create a new booking before all tests
+  beforeAll(async () => {
+    const newBooking = {
+      student: '64e5e2c6c5e6f1a0d0d1e4b0', 
+      tutor: '64e5e2c6c5e6f1a0d0d1e4b1', 
+      subject: 'Advanced Algebra',
+      sessionDate: '2024-10-01T00:00:00.000Z',
+      sessionTime: '10:00 AM',
+      duration: 60,
+    };
+
+    const res = await request(app).post('/api/bookings').send(newBooking);
+    expect(res.statusCode).toEqual(201);
+    expect(res.body).toHaveProperty('_id');
+
+    // Store the bookingId for use in the following tests
+    bookingId = res.body._id;
+  });
+
+  it('should create a new booking', async () => {
+    const newBooking = {
+      student: '64e5e2c6c5e6f1a0d0d1e4b0', 
+      tutor: '64e5e2c6c5e6f1a0d0d1e4b1', 
+      subject: 'Advanced Algebra',
+      sessionDate: '2024-10-01T00:00:00.000Z',
+      sessionTime: '10:00 AM',
+      duration: 60,
+    };
+
+    const res = await request(app).post('/api/bookings').send(newBooking);
+    expect(res.statusCode).toEqual(201);
+    expect(res.body).toHaveProperty('_id');
+    expect(res.body.subject).toBe(newBooking.subject);
+    expect(new Date(res.body.sessionDate).toISOString()).toBe(newBooking.sessionDate);
+    expect(res.body.sessionTime).toBe(newBooking.sessionTime);
+    expect(res.body.duration).toBe(newBooking.duration);
+  });
+
+  it('should get all bookings', async () => {
+    const res = await request(app).get('/api/bookings');
+    expect(res.statusCode).toEqual(200);
+    expect(Array.isArray(res.body)).toBe(true);
+  });
+
+  it('should get a booking by ID', async () => {
+    const res = await request(app).get(`/api/bookings/${bookingId}`);
+    expect(res.statusCode).toEqual(200);
+    expect(res.body).toHaveProperty('_id', bookingId);
+  });
+
+  it('should update or cancel the booking', async () => {
+    const updatedBooking = { 
+      status: 'Completed', 
+      cancellationReason: 'No longer needed' 
+    };
+
+    const res = await request(app).put(`/api/bookings/${bookingId}`).send(updatedBooking);
+    expect(res.statusCode).toEqual(200);
+    expect(res.body.status).toBe(updatedBooking.status);
+    expect(res.body.cancellationReason).toBe(updatedBooking.cancellationReason);
+  });
+
+  it('should delete the booking', async () => {
+    const res = await request(app).delete(`/api/bookings/${bookingId}`);
+    expect(res.statusCode).toEqual(200);
+    expect(res.body.message).toBe('Booking deleted successfully');
+  });
+
+
+});
 
 describe('Virtual Tutoring Unit Tests', () => {
   let sessionId; // Store the sessionId here
@@ -293,7 +359,7 @@ describe('Virtual Tutoring Unit Tests', () => {
   });
 
 
-  it('should return sessions for a specific student by studentId and student doesnt have a session', async () => {
+  it('should return sessions for a specific student by studentId and student does have a session', async () => {
     const studentId = '60c72b2f9b1d8f4d2e3f8d6e'; 
     
     const res = await request(app).get(`/api/virtualtutoring/student/${studentId}`);
@@ -304,155 +370,160 @@ describe('Virtual Tutoring Unit Tests', () => {
 
   });
 
-  describe('Bookings Unit Test', () => {
-    let bookingId; // Variable to store the bookingId
-  
-    // Create a new booking before all tests
-    beforeAll(async () => {
-      const newBooking = {
-        student: '64e5e2c6c5e6f1a0d0d1e4b0', 
-        tutor: '64e5e2c6c5e6f1a0d0d1e4b1', 
-        subject: 'Advanced Algebra',
-        sessionDate: '2024-10-01T00:00:00.000Z',
-        sessionTime: '10:00 AM',
-        duration: 60,
-      };
-  
-      const res = await request(app).post('/api/bookings').send(newBooking);
-      expect(res.statusCode).toEqual(201);
-      expect(res.body).toHaveProperty('_id');
-  
-      // Store the bookingId for use in the following tests
-      bookingId = res.body._id;
-    });
-  
-    it('should create a new booking', async () => {
-      const newBooking = {
-        student: '64e5e2c6c5e6f1a0d0d1e4b0', 
-        tutor: '64e5e2c6c5e6f1a0d0d1e4b1', 
-        subject: 'Advanced Algebra',
-        sessionDate: '2024-10-01T00:00:00.000Z',
-        sessionTime: '10:00 AM',
-        duration: 60,
-      };
-  
-      const res = await request(app).post('/api/bookings').send(newBooking);
-      expect(res.statusCode).toEqual(201);
-      expect(res.body).toHaveProperty('_id');
-      expect(res.body.subject).toBe(newBooking.subject);
-      expect(new Date(res.body.sessionDate).toISOString()).toBe(newBooking.sessionDate);
-      expect(res.body.sessionTime).toBe(newBooking.sessionTime);
-      expect(res.body.duration).toBe(newBooking.duration);
-    });
-  
-    it('should get all bookings', async () => {
-      const res = await request(app).get('/api/bookings');
-      expect(res.statusCode).toEqual(200);
-      expect(Array.isArray(res.body)).toBe(true);
-    });
-  
-    it('should get a booking by ID', async () => {
-      const res = await request(app).get(`/api/bookings/${bookingId}`);
-      expect(res.statusCode).toEqual(200);
-      expect(res.body).toHaveProperty('_id', bookingId);
-    });
-  
-    it('should update or cancel the booking', async () => {
-      const updatedBooking = { 
-        status: 'Completed', 
-        cancellationReason: 'No longer needed' 
-      };
-  
-      const res = await request(app).put(`/api/bookings/${bookingId}`).send(updatedBooking);
-      expect(res.statusCode).toEqual(200);
-      expect(res.body.status).toBe(updatedBooking.status);
-      expect(res.body.cancellationReason).toBe(updatedBooking.cancellationReason);
-    });
-  
-    it('should delete the booking', async () => {
-      const res = await request(app).delete(`/api/bookings/${bookingId}`);
-      expect(res.statusCode).toEqual(200);
-      expect(res.body.message).toBe('Booking deleted successfully');
-    });
-  
+});
 
-  });
-  
+let resourceId = "66f6c792e561ff78803d42e3";
 
-  describe('Notifications Unit Test', () => {
-    let notificationId;
-    const userId = '66d3c6bea7133bbc3a897ec1'; // Sample user ID
-  
-    beforeAll(async () => {
-      const newNotification = {
-        message: 'New Message',
-        user: userId,
-      };
-  
-      const res = await request(app).post('/api/notifications').send(newNotification);
-      expect(res.statusCode).toEqual(201);
-      expect(res.body).toHaveProperty('_id');
-      notificationId = res.body._id; // Store notificationId for use in other tests
-    });
-  
-    it('should create a new notification', async () => {
-      const newNotification = {
-        message: 'Appointment Reminder',
-        user: userId,
-      };
-  
-      const res = await request(app).post('/api/notifications').send(newNotification);
-      expect(res.statusCode).toEqual(201);
-      expect(res.body).toHaveProperty('_id');
-      expect(res.body.message).toBe(newNotification.message);
-      expect(res.body.user).toBe(newNotification.user);
-      expect(res.body.read).toBe(false); // Ensure the default read value is false
-    });
+describe('Resourcefile Unit Tests', () => {
 
-    it('should get all notifications for a user', async () => {
-      const res = await request(app).get('/api/notifications?user=66d3c6bea7133bbc3a897ec1');
-      expect(res.statusCode).toEqual(200);
-      expect(Array.isArray(res.body)).toBe(true);
-    });
-  
-    it('should get a notification by ID', async () => {
-      const res = await request(app).get(`/api/notifications/${notificationId}`);
-      expect(res.statusCode).toEqual(200);
-      expect(res.body).toHaveProperty('_id', notificationId);
-    });
-    it('should return an error if message is missing', async () => {
-      const newNotification = {
-        user: userId,
-      };
-  
-      const res = await request(app).post('/api/notifications').send(newNotification);
-      expect(res.statusCode).toEqual(500); // Assuming you handle validation errors
-      expect(res.body.message).toBe('Error creating notification');
-    });
-    it('should mark a notification as read', async () => {
-      const res = await request(app).put(`/api/notifications/read/${notificationId}`);
-      expect(res.statusCode).toEqual(200);
-      expect(res.body).toHaveProperty('_id', notificationId);
-      expect(res.body.read).toBe(true); // Assuming markNotificationAsRead updates the read status to true
-    });
-  
-    it('should return 500 if notification not found when marking as read', async () => {
-      const res = await request(app).put('/api/notifications/read/invalidId'); // Use an invalid ID
-      expect(res.statusCode).toEqual(500);
-      expect(res.body.message).toBe('Error updating notification');
-    });
-  
-    it('should delete a notification', async () => {
-      const res = await request(app).delete(`/api/notifications/${notificationId}`);
-      expect(res.statusCode).toEqual(200);
-      expect(res.body.message).toBe('Notification deleted successfully');
-    });
 
-    afterAll((done) => {
-      mongoose.connection.close();
-      done();
+
+  beforeAll(async () => {
+
+    const resourcefile = new Resourcefile({
+      file: {
+        data: Buffer.from('test data'),
+        contentType: 'application/pdf',
+        originalName: 'testfile.pdf'
+      },
+      uploadedBy: new mongoose.Types.ObjectId(), // Create a mock ObjectId for testing
+      tags: ['test', 'example']
     });
+    const savedResourcefile = await resourcefile.save();
+    resourceId = savedResourcefile._id.toString(); // Store resource ID for later tests
   });
 
 
+  it('should return all resource files', async () => {
+    const res = await request(app).get('/api/resourcesfile');
+    expect(res.statusCode).toEqual(200);
+    expect(Array.isArray(res.body)).toBe(true);
+  });
+
+
+
+  // it('should create a new resource file', async () => {
+  //   const newResourcefile = {
+  //     uploadedBy: userId, // Use the mock user ID
+  //     tags: 'newTag1,newTag2' // Tags as a comma-separated string
+  //   };
+
+  //   // Create a buffer to simulate file data
+  //   const fileBuffer = Buffer.from('new test data');
+
+  //   const res = await request(app)
+  //     .post('/api/resourcesfile') // Adjust the endpoint according to your routes
+  //     .field('uploadedBy', newResourcefile.uploadedBy) // Use .field() for uploadedBy
+  //     .field('tags', newResourcefile.tags) // Use .field() for tags
+  //     .attach('file', fileBuffer, { filename: 'newfile.pdf', contentType: 'application/pdf' }); // Use .attach() for file upload
+
+  //   expect(res.statusCode).toEqual(201); // Expect a successful creation
+  // });
+
+
+  it('should return a specific resource file by ID', async () => {
+    const res = await request(app).get(`/api/resourcesfile/${resourceId}`);
+    expect(res.statusCode).toEqual(200);
+  });
+
+  it('should update a resource file', async () => {
+    const updatedData = {
+      tags: ['updatedTag'] // Update tags
+    };
+
+    const res = await request(app)
+      .put(`/api/resourcesfile/${resourceId}`)
+      .send(updatedData);
+
+    expect(res.statusCode).toEqual(200);
+  });
+
+  it('should return 404 for non-existent resource file', async () => {
+    const nonExistentId = new mongoose.Types.ObjectId();
+    const res = await request(app).get(`/api/resourcesfile/${nonExistentId}`);
+    expect(res.statusCode).toEqual(404);
+    expect(res.body).toHaveProperty('message', 'File not found');
+  });
+
+  it('should delete a resource file', async () => {
+    const res = await request(app).delete(`/api/resourcesfile/${resourceId}`);
+    expect(res.statusCode).toEqual(200);
+    expect(res.body.message).toBe('Resourcefile deleted successfully');
+  });
+});
+
+
+describe('Notifications Unit Test', () => {
+  let notificationId;
+  const userId = '66d3c6bea7133bbc3a897ec1'; // Sample user ID
+
+  beforeAll(async () => {
+    const newNotification = {
+      message: 'New Message',
+      user: userId,
+    };
+
+    const res = await request(app).post('/api/notifications').send(newNotification);
+    expect(res.statusCode).toEqual(201);
+    expect(res.body).toHaveProperty('_id');
+    notificationId = res.body._id; // Store notificationId for use in other tests
+  });
+
+  it('should create a new notification', async () => {
+    const newNotification = {
+      message: 'Appointment Reminder',
+      user: userId,
+    };
+
+    const res = await request(app).post('/api/notifications').send(newNotification);
+    expect(res.statusCode).toEqual(201);
+    expect(res.body).toHaveProperty('_id');
+    expect(res.body.message).toBe(newNotification.message);
+    expect(res.body.user).toBe(newNotification.user);
+    expect(res.body.read).toBe(false); // Ensure the default read value is false
+  });
+
+  it('should get all notifications for a user', async () => {
+    const res = await request(app).get('/api/notifications?user=66d3c6bea7133bbc3a897ec1');
+    expect(res.statusCode).toEqual(200);
+    expect(Array.isArray(res.body)).toBe(true);
+  });
+
+  it('should get a notification by ID', async () => {
+    const res = await request(app).get(`/api/notifications/${notificationId}`);
+    expect(res.statusCode).toEqual(200);
+    expect(res.body).toHaveProperty('_id', notificationId);
+  });
+  it('should return an error if message is missing', async () => {
+    const newNotification = {
+      user: userId,
+    };
+
+    const res = await request(app).post('/api/notifications').send(newNotification);
+    expect(res.statusCode).toEqual(500); // Assuming you handle validation errors
+    expect(res.body.message).toBe('Error creating notification');
+  });
+  it('should mark a notification as read', async () => {
+    const res = await request(app).put(`/api/notifications/read/${notificationId}`);
+    expect(res.statusCode).toEqual(200);
+    expect(res.body).toHaveProperty('_id', notificationId);
+    expect(res.body.read).toBe(true); // Assuming markNotificationAsRead updates the read status to true
+  });
+
+  it('should return 500 if notification not found when marking as read', async () => {
+    const res = await request(app).put('/api/notifications/read/invalidId'); // Use an invalid ID
+    expect(res.statusCode).toEqual(500);
+    expect(res.body.message).toBe('Error updating notification');
+  });
+
+  it('should delete a notification', async () => {
+    const res = await request(app).delete(`/api/notifications/${notificationId}`);
+    expect(res.statusCode).toEqual(200);
+    expect(res.body.message).toBe('Notification deleted successfully');
+  });
+
+  afterAll((done) => {
+    mongoose.connection.close();
+    done();
+  });
 });

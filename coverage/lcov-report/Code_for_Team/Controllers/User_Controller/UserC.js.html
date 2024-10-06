@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">59.61% </span>
+                <span class="strong">78% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>31/52</span>
+                <span class='fraction'>39/50</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">35.71% </span>
+                <span class="strong">57.14% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/14</span>
+                <span class='fraction'>8/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">71.42% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">59.61% </span>
+                <span class="strong">78% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>31/52</span>
+                <span class='fraction'>39/50</span>
             </div>
         
             
@@ -187,11 +187,7 @@
 <a name='L122'></a><a href='#L122'>122</a>
 <a name='L123'></a><a href='#L123'>123</a>
 <a name='L124'></a><a href='#L124'>124</a>
-<a name='L125'></a><a href='#L125'>125</a>
-<a name='L126'></a><a href='#L126'>126</a>
-<a name='L127'></a><a href='#L127'>127</a>
-<a name='L128'></a><a href='#L128'>128</a>
-<a name='L129'></a><a href='#L129'>129</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L125'></a><a href='#L125'>125</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -257,10 +253,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -278,29 +270,29 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -383,12 +375,8 @@ export const loginUser = async (email, password) =&gt; {
 &nbsp;
 &nbsp;
 export const getAllUsers = async () =&gt; {
-  try {
     const users = await User.find(); 
-    return users; 
-  } catch (error) {
-<span class="cstat-no" title="statement not covered" >    throw new Error(`Error fetching users: ${error.message}`);</span>
-  }
+    return users;  
 };
 &nbsp;
 &nbsp;
@@ -405,16 +393,16 @@ export const getUserById = async (id) =&gt; {
 };
 &nbsp;
 &nbsp;
-export const modifyUser = <span class="fstat-no" title="function not covered" >as</span>ync (id, payload, file) =&gt; {
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const user = <span class="cstat-no" title="statement not covered" >await User.findById(id);</span>
-<span class="cstat-no" title="statement not covered" >    if (!user) {</span>
+export const modifyUser = async (id, payload, file) =&gt; {
+  try {
+    const user = await User.findById(id);
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (!user) {
 <span class="cstat-no" title="statement not covered" >      throw new Error('User not found');</span>
     }
 &nbsp;
     // If a file is provided, update the profile picture
-<span class="cstat-no" title="statement not covered" >    if (file) {</span>
-<span class="cstat-no" title="statement not covered" >      user.profilePicture = {</span>
+    if (file) {
+      user.profilePicture = {
         data: file.buffer,
         contentType: file.mimetype,
         originalName: file.originalname,
@@ -422,13 +410,13 @@ export const modifyUser = <span class="fstat-no" title="function not covered" >a
     }
 &nbsp;
     // Update other fields from payload
-<span class="cstat-no" title="statement not covered" >    Object.keys(payload).forEach(<span class="fstat-no" title="function not covered" >(k</span>ey) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      user[key] = payload[key];</span>
+    Object.keys(payload).forEach((key) =&gt; {
+      user[key] = payload[key];
     });
 &nbsp;
     // Save the updated user
-    const updatedUser = <span class="cstat-no" title="statement not covered" >await user.save();</span>
-<span class="cstat-no" title="statement not covered" >    return updatedUser;</span>
+    const updatedUser = await user.save();
+    return updatedUser;
   } catch (error) {
 <span class="cstat-no" title="statement not covered" >    throw new Error(`Error updating user: ${error.message}`);</span>
   }
@@ -454,7 +442,7 @@ export const deleteUserById = async (id) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-10-06T15:31:29.852Z
+                at 2024-10-06T16:40:32.695Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

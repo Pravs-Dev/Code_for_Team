@@ -62,12 +62,8 @@ export const loginUser = async (email, password) => {
 
 
 export const getAllUsers = async () => {
-  try {
     const users = await User.find(); 
-    return users; 
-  } catch (error) {
-    throw new Error(`Error fetching users: ${error.message}`);
-  }
+    return users;  
 };
 
 
