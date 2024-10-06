@@ -101,13 +101,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (response.ok) {
                     const data = await response.json();
-                    document.getElementById("error-msg").innerHTML=`Loading...`;
-                    document.getElementById("error-msg").style.color = 'white'; 
-                    window.location.href = './login.html'; // Redirect to the login page after registration
-                } else {
+                  //   window.location.href = "./login.html";
+                    swal.fire({
+                      title: 'Success!',
+                      text: 'You have successfully registered.',
+                      icon: 'success',
+                      confirmButtonText: 'OK',
+                      timer: 5000,
+                      timerProgressBar: true
+                  }).then(() => {
+                          window.location.href = './login.html';
+                  
+                  });
+                  } else {
                     const errorData = await response.json();
-                    document.getElementById("error-msg").innerHTML=`An error occurred while registering.`;
-                }
+                    swal.fire({
+                      title: 'Unsuccessful!',
+                      text: 'An error occurred while registering.',
+                      icon: 'error',
+                      confirmButtonText: 'Retry',
+                      timer: 5000,
+                      timerProgressBar: true
+                  });
+                  }
             } catch (error) {
                 console.error('Error registering:', error);
                 document.getElementById("error-msg").innerHTML=`An error occurred while registering.`;
