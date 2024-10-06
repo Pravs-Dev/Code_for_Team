@@ -334,8 +334,18 @@ async function fetchFacultiesForSwal(currentCourses) {
             const selectedFacultyId = this.value;
             const selectedFaculty = facultiesData.find(faculty => faculty._id === selectedFacultyId);
             const courseSelect = document.getElementById('course');
+            const yearSelect = document.getElementById('year');
+            const courseListUl = document.getElementById('course-list-ul');
+        
+            // Reset course, year, and module inputs
             courseSelect.innerHTML = '<option value="" disabled selected>-- Select Course --</option>';
-
+            yearSelect.innerHTML = '<option value="" disabled selected>-- Select Year --</option>';
+            courseListUl.innerHTML = ''; // Clear any existing modules
+        
+            document.getElementById('course-container').style.display = 'none';
+            document.getElementById('year-container').style.display = 'none';
+            document.getElementById('course-list').style.display = 'none'; // Hide module container
+        
             if (selectedFaculty) {
                 selectedFaculty.courses.forEach(course => {
                     const option = document.createElement('option');
@@ -344,46 +354,52 @@ async function fetchFacultiesForSwal(currentCourses) {
                     courseSelect.appendChild(option);
                 });
                 document.getElementById('course-container').style.display = 'block';
-            }
-
-            courseSelect.addEventListener('change', function () {
-                const selectedCourseId = this.value;
-                const selectedCourse = selectedFaculty.courses.find(course => course._id === selectedCourseId);
-                const yearSelect = document.getElementById('year');
-                yearSelect.innerHTML = '<option value="" disabled selected>-- Select Year --</option>';
-
-                if (selectedCourse) {
-                    selectedCourse.years_of_study.forEach(year => {
-                        const option = document.createElement('option');
-                        option.value = year.year;
-                        option.textContent = `Year ${year.year}`;
-                        yearSelect.appendChild(option);
-                    });
-                    document.getElementById('year-container').style.display = 'block';
-                }
-
-                yearSelect.addEventListener('change', function () {
-                    const selectedYearValue = this.value;
-                    const selectedYear = selectedCourse.years_of_study.find(year => year.year === parseInt(selectedYearValue));
-                    const courseListUl = document.getElementById('course-list-ul');
-                    courseListUl.innerHTML = '';
-
-                    if (selectedYear) {
-                        // Populate checkboxes for modules and pre-check current courses
-                        selectedYear.modules.forEach(module => {
-                            const isChecked = currentCourses.includes(module.module) ? 'checked' : ''; // Check if the current course matches
-                            const div = document.createElement('div');
-                            div.innerHTML = `
-                                <label>
-                                    <input type="checkbox" value="${module.module}" ${isChecked}> ${module.module}
-                                </label>
-                            `;
-                            courseListUl.appendChild(div);
+        
+                // Add event listener for course selection
+                courseSelect.addEventListener('change', function () {
+                    const selectedCourseId = this.value;
+                    const selectedCourse = selectedFaculty.courses.find(course => course._id === selectedCourseId);
+                    
+                    // Reset year and module inputs
+                    yearSelect.innerHTML = '<option value="" disabled selected>-- Select Year --</option>';
+                    courseListUl.innerHTML = ''; // Clear any existing modules
+                    
+                    document.getElementById('year-container').style.display = 'none'; // Hide year container
+                    document.getElementById('course-list').style.display = 'none'; // Hide module container
+        
+                    if (selectedCourse) {
+                        selectedCourse.years_of_study.forEach(year => {
+                            const option = document.createElement('option');
+                            option.value = year.year;
+                            option.textContent = `Year ${year.year}`;
+                            yearSelect.appendChild(option);
                         });
-                        document.getElementById('course-list').style.display = 'block';
+                        document.getElementById('year-container').style.display = 'block';
+        
+                        // Add event listener for year selection
+                        yearSelect.addEventListener('change', function () {
+                            const selectedYearValue = this.value;
+                            const selectedYear = selectedCourse.years_of_study.find(year => year.year === parseInt(selectedYearValue));
+                            
+                            courseListUl.innerHTML = ''; // Clear any existing modules
+        
+                            if (selectedYear) {
+                                // Populate checkboxes for modules
+                                selectedYear.modules.forEach(module => {
+                                    const div = document.createElement('div');
+                                    div.innerHTML = `
+                                        <label>
+                                            <input type="checkbox" value="${module.module}"> ${module.module}
+                                        </label>
+                                    `;
+                                    courseListUl.appendChild(div);
+                                });
+                                document.getElementById('course-list').style.display = 'block';
+                            }
+                        });
                     }
                 });
-            });
+            }
         });
     } catch (error) {
         console.error('Error fetching faculties:', error);
@@ -452,3 +468,4 @@ async function saveUpdatedCourses(courses) {
         console.error('Error updating courses:', error);
     }
 }
+

@@ -16,3 +16,6 @@
     display: none;
 }
 
+#password-eye:hover {
+    cursor: pointer;
+}

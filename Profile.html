@@ -46,12 +46,13 @@
                 <input type="email" id="email" name="email" required>
             </div>
             <div class="form-group">
+                <label for="password">Password:</label>
                 <input type="password" id="password" placeholder="Enter your password">
                 <!-- Load the external SVG eye icon from the assets folder -->
                 <span id="togglePassword" class="toggle-password">
                     <img
                     id="password-eye"
-                    src="./Icons/show-password.svg"
+                    src="./Icons/showeye.svg"
                     width="30px"
                     alt="Show Password"
                   />
@@ -77,18 +78,6 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                window.location.href = './login.html';
-            } else {
-                document.body.style.display = 'block'; // Show body content once loaded
-            }
-        });
-
-        
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./Client-servers/profile.js"></script>  
     <script src="./headerFooter.js"></script>  
