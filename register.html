@@ -96,13 +96,20 @@
                         <input type="email" id="email" name="email" required>
                     </div>
                     <div class="input-group">
-                        <label for="email">Password</label>
+                        <label for="password">Password</label>
                         <input type="password" id="password" placeholder="Enter your password">
-                        <!-- Load the external SVG eye icon from the assets folder -->
                         <span id="togglePassword" class="toggle-password">
-                          <img src="./Icons/eye.svg"  width="30px" alt="Show Password">
+                          <img src="./Icons/eye.svg" width="30px" alt="Show Password">
                         </span>
+                        
+                        <!-- Tooltip that will display error messages -->
+                        <div id="passwordTooltip" class="tooltip">
+                          <ul id="passwordErrors">
+                            <!-- Error messages will be dynamically added here -->
+                          </ul>
+                        </div>
                       </div>
+                      
                 </div>
 
                 <p id="error-msg" style="color: red;"></p>

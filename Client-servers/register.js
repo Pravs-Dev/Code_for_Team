@@ -1,19 +1,6 @@
-const API_BASE_URL = 'https://backend2077.azurewebsites.net/api';
+const API_BASE_URL = 'http://localhost:3000/api';
 
 
-
-const passwordInput = document.getElementById('password');
-    const togglePassword = document.getElementById('togglePassword');
-
-    togglePassword.addEventListener('click', function () {
-      // Toggle the type attribute between 'password' and 'text'
-      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-      passwordInput.setAttribute('type', type);
-
-      // Toggle the alt text for accessibility
-      const img = this.querySelector('img');
-      img.alt = type === 'password' ? 'Show Password' : 'Hide Password';
-    });
 
 document.addEventListener('DOMContentLoaded', () => {
     const registerForm = document.getElementById('register-form');
@@ -48,31 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-
-            // Password validation
-            const errorMessages = [];
-            if (password.length < 8) {
-                errorMessages.push('Password must be at least 8 characters long.');
-            }
-            if (!/[a-z]/.test(password)) {
-                errorMessages.push('Password must contain at least one lowercase letter.');
-            }
-            if (!/[A-Z]/.test(password)) {
-                errorMessages.push('Password must contain at least one uppercase letter.');
-            }
-            if (!/[0-9]/.test(password)) {
-                errorMessages.push('Password must contain at least one number.');
-            }
-            if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-                errorMessages.push('Password must contain at least one special character.');
-            }
-
-            // If there are any error messages, display them and stop the form submission
-            if (errorMessages.length > 0) {
-                document.getElementById("error-msg").innerHTML = errorMessages.join('<br>');
-                document.getElementById("error-msg").style.color = 'red';
-                return;
-            }
+            
+            
 
             // Prepare form data
             const formData = new FormData();
@@ -483,3 +447,50 @@ function removeField(element) {
     const inputGroup = element.parentElement;
     inputGroup.parentElement.removeChild(inputGroup);
 }
+
+
+const passwordInput = document.getElementById('password');
+const passwordErrorsContainer = document.getElementById('passwordErrors');
+
+passwordInput.addEventListener('input', () => {
+    const password = passwordInput.value;
+    const errorMessages = [];
+
+    // Check each password requirement
+    if (password.length < 8) {
+        errorMessages.push('Password must be at least 8 characters long.');
+    }
+    if (!/[a-z]/.test(password)) {
+        errorMessages.push('Password must contain at least one lowercase letter.');
+    }
+    if (!/[A-Z]/.test(password)) {
+        errorMessages.push('Password must contain at least one uppercase letter.');
+    }
+    if (!/[0-9]/.test(password)) {
+        errorMessages.push('Password must contain at least one number.');
+    }
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+        errorMessages.push('Password must contain at least one special character.');
+    }
+
+    // Update the tooltip with remaining error messages
+    passwordErrorsContainer.innerHTML = '';
+    if (errorMessages.length > 0) {
+        errorMessages.forEach(msg => {
+            const li = document.createElement('li');
+            li.textContent = msg;
+            passwordErrorsContainer.appendChild(li);
+        });
+    }
+});
+
+// Toggle tooltip display on hover
+passwordInput.addEventListener('mouseover', () => {
+    const tooltip = document.getElementById('passwordTooltip');
+    tooltip.style.color='white';
+});
+
+passwordInput.addEventListener('mouseout', () => {
+    const tooltip = document.getElementById('passwordTooltip');
+    tooltip.style.color ='rgb(80, 181, 220)';
+});
