@@ -1,5 +1,5 @@
 // Redirect to Google OAuth route when Google login button is clicked
-const API_BASE_URL = 'https://backend2077.azurewebsites.net/api';
+const API_BASE_URL = 'https://witscampustutoring.azurewebsites.net/api';
 
 
 function handleGoogleLogin() {
