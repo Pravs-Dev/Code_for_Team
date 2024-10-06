@@ -1667,7 +1667,7 @@ textarea {
 }
 
 .highlighted {
-    background-color: #007bff; /* Highlight selected day */
+    background-color: #000000; /* Highlight selected day */
     color: #888; /* Make text white */
 }
 
