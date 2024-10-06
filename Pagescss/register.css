@@ -219,3 +219,13 @@ button.section:hover {
 #courses {
     padding: 10px;
 }
+
+/* show password icon */
+#password-eye {
+    margin-top: 8px;
+    margin-left: 5px;
+}
+
+#password-eye:hover {
+    cursor: pointer;
+}

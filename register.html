@@ -1,219 +1,281 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register - Tutoring App</title>
-    <link rel="stylesheet" href="./Pagescss/register.css">
+    <link rel="stylesheet" href="./Pagescss/register.css" />
     <style>
-        .hidden {
-            display: none;
-        }
-        .input-group {
-            margin-bottom: 15px;
-        }
-        .add-more {
-            cursor: pointer;
-            color: #ffffff;
-            margin-left: 10px;
-        }
-        .remove {
-            cursor: pointer;
-            color: red;
-            margin-left: 10px;
-        }
+      .hidden {
+        display: none;
+      }
+      .input-group {
+        margin-bottom: 15px;
+      }
+      .add-more {
+        cursor: pointer;
+        color: #ffffff;
+        margin-left: 10px;
+      }
+      .remove {
+        cursor: pointer;
+        color: red;
+        margin-left: 10px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="register-section">
-            <h1>Register</h1>
-            <form id="register-form" enctype="multipart/form-data">
-                <div class="profile-picture-upload">
-                    <label for="profilePicture" class="profile-picture-label">
-                        <input type="file" id="profilePicture" name="profilePicture" accept="image/*" style="display: none;">
-                        <div class="profile-picture-container">
-                            <img id="profilePicturePreview" src="./Icons/profile2.jpg" alt="Profile Picture">
-                            <div class="camera-icon">
-                                <img src="./Icons/background.jpg" alt="Upload">
-                            </div>
-                        </div>
-                    </label>
+      <div class="register-section">
+        <h1>Register</h1>
+        <form id="register-form" enctype="multipart/form-data">
+          <div class="profile-picture-upload">
+            <label for="profilePicture" class="profile-picture-label">
+              <input
+                type="file"
+                id="profilePicture"
+                name="profilePicture"
+                accept="image/*"
+                style="display: none"
+              />
+              <div class="profile-picture-container">
+                <img
+                  id="profilePicturePreview"
+                  src="./Icons/profile2.jpg"
+                  alt="Profile Picture"
+                />
+                <div class="camera-icon">
+                  <img src="./Icons/background.jpg" alt="Upload" />
                 </div>
+              </div>
+            </label>
+          </div>
 
-                <div class="input-group">
-                    <label for="role">Role</label>
-                    <select id="role" name="role" required>
-                        <option value="" selected disabled>Select Role</option>
-                        <option value="student">Student</option>
-                        <option value="tutor">Tutor</option>
-                    </select>
-                </div>
+          <div class="input-group">
+            <label for="role">Role</label>
+            <select id="role" name="role" required>
+              <option value="" selected disabled>Select Role</option>
+              <option value="student">Student</option>
+              <option value="tutor">Tutor</option>
+            </select>
+          </div>
 
-                <!-- Student Fields -->
-                <div id="student-fields" class="hidden">
-                    <div class="input-group">
-                        <label for="student-fname">First Name</label>
-                        <input type="text" id="student-fname" name="fname">
-                    </div>
-                    <div class="input-group">
-                        <label for="student-lname">Last Name</label>
-                        <input type="text" id="student-lname" name="lname">
-                    </div>
-                    <div class="input-group" id="courses-group">
-                        <label for="courses">Courses</label>
-                        <input type="text" id="courses" name="courses[]" placeholder="Please click to add courses">
-                        <span class="add-more" id="add-more-courses">.</span>
-                    </div>
-                </div>
+          <!-- Student Fields -->
+          <div id="student-fields" class="hidden">
+            <div class="input-group">
+              <label for="student-fname">First Name</label>
+              <input type="text" id="student-fname" name="fname" />
+            </div>
+            <div class="input-group">
+              <label for="student-lname">Last Name</label>
+              <input type="text" id="student-lname" name="lname" />
+            </div>
+            <div class="input-group" id="courses-group">
+              <label for="courses">Courses</label>
+              <input
+                type="text"
+                id="courses"
+                name="courses[]"
+                placeholder="Please click to add courses"
+              />
+              <span class="add-more" id="add-more-courses">.</span>
+            </div>
+          </div>
 
-                <!-- Tutor Fields -->
-                <div id="tutor-fields" class="hidden">
-                    <div class="input-group">
-                        <label for="tutor-fname">First Name</label>
-                        <input type="text" id="tutor-fname" name="fname">
-                    </div>
-                    <div class="input-group">
-                        <label for="tutor-lname">Last Name</label>
-                        <input type="text" id="tutor-lname" name="lname">
-                    </div>
-                    <div class="input-group" id="subjects-group">
-                        <label for="subjects">Subjects</label>
-                        <input type="text" id="subjects" name="subjects[]" placeholder="Enter a subject you teach">
-                        <span class="add-more" id="add-more-subjects">.</span>
-                    </div>
-                    <div class="input-group" id="qualification-group">
-                        <label for="qualifications">Qualification</label>
-                        <input type="text" id="qualification" name="qualification[]" placeholder="Enter a qualification">
-                        <span disabled class="add-more" id="add-more-qualifications">+ Add more</span>
-                    </div>
-                </div>
+          <!-- Tutor Fields -->
+          <div id="tutor-fields" class="hidden">
+            <div class="input-group">
+              <label for="tutor-fname">First Name</label>
+              <input type="text" id="tutor-fname" name="fname" />
+            </div>
+            <div class="input-group">
+              <label for="tutor-lname">Last Name</label>
+              <input type="text" id="tutor-lname" name="lname" />
+            </div>
+            <div class="input-group" id="subjects-group">
+              <label for="subjects">Subjects</label>
+              <input
+                type="text"
+                id="subjects"
+                name="subjects[]"
+                placeholder="Enter a subject you teach"
+              />
+              <span class="add-more" id="add-more-subjects">.</span>
+            </div>
+            <div class="input-group" id="qualification-group">
+              <label for="qualifications">Qualification</label>
+              <input
+                type="text"
+                id="qualification"
+                name="qualification[]"
+                placeholder="Enter a qualification"
+              />
+              <span disabled class="add-more" id="add-more-qualifications"
+                >+ Add more</span
+              >
+            </div>
+          </div>
 
-                <!-- Common Fields -->
-                <div id="common-fields" class="hidden">
-                    <div class="input-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="email">Password</label>
-                        <input type="password" id="password" placeholder="Enter your password">
-                        <!-- Load the external SVG eye icon from the assets folder -->
-                        <span id="togglePassword" class="toggle-password">
-                          <img src="./Icons/eye.svg"  width="30px" alt="Show Password">
-                        </span>
-                      </div>
-                </div>
+          <!-- Common Fields -->
+          <div id="common-fields" class="hidden">
+            <div class="input-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="input-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+              />
+              <!-- Load the external SVG eye icon from the assets folder -->
+              <span id="togglePassword" class="toggle-password">
+                <img
+                  id="password-eye"
+                  src="./Icons/show-password.svg"
+                  width="30px"
+                  alt="Show Password"
+                />
+              </span>
+            </div>
+          </div>
 
-                <p id="error-msg" style="color: red;"></p>
-                <button type="submit" class="section hidden" id="submit-button">Register</button>
-            </form>
-            <p class="login-link">Already have an account? <a href="login.html">Login here</a></p>
-        </div>
-        <div class="image-section">
-            <img src="./Icons/online-tutoring-benefits.jpg" alt="Tutoring App">
-        </div>
+          <p id="error-msg" style="color: red"></p>
+          <button type="submit" class="section hidden" id="submit-button">
+            Register
+          </button>
+        </form>
+        <p class="login-link">
+          Already have an account? <a href="login.html">Login here</a>
+        </p>
+      </div>
+      <div class="image-section">
+        <img src="./Icons/online-tutoring-benefits.jpg" alt="Tutoring App" />
+      </div>
     </div>
 
     <script>
-        document.getElementById('role').addEventListener('change', function () {
-            const role = this.value;
-            const studentFields = document.getElementById('student-fields');
-            const tutorFields = document.getElementById('tutor-fields');
-            const commonFields = document.getElementById('common-fields');
-            const submitButton = document.getElementById('submit-button');
 
-            // Hide all fields initially
-            studentFields.classList.add('hidden');
-            tutorFields.classList.add('hidden');
-            commonFields.classList.add('hidden');
-            submitButton.classList.add('hidden');
+      document.getElementById("role").addEventListener("change", function () {
+        const role = this.value;
+        const studentFields = document.getElementById("student-fields");
+        const tutorFields = document.getElementById("tutor-fields");
+        const commonFields = document.getElementById("common-fields");
+        const submitButton = document.getElementById("submit-button");
 
-            // Show relevant fields based on role selection
-            if (role === 'student') {
-                studentFields.classList.remove('hidden');
-                studentFields.querySelector('input[name="fname"]').setAttribute('required', 'required');
-                studentFields.querySelector('input[name="lname"]').setAttribute('required', 'required');
-                studentFields.querySelector('input[name="courses[]"]').setAttribute('required', 'required');
-                commonFields.classList.remove('hidden');
-                submitButton.classList.remove('hidden');
-            } else if (role === 'tutor') {
-                tutorFields.classList.remove('hidden');
-                tutorFields.querySelector('input[name="fname"]').setAttribute('required', 'required');
-                tutorFields.querySelector('input[name="lname"]').setAttribute('required', 'required');
-                tutorFields.querySelector('input[name="subjects[]"]').setAttribute('required', 'required');
-                tutorFields.querySelector('input[name="qualification[]"]').setAttribute('required', 'required');
-                commonFields.classList.remove('hidden');
-                submitButton.classList.remove('hidden');
-            } 
-        });
+        // Hide all fields initially
+        studentFields.classList.add("hidden");
+        tutorFields.classList.add("hidden");
+        commonFields.classList.add("hidden");
+        submitButton.classList.add("hidden");
 
-        // Add more courses for students
-        document.getElementById('add-more-courses').addEventListener('click', function () {
-            const coursesGroup = document.getElementById('courses-group');
-            const newCourse = document.createElement('div');
-            newCourse.classList.add('input-group');
-            newCourse.innerHTML = `
+        // Show relevant fields based on role selection
+        if (role === "student") {
+          studentFields.classList.remove("hidden");
+          studentFields
+            .querySelector('input[name="fname"]')
+            .setAttribute("required", "required");
+          studentFields
+            .querySelector('input[name="lname"]')
+            .setAttribute("required", "required");
+          studentFields
+            .querySelector('input[name="courses[]"]')
+            .setAttribute("required", "required");
+          commonFields.classList.remove("hidden");
+          submitButton.classList.remove("hidden");
+        } else if (role === "tutor") {
+          tutorFields.classList.remove("hidden");
+          tutorFields
+            .querySelector('input[name="fname"]')
+            .setAttribute("required", "required");
+          tutorFields
+            .querySelector('input[name="lname"]')
+            .setAttribute("required", "required");
+          tutorFields
+            .querySelector('input[name="subjects[]"]')
+            .setAttribute("required", "required");
+          tutorFields
+            .querySelector('input[name="qualification[]"]')
+            .setAttribute("required", "required");
+          commonFields.classList.remove("hidden");
+          submitButton.classList.remove("hidden");
+        }
+      });
+
+      // Add more courses for students
+      document
+        .getElementById("add-more-courses")
+        .addEventListener("click", function () {
+          const coursesGroup = document.getElementById("courses-group");
+          const newCourse = document.createElement("div");
+          newCourse.classList.add("input-group");
+          newCourse.innerHTML = `
                 <input type="text" name="courses[]" placeholder="Enter another course" disabled>
                 <span class="remove" onclick="removeField(this)">- Remove</span>
             `;
-            coursesGroup.appendChild(newCourse);
+          coursesGroup.appendChild(newCourse);
         });
 
-        // Add more subjects for tutors
-        document.getElementById('add-more-subjects').addEventListener('click', function () {
-            const subjectsGroup = document.getElementById('subjects-group');
-            const newSubject = document.createElement('div');
-            newSubject.classList.add('input-group');
-            newSubject.innerHTML = `
+      // Add more subjects for tutors
+      document
+        .getElementById("add-more-subjects")
+        .addEventListener("click", function () {
+          const subjectsGroup = document.getElementById("subjects-group");
+          const newSubject = document.createElement("div");
+          newSubject.classList.add("input-group");
+          newSubject.innerHTML = `
                 <input type="text" name="subjects[]" placeholder="Enter another subject">
                 <span class="remove" onclick="removeField(this)">- Remove</span>
             `;
-            subjectsGroup.appendChild(newSubject);
+          subjectsGroup.appendChild(newSubject);
         });
 
-        // Add more qualifications for tutors
-        document.getElementById('add-more-qualifications').addEventListener('click', function () {
-            const qualificationGroup = document.getElementById('qualification-group');
-            const newQualification = document.createElement('div');
-            newQualification.classList.add('input-group');
-            newQualification.innerHTML = `
+      // Add more qualifications for tutors
+      document
+        .getElementById("add-more-qualifications")
+        .addEventListener("click", function () {
+          const qualificationGroup = document.getElementById(
+            "qualification-group"
+          );
+          const newQualification = document.createElement("div");
+          newQualification.classList.add("input-group");
+          newQualification.innerHTML = `
                 <input type="text" name="qualification[]" placeholder="Enter another qualification">
                 <span class="remove" onclick="removeField(this)">- Remove</span>
             `;
-            qualificationGroup.appendChild(newQualification);
+          qualificationGroup.appendChild(newQualification);
         });
 
-        // Remove a field
-        function removeField(element) {
-            const inputGroup = element.parentElement;
-            inputGroup.parentElement.removeChild(inputGroup);
-        }
+      // Remove a field
+      function removeField(element) {
+        const inputGroup = element.parentElement;
+        inputGroup.parentElement.removeChild(inputGroup);
+      }
     </script>
     <script>
-        // On page load, check if a module is stored in localStorage
-        document.addEventListener('DOMContentLoaded', function() {
-            const selectedModule = localStorage.getItem('selectedModule');
-            if (selectedModule) {
-                // Find the courses input
-                const coursesInput = document.getElementById('courses');
-                
-                // If there's already a value in the courses input, append the new course
-                if (coursesInput.value) {
-                    coursesInput.value += `, ${selectedModule}`;
-                } else {
-                    // Otherwise, just set the first selected course
-                    coursesInput.value = selectedModule;
-                }
-    
-                // Clear the module from localStorage after setting it
-                localStorage.removeItem('selectedModule');
-            }
-        });
+      // On page load, check if a module is stored in localStorage
+      document.addEventListener("DOMContentLoaded", function () {
+        const selectedModule = localStorage.getItem("selectedModule");
+        if (selectedModule) {
+          // Find the courses input
+          const coursesInput = document.getElementById("courses");
+
+          // If there's already a value in the courses input, append the new course
+          if (coursesInput.value) {
+            coursesInput.value += `, ${selectedModule}`;
+          } else {
+            // Otherwise, just set the first selected course
+            coursesInput.value = selectedModule;
+          }
+
+          // Clear the module from localStorage after setting it
+          localStorage.removeItem("selectedModule");
+        }
+      });
     </script>
-    
-    
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./Client-servers/register.js"></script>
-</body>
+  </body>
 </html>
