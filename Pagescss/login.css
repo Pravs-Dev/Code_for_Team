@@ -124,3 +124,7 @@ button.google-login:hover {
     margin-left: 5px;
     margin-bottom: 0;
 }
+
+#password-eye:hover{
+    cursor: pointer;
+}
