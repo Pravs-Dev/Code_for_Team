@@ -118,3 +118,9 @@ button.google-login:hover {
 .register-link a:hover {
     color: #ddd;
 }
+
+#password-eye {
+    margin-top: 8px;
+    margin-left: 5px;
+    margin-bottom: 0;
+}

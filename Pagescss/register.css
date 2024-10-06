@@ -224,8 +224,13 @@ button.section:hover {
 #password-eye {
     margin-top: 8px;
     margin-left: 5px;
+    margin-bottom: 0;
 }
 
 #password-eye:hover {
     cursor: pointer;
+}
+
+#passwordErrors {
+    margin: 0;
 }

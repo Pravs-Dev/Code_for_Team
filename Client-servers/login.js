@@ -132,15 +132,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-const passwordInput = document.getElementById('password');
-    const togglePassword = document.getElementById('togglePassword');
+//handle clicking the show password eye
+// Get references to the password input and the toggle icon
+const passwordInput = document.getElementById("password");
+const passwordEye = document.getElementById("password-eye");
 
-    togglePassword.addEventListener('click', function () {
-      // Toggle the type attribute between 'password' and 'text'
-      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-      passwordInput.setAttribute('type', type);
+// Handle clicking the eye icon
+passwordEye.addEventListener("click", function () {
+  // Toggle password visibility
+  const isPasswordVisible = passwordInput.type === "text";
+  passwordInput.type = isPasswordVisible ? "password" : "text";
 
-      // Toggle the alt text for accessibility
-      const img = this.querySelector('img');
-      img.alt = type === 'password' ? 'Show Password' : 'Hide Password';
-    });
+  // Switch between show and hide icons
+  if (isPasswordVisible) {
+    passwordEye.src = "./Icons/show-password.svg";
+    passwordEye.alt = "Show Password";
+  } else {
+    passwordEye.src = "./Icons/hide-password.svg";
+    passwordEye.alt = "Hide Password";
+  }
+});
