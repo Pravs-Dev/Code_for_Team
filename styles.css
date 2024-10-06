@@ -1687,3 +1687,29 @@ textarea {
     background-color: #f0f8ff; /* Slight hover effect for better user experience */
     border-color: #007bff; /* Change border color on hover */
 }
+
+.input-group {
+  position: relative;
+}
+
+.tooltip {
+  /* Light red to indicate error */
+  color: rgb(80, 181, 220);
+ 
+}
+
+
+.input-group:hover .tooltip {
+  display: block; /* Show tooltip on hover */
+}
+
+#passwordErrors {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+#passwordErrors li {
+  font-size: 12px;
+}
+
