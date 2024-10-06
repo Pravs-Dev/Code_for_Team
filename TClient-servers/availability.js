@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 console.error('Error:', error);
                                 confirm(error);
                             });
-                    
+                            
                             //reload the page
                             location.reload();
                     }
@@ -176,13 +176,27 @@ function isValidInput(availabilities) {
             if(availability.slots[i].start != '' && availability.slots[(i+1)%3].start != '' && availability.slots[(i+1)%3].end != ''){
                 if( parseInt((availability.slots[i].end).split(':')[0]) > parseInt((availability.slots[(i+1)%3].start).split(':')[0]) ){
                     isValid = false;
-                    confirm('Slots overlap or are not in order in: '+ availability.date);
+                    swal.fire({
+                        title: 'Unsuccessful!',
+                        text: 'Slots overlap or are not in order in: '+ availability.date,
+                        icon: 'error',
+                        confirmButtonText: 'Retry',
+                        timer: 5000,
+                        timerProgressBar: true
+                    });
                     return isValid;
                 }
                 else if(parseInt((availability.slots[i].end).split(':')[0]) == parseInt((availability.slots[(i+1)%3].start).split(':')[0])){
                     if(parseInt((availability.slots[i].end).split(':')[1]) > parseInt((availability.slots[(i+1)%3].start).split(':')[1])){
                         isValid = false;
-                        confirm('Slots overlap or are not in order in: '+ availability.date);
+                        swal.fire({
+                            title: 'Unsuccessful!',
+                            text: 'Slots overlap or are not in order in: '+ availability.date,
+                            icon: 'error',
+                            confirmButtonText: 'Retry',
+                            timer: 5000,
+                            timerProgressBar: true
+                        });
                         return isValid;
                     }
                 }
@@ -196,50 +210,114 @@ function isValidInput(availabilities) {
                 }
                 else if (slot.start >= slot.end) {
                     isValid = false;
-                    confirm('Start time after or too close to end time in: '+ availability.date);
+                    swal.fire({
+                        title: 'Unsuccessful!',
+                        text: 'Start time after or too close to end time in: '+ availability.date,
+                        icon: 'error',
+                        confirmButtonText: 'Retry',
+                        timer: 5000,
+                        timerProgressBar: true
+                    });
                     return isValid;
                 }
                 else if (slot.start < '08:00'  ) {
                     isValid = false;
-                    confirm('Start time too early in: '+ availability.date);
+                    swal.fire({
+                        title: 'Unsuccessful!',
+                        text: 'Start time too early in: '+ availability.date,
+                        icon: 'error',
+                        confirmButtonText: 'Retry',
+                        timer: 5000,
+                        timerProgressBar: true
+                    });
                     return isValid;
                 }
                 else if(slot.start > '20:00'){
                     isValid = false;
-                    confirm('Start time too late in: '+ availability.date);
+                    swal.fire({
+                        title: 'Unsuccessful!',
+                        text: 'Start time too late in: '+ availability.date,
+                        icon: 'error',
+                        confirmButtonText: 'Retry',
+                        timer: 5000,
+                        timerProgressBar: true
+                    });
                     return isValid;
                 }
                 else if(slot.end > '21:00' ){
                     isValid = false;
-                    confirm('End time too late in: '+ availability.date);
+                    swal.fire({
+                        title: 'Unsuccessful!',
+                        text: 'End time too late in: '+ availability.date,
+                        icon: 'error',
+                        confirmButtonText: 'Retry',
+                        timer: 5000,
+                        timerProgressBar: true
+                    });
                     return isValid;
                 }
                 else if(slot.end < '09:00'){
                     isValid = false;
-                    confirm('End time too early in: '+ availability.date);
+                    
+                    swal.fire({
+                        title: 'Unsuccessful!',
+                        text: 'End time too early in: '+ availability.date,
+                        icon: 'error',
+                        confirmButtonText: 'Retry',
+                        timer: 5000,
+                        timerProgressBar: true
+                    });
                     return isValid;
                 }
                 else if(parseInt((slot.start).split(':')[0])<(parseInt((slot.end).split(':')[0]) - 2)){
                     isValid = false;
-                    confirm('Slot too long (maximum 2 hours) in: '+ availability.date);
+                    swal.fire({
+                        title: 'Unsuccessful!',
+                        text: 'Slot too long (maximum 2 hours) in: '+ availability.date,
+                        icon: 'error',
+                        confirmButtonText: 'Retry',
+                        timer: 5000,
+                        timerProgressBar: true
+                    });
                     return isValid;
                 }
                 else if(parseInt((slot.start).split(':')[0])==(parseInt((slot.end).split(':')[0]) - 2)){
                     if(parseInt((slot.start).split(':')[1])<parseInt((slot.end).split(':')[1])){
                         isValid = false;
-                        confirm('Slot too long (maximum 2 hours) in: '+ availability.date);
+                        swal.fire({
+                            title: 'Unsuccessful!',
+                            text: 'Slot too long (maximum 2 hours) in: '+ availability.date,
+                            icon: 'error',
+                            confirmButtonText: 'Retry',
+                            timer: 5000,
+                            timerProgressBar: true
+                        });
                         return isValid;
                     }
                 }
                 else if(parseInt((slot.start).split(':')[0]) > (parseInt((slot.end).split(':')[0]) -1)){
                     isValid = false;
-                    confirm('Slot too short (minimum 1 hour) in: '+ availability.date);
+                    swal.fire({
+                        title: 'Unsuccessful!',
+                        text: 'Slot too short (minimum 1 hour) in: '+ availability.date,
+                        icon: 'error',
+                        confirmButtonText: 'Retry',
+                        timer: 5000,
+                        timerProgressBar: true
+                    });
                     return isValid;
                 }
                 else if(parseInt((slot.start).split(':')[0]) == (parseInt((slot.end).split(':')[0]) -1)){
                     if(parseInt((slot.start).split(':')[1])>parseInt((slot.end).split(':')[1])){
                         isValid = false;
-                        confirm('Slot too short (minimum 1 hour) in: '+ availability.date);
+                        swal.fire({
+                            title: 'Unsuccessful!',
+                            text: 'Slot too short (minimum 1 hour) in: '+ availability.date,
+                            icon: 'error',
+                            confirmButtonText: 'Retry',
+                            timer: 5000,
+                            timerProgressBar: true
+                        });
                         return isValid;
                     }
                 }

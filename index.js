@@ -58,6 +58,14 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+app.get('/api/v1/bus-schedule', async (req, res) => {
+  try {
+    const response = await axios.get('http://52.40.184.137/api/v1/bus-schedule/');
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching bus schedule' });
+  }
+});
 app.use(express.static(__dirname));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'login.html'));

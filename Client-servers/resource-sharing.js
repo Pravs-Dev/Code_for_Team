@@ -42,7 +42,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     confirmButtonColor: '#007bff',
                     timer: 5000, // Auto-close after 3 seconds (optional)
                     timerProgressBar: true, // Progress bar for auto-close (optional)
-                }); 
+                }).then(() => {
+                    location.reload(); // Reload after OK is clicked
+                });
                 console.log('New resource created:', data);
             } else {
                 const errorData = await response.json();
@@ -97,9 +99,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     title: 'File submitted successfully!',
                     confirmButtonText: 'OK',
                     confirmButtonColor: '#007bff',
-                    timer: 5000, // Auto-close after 3 seconds (optional)
+                    timer: 5000, // Auto-close after 5 seconds (optional)
                     timerProgressBar: true, // Progress bar for auto-close (optional)
-                }); 
+                }).then(() => {
+                    location.reload(); // Reload after OK is clicked
+                });
                 console.log('New resource created:', data);
             } else {
                 const errorData = await response.json();

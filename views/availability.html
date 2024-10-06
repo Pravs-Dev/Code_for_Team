@@ -2,21 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Availability</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Availability</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Styles for the instruction box */
+        .instruction-box {
+            background-color: #f9f9f9;
+            border-left: 4px solid #007BFF;
+            padding: 16px;
+            margin: 20px auto;
+            max-width: 800px;
+            font-family: Arial, sans-serif;
+        }
+
+        .instruction-box h2 {
+            margin-top: 0;
+            color: #007BFF;
+        }
+
+        .instruction-box ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .instruction-box li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+    </style>
 </head>
 <body>
     <app-header></app-header>
     <app-sidebar></app-sidebar>
 
-    <div class = "main-content" >
-        <div id = "availability-list"></div>   
-    </div> 
-    
-    <script src="../TClient-servers/availability.js"></script> 
-    <script src="./theaderFooter.js"></script>  
+    <div class="main-content">
+
+        <!-- Instruction Box -->
+        <div class="instruction-box">
+            <h2>Instructions for Entering Availability Slots</h2>
+            <ul>
+                <li>Each slot must have a valid <strong>start time</strong> and <strong>end time</strong>.</li>
+                <li>Slots must be in chronological order and <strong>must not overlap</strong>.</li>
+                <li>The <strong>start time</strong> must be <strong>before</strong> the end time.</li>
+                <li>The <strong>start time</strong> cannot be earlier than <strong>08:00</strong> and not later than <strong>20:00</strong>.</li>
+                <li>The <strong>end time</strong> cannot be earlier than <strong>09:00</strong> and not later than <strong>21:00</strong>.</li>
+                <li>Each slot must be at least <strong>1 hour</strong> long and cannot exceed <strong>2 hours</strong>.</li>
+                <li>Slots must be in order without gaps or overlaps between them.</li>
+            </ul>
+        </div>
+
+        <!-- Availability Slots Section -->
+        <div id="availability-list"></div>
+    </div>
+
+    <script src="../TClient-servers/availability.js"></script>
+    <script src="./theaderFooter.js"></script>
     <script src="../Client-servers/login.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
-

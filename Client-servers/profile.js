@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             } else {
                 const errorData = await response.json();
                 Swal.fire({
-                    icon: 'success',
+                    icon: 'error',
                     title: 'Profile update failed',
                     text: 'Error updating profile',
                     confirmButtonText: 'OK',
@@ -408,7 +408,6 @@ async function fetchFacultiesForSwal(currentCourses) {
 
 // Fetch the user's current courses
 async function getCurrentCourses() {
-    //const API_BASE_URL = 'https://finalbackend2099.azurewebsites.net/api';
     const userId = localStorage.getItem('userId');
     const token = localStorage.getItem('token');
     try {

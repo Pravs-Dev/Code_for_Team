@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://backend2077.azurewebsites.net/api';
+const API_BASE_URL = 'http://localhost:3000/api';
 
 //handle clicking the show password eye
 // Get references to the password input and the toggle icon
@@ -19,6 +19,7 @@ passwordEye.addEventListener("click", function () {
     passwordEye.src = "./Icons/hide-password.svg";
     passwordEye.alt = "Hide Password";
   }
+  
 });
 
 document.addEventListener('DOMContentLoaded', () => {
