@@ -72,18 +72,16 @@ export const deleteSessionById = async (id) => {
 
 export const getSessionsByStudentId = async (studentId) => {
   try {
-    console.log("Fetching sessions for student ID:", studentId); // Debug
     const sessions = await VirtualTutoring.find({ studentId })
       .populate('tutorId', 'fname')
       .populate('studentId', 'fname');
 
     if (!sessions.length) {
-      console.log('No sessions found for this student');
+      //console.log('No sessions found for this student');
     }
 
     return sessions;
   } catch (error) {
-    console.error('Error fetching sessions:', error); // Log errors
     throw new Error(`Error fetching sessions for student: ${error.message}`);
   }
 };

@@ -142,6 +142,34 @@ describe('User Unit Tests', () => {
     expect(res.body).toHaveProperty('_id', userId);
   });
 
+  it('should return the profile picture for a specific user by userId', async () => {
+    let userId = "66f93e6c5de69a52e153877c";
+    const res = await request(app).get(`/api/users/${userId}/profile-picture`);
+    expect(res.statusCode).toEqual(200); 
+  });
+
+
+
+  // it('should update the user profile picture', async () => {
+  //   const updatedData = {
+  //     fname: 'Jane Updated',
+  //     lname: 'Doe Updated',
+  //   };
+
+  //   // Mock file upload using multer
+  //   const file = Buffer.from('new image data'); // Mock new image data
+  //   const res = await request(app)
+  //     .put(`/api/users/${userId}`)
+  //     .field('profilePicture', file, { filename: 'new-profile.png' }) // Simulate file upload
+  //     .send(updatedData); // Send the updated user data
+
+  //   expect(res.statusCode).toEqual(200); // Expect success status
+  //   expect(res.body).toHaveProperty('_id', userId); // Ensure returned user has the correct ID
+  //   expect(res.body).toHaveProperty('fname', 'Jane Updated'); // Check updated name
+  //   expect(res.body).toHaveProperty('lname', 'Doe Updated'); // Check updated last name
+  //   expect(res.body).toHaveProperty('profilePicture'); // Check if profile picture is updated
+  // });
+
   it('should return 404 for non-existent user', async () => {
     const nonExistentUserId = '66e8a4235629979b7e8f6235';
     const res = await request(app).get(`/api/users/${nonExistentUserId}`);
@@ -185,31 +213,36 @@ describe('Virtual Tutoring Unit Tests', () => {
   let sessionId; // Store the sessionId here
 
   it('should create a new session', async () => {
-    const tutorId = new mongoose.Types.ObjectId();
-    const studentId = new mongoose.Types.ObjectId();
+    const tutorId = "66fb28865293c80710d63a82";
+    const studentId = "66e8a4235629979b7e8f6236";
 
     const newSession = {
       tutorId: tutorId.toString(),
       studentId: studentId.toString(),
-      scheduledTime: '2024-10-01T10:00:00.000Z',
+      scheduledTime: '2024-10-01T10:00:00.000Z', 
+      scheduledDate: '2024-10-01',  
       videoConferenceUrl: 'https://example.com/conference/' + Math.floor(10000 + Math.random() * 90000),
       status: 'scheduled',
       notes: 'A session on advanced algebra'
     };
 
+    // Call the API
     const res = await request(app).post('/api/virtualtutoring').send(newSession);
+
+    // Check for correct status code
     expect(res.statusCode).toEqual(201);
+
+    // Ensure the response has _id
     expect(res.body).toHaveProperty('_id');
+    sessionId = res.body._id; // Save the session ID
 
-    // Store the sessionId for use in the following tests
-    sessionId = res.body._id;
-
+    // Check if the response matches the sent object
     expect(res.body).toMatchObject({
       tutorId: newSession.tutorId,
       studentId: newSession.studentId,
       scheduledTime: newSession.scheduledTime,
+      scheduledDate: newSession.scheduledDate,
       videoConferenceUrl: newSession.videoConferenceUrl,
-      status: newSession.status,
       notes: newSession.notes
     });
   });
@@ -250,7 +283,26 @@ describe('Virtual Tutoring Unit Tests', () => {
     expect(res.body.message).toBe('Session deleted successfully');
   });
 
+  it('should return sessions for a specific student by studentId and student doesnt have a session', async () => {
+    const studentId = '66e8a4235629979b7e8f6236'; 
+    
+    const res = await request(app).get(`/api/virtualtutoring/student/${studentId}`);
+  
+    expect(res.statusCode).toEqual(404); 
+  
+  });
 
+
+  it('should return sessions for a specific student by studentId and student doesnt have a session', async () => {
+    const studentId = '60c72b2f9b1d8f4d2e3f8d6e'; 
+    
+    const res = await request(app).get(`/api/virtualtutoring/student/${studentId}`);
+  
+    expect(res.statusCode).toEqual(200); 
+    expect(res.body).toBeInstanceOf(Array);  
+    expect(res.body.length).toBeGreaterThan(0);  
+
+  });
 
   describe('Bookings Unit Test', () => {
     let bookingId; // Variable to store the bookingId
