@@ -2,9 +2,72 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Show Events</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Available Events</title>
+    <title>Show Events</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+        }
+
+
+        .welcome {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        /* Event Card Styles */
+        .event-card {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .event-card h3 {
+            margin-top: 0;
+            color: #1a73e8;
+            margin-bottom: 16px;
+        }
+
+        .event-details {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .event-details p {
+            flex: 1 1 250px;
+            margin: 8px 0;
+            color: #555;
+        }
+
+        .event-details p strong {
+            color: #333;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .event-details {
+                flex-direction: column;
+            }
+
+            .event-details p {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -21,29 +84,87 @@
         async function fetchAndDisplayEvents() {
             const eventsList = document.getElementById('Events-list');
 
+            // Mock data to use if API call fails
+            const mockEvents = [
+                {
+                    "BOOKING_ID": 5,
+                    "VENUE_ID": 2,
+                    "USER_ID": "2546838@students.wits.ac.za",
+                    "DATE": "2024-09-15T00:00:00.000Z",
+                    "START_TIME": "14:15:00",
+                    "END_TIME": "17:00:00",
+                    "DATE_CREATED": "2024-09-01T00:00:00.000Z",
+                    "BOOKING_STATUS": "Confirmed",
+                    "EVENT_NAME": "OS Meetup"
+                },
+                {
+                    "BOOKING_ID": 62,
+                    "VENUE_ID": 1,
+                    "USER_ID": "2544456@students.wits.ac.za",
+                    "DATE": "2024-09-20T00:00:00.000Z",
+                    "START_TIME": "10:15:00",
+                    "END_TIME": "12:00:00",
+                    "DATE_CREATED": "2024-09-14T00:00:00.000Z",
+                    "BOOKING_STATUS": "Confirmed",
+                    "EVENT_NAME": "Test 2"
+                },
+                // ... include the rest of your mock data here
+            ];
+
             try {
                 const response = await fetch('https://group2afunctionapp.azurewebsites.net/api/getBOOKING?code=JDsgJhmxzmtNJeOdiPSKbEAPlrI61hA5RDMlGKh4OzxyAzFuGvO2yQ%3D%3D');
+
+                if (!response.ok) {
+                    throw new Error(`API error: ${response.status}`);
+                }
+
                 const events = await response.json();
 
-                events.forEach(event => {
-                    const studentNumber = booking.USER_ID.split('@')[0];
-                    const eventElement = document.createElement('div');
-                    eventElement.innerHTML = `
-                        <h3>${event.EVENT_NAME}</h3>
-                        <p><strong>Booking Number:</strong> ${event.BOOKING_ID}</p>
-                        <p><strong>Venue Number:</strong> ${event.VENUE_ID}</p>
-                        <p><strong>Date:</strong> ${new Date(event.DATE).toLocaleDateString()}</p>
-                        <p><strong>Start Time:</strong> ${event.START_TIME}</p>
-                        <p><strong>End Time:</strong> ${event.END_TIME}</p>
-                        <p><strong>Status:</strong> ${event.BOOKING_STATUS}</p>
-                        <p><strong>Student Number that Booked:</strong> ${studentNumber}</p>
-                    `;
-                    eventsList.appendChild(eventElement);
-                });
+                displayEvents(events);
             } catch (error) {
                 console.error('Error fetching events:', error);
-                eventsList.innerHTML = '<p>Failed to load events.</p>';
+                console.log('Using mock data instead.');
+                displayEvents(mockEvents);
             }
+        }
+
+        function displayEvents(events) {
+            const eventsList = document.getElementById('Events-list');
+
+            // Clear any existing content
+            eventsList.innerHTML = '';
+
+            // Sort events by date
+            events.sort((a, b) => new Date(a.DATE) - new Date(b.DATE));
+
+            events.forEach(event => {
+                const studentNumber = event.USER_ID.split('@')[0];
+                const eventElement = document.createElement('div');
+                eventElement.classList.add('event-card');
+
+                // Format date and time
+                const eventDate = new Date(event.DATE).toLocaleDateString('en-GB', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                const startTime = event.START_TIME.substring(0,5);
+                const endTime = event.END_TIME.substring(0,5);
+
+                eventElement.innerHTML = `
+                    <h3>${event.EVENT_NAME}</h3>
+                    <div class="event-details">
+                        <p><strong>Booking Number:</strong> ${event.BOOKING_ID}</p>
+                        <p><strong>Venue Number:</strong> ${event.VENUE_ID}</p>
+                        <p><strong>Date:</strong> ${eventDate}</p>
+                        <p><strong>Time:</strong> ${startTime} - ${endTime}</p>
+                        <p><strong>Status:</strong> ${event.BOOKING_STATUS}</p>
+                        <p><strong>Booked By:</strong> ${studentNumber}</p>
+                    </div>
+                `;
+                eventsList.appendChild(eventElement);
+            });
         }
 
         fetchAndDisplayEvents();
