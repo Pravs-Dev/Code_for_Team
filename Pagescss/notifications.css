@@ -114,3 +114,13 @@
     right: 0;
     display: none; /* Initially hidden */
 }
+
+.delete-btn{
+    padding: 10px 20px;
+    background-color: #c91a37;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}

@@ -46,9 +46,17 @@
                 <input type="email" id="email" name="email" required>
             </div>
             <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password">
-            </div>
+                <input type="password" id="password" placeholder="Enter your password">
+                <!-- Load the external SVG eye icon from the assets folder -->
+                <span id="togglePassword" class="toggle-password">
+                    <img
+                    id="password-eye"
+                    src="./Icons/show-password.svg"
+                    width="30px"
+                    alt="Show Password"
+                  />
+                </span>
+              </div>
             <div class="form-group">
                 <label for="courses">Courses:</label>
                 <input disabled type="text" id="courses" name="courses" readonly>
