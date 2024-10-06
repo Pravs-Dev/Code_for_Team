@@ -5,84 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bus Schedule</title>
     <link rel="stylesheet" href="styles.css">
-    <body>
+</head>
+<body>
 
-        <!-- Header Component -->
-        <app-header></app-header>
-    
-        <!-- Sidebar Component -->
-        <app-sidebar></app-sidebar>
-    
-        <!-- Main Content Section -->
-        <div class="main-content">
-            <section class="bus-schedule-section">
-                <h1>Campus Bus Schedule</h1>
-                <p>Stay updated on campus bus routes and timings. Check the status of each bus to ensure you never miss a stop!</p>
-    
-                <!-- Bus Schedule Cards -->
-                <div id="bus-schedule-list">
-                    <!-- Bus cards will be dynamically generated here -->
-                </div>
-            </section>
-        </div>
-    
-        <script>
-            async function fetchBusSchedule() {
-                try {
-                    const response = await fetch('http://52.40.184.137/api/v1/bus-schedule/');
-                    const busData = await response.json();
-                    displayBusSchedule(busData.data);
-                } catch (error) {
-                    console.error('Error fetching bus schedule:', error);
-                }
+    <!-- Header Component -->
+    <app-header></app-header>
+
+    <!-- Sidebar Component -->
+    <app-sidebar></app-sidebar>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+        <section class="bus-schedule-section">
+            <h1>Campus Bus Schedule</h1>
+            <p>Stay updated on campus bus routes and timings. Check the status of each bus to ensure you never miss a stop!</p>
+
+            <!-- Bus Schedule Cards -->
+            <div id="bus-schedule-list">
+                <!-- Bus cards will be dynamically generated here -->
+            </div>
+        </section>
+    </div>
+
+    <script>
+        async function fetchBusSchedule() {
+            try {
+                const response = await fetch('http://52.40.184.137/api/v1/bus-schedule/');
+                const busData = await response.json();
+                displayBusSchedule(busData); // Adjusted to match the full response format
+            } catch (error) {
+                console.error('Error fetching bus schedule:', error);
             }
-    
-            function displayBusSchedule(data) {
-                const busScheduleList = document.getElementById('bus-schedule-list');
-                busScheduleList.innerHTML = ''; // Clear previous data
-    
-                data.forEach(schedule => {
-                    const busCard = document.createElement('div');
-                    busCard.className = 'bus-card';
-                    busCard.innerHTML = `
-                        <div class="route-info">
-                            <h2>Route ID: ${schedule.RouteID}</h2>
-                            <p><strong>Bus ID:</strong> ${schedule.BusID}</p>
-                            <table class="bus-stops">
-                                <thead>
+        }
+
+        function displayBusSchedule(data) {
+            const busScheduleList = document.getElementById('bus-schedule-list');
+            busScheduleList.innerHTML = ''; // Clear previous data
+
+            data.forEach(schedule => {
+                const busCard = document.createElement('div');
+                busCard.className = 'bus-card';
+                busCard.innerHTML = `
+                    <div class="route-info">
+                        <h2>Route: ${schedule.routeName}</h2>
+                        <p><strong>Route ID:</strong> ${schedule.routeId}</p>
+                        <p><strong>Bus ID:</strong> ${schedule.busInfo.busId}</p>
+                        <p><strong>Bus Capacity:</strong> ${schedule.busInfo.capacity}</p>
+                        <table class="bus-stops">
+                            <thead>
+                                <tr>
+                                    <th>Stop Name</th>
+                                    <th>Arrival Time</th>
+                                    <th>Departure Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${schedule.stops.map(stop => `
                                     <tr>
-                                        <th>Stop ID</th>
-                                        <th>Arrival Time</th>
-                                        <th>Departure Time</th>
+                                        <td>${stop.stopName}</td>
+                                        <td>${stop.arrivalTime}</td>
+                                        <td>${stop.departureTime}</td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    ${schedule.stops.map(stop => `
-                                        <tr>
-                                            <td>${stop.stopId}</td>
-                                            <td>${stop.arrivalTime}</td>
-                                            <td>${stop.departureTime}</td>
-                                        </tr>
-                                    `).join('')}
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="bus-status">
-                            <span class="${schedule.STATUS === 'Delayed' ? 'delayed' : ''}">
-                                ${schedule.STATUS}
-                            </span>
-                        </div>
-                    `;
-                    busScheduleList.appendChild(busCard);
-                });
-            }
-    
-            // Fetch and display the bus schedule data when the page loads
-            fetchBusSchedule();
-        </script>
-    
-        <script src="./headerFooter.js"></script>
-        <script src="./Client-servers/login.js"></script>
-    
-    </body>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+                busScheduleList.appendChild(busCard);
+            });
+        }
+
+        // Fetch and display the bus schedule data when the page loads
+        fetchBusSchedule();
+    </script>
+
+    <script src="./headerFooter.js" defer></script>
+    <script src="./Client-servers/login.js" defer></script>
+
+</body>
 </html>

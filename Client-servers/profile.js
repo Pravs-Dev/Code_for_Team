@@ -468,4 +468,3 @@ async function saveUpdatedCourses(courses) {
         console.error('Error updating courses:', error);
     }
 }
-
