@@ -40,6 +40,7 @@ router.post('/', async (req, res) => {
     const session = await createSession(newSession);
     res.status(201).json(session);
   } catch (error) {
+    console.error('Error creating session:', error);
     res.status(500).json({ message: 'Error creating session', error: error.message });
   }
 });
@@ -78,7 +79,6 @@ router.delete('/:id', async (req, res) => {
 router.get('/student/:studentId', async (req, res) => {
   const { studentId } = req.params;
   try {
-    console.log("Fetching sessions for student:", studentId); // Debug log
     const sessions = await getSessionsByStudentId(studentId);
     if (sessions.length > 0) {
       res.status(200).json(sessions);

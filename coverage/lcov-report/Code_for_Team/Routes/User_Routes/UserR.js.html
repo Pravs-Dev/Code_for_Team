@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">61.29% </span>
+                <span class="strong">68.25% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>38/62</span>
+                <span class='fraction'>43/63</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">60% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/15</span>
+                <span class='fraction'>9/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">71.42% </span>
+                <span class="strong">85.71% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/7</span>
+                <span class='fraction'>6/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">61.29% </span>
+                <span class="strong">68.25% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>38/62</span>
+                <span class='fraction'>43/63</span>
             </div>
         
             
@@ -201,7 +201,8 @@
 <a name='L136'></a><a href='#L136'>136</a>
 <a name='L137'></a><a href='#L137'>137</a>
 <a name='L138'></a><a href='#L138'>138</a>
-<a name='L139'></a><a href='#L139'>139</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -243,18 +244,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -380,19 +382,20 @@ router.get('/:id', async (req, res) =&gt; {
   }
 });
 &nbsp;
-router.get('/:userId/profile-picture', <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >  try {</span>
-      const user = <span class="cstat-no" title="statement not covered" >await User.findById(req.params.userId);</span>
+router.get('/:userId/profile-picture', async (req, res) =&gt; {
+  try {
+      const user = await User.findById(req.params.userId);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      if (!user || !user.profilePicture || !user.profilePicture.data) {</span>
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (!user || !user.profilePicture || !user.profilePicture.data) {
           // If no picture is found, send the default image
-<span class="cstat-no" title="statement not covered" >          return res.sendFile(path.join(__dirname, '../Icons/default-profile.png')); </span>// Adjust path if necessary
+<span class="cstat-no" title="statement not covered" >          return res.sendFile(path.join(__dirname, '../Icons/default-profile.png')); </span>
       }
 &nbsp;
       // Set the content type and send the image data
-<span class="cstat-no" title="statement not covered" >      res.set('Content-Type', user.profilePicture.contentType);</span>
-<span class="cstat-no" title="statement not covered" >      res.send(user.profilePicture.data);</span>
+      res.set('Content-Type', user.profilePicture.contentType);
+      res.send(user.profilePicture.data);
   } catch (error) {
+<span class="cstat-no" title="statement not covered" >    console.log(error);</span>
 <span class="cstat-no" title="statement not covered" >      res.status(500).json({ message: 'Error fetching profile picture', error: error.message });</span>
   }
 });
@@ -484,7 +487,7 @@ export default router;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-10-04T21:54:48.162Z
+                at 2024-10-06T15:31:29.852Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

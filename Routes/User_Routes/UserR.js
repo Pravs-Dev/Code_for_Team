@@ -45,13 +45,14 @@ router.get('/:userId/profile-picture', async (req, res) => {
 
       if (!user || !user.profilePicture || !user.profilePicture.data) {
           // If no picture is found, send the default image
-          return res.sendFile(path.join(__dirname, '../Icons/default-profile.png')); // Adjust path if necessary
+          return res.sendFile(path.join(__dirname, '../Icons/default-profile.png')); 
       }
 
       // Set the content type and send the image data
       res.set('Content-Type', user.profilePicture.contentType);
       res.send(user.profilePicture.data);
   } catch (error) {
+    console.log(error);
       res.status(500).json({ message: 'Error fetching profile picture', error: error.message });
   }
 });
