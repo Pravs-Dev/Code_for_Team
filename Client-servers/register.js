@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://backendapi2003.azurewebsites.net/api';
+const API_BASE_URL = 'https://backend2077.azurewebsites.net/api';
 
 //handle clicking the show password eye
 // Get references to the password input and the toggle icon
