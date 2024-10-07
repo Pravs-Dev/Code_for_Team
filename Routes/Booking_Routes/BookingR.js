@@ -9,6 +9,7 @@ import {
   getBookingByTutor, 
   getCompletedAndReviewedSessionsByStudent,
   markSessionAsReviewed,
+  getCancelledSessionsByStudent,
 } from '../../Controllers/Booking_Controller/BookingC.js';
 
 const router = express.Router();
@@ -78,6 +79,17 @@ router.put('/cancel/:id', async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ message: 'Error canceling booking', error: error.message });
+  }
+});
+
+router.get('/student/:id/cancelled', async (req, res) => {
+  const { id } = req.params;
+  try {
+      // Fetch cancelled sessions using the updated controller function
+      const cancelledSessions = await getCancelledSessionsByStudent(id);
+      res.status(200).json(cancelledSessions); 
+  } catch (error) {
+      res.status(500).json({ message: 'Error fetching cancelled sessions', error: error.message });
   }
 });
 

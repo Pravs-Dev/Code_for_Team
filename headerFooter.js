@@ -13,6 +13,7 @@ class AppHeader extends HTMLElement {
                         </div>
                     </a>
                 </li>
+                <li><a href="cancel.html"><img src="./Icons/chat.svg" alt="Cancel" width="30px"></a></li>
                 <li><a href="bus-schedule.html"><img src="./Icons/bus.svg" alt="Bus" width="30px"></a></li>
             </ul>
             <ul class="account-link">

@@ -138,7 +138,7 @@ export const getCompletedAndReviewedSessionsByStudent = async (id) => {
       const bookings = await Booking.find({
           student: id, 
           $or: [{ status: 'Completed' }, { status: 'Reviewed' }] 
-      }).populate('tutor');
+      }).populate('tutor',);
 
       // Check if any bookings were found
       if (!bookings.length) { 
@@ -147,6 +147,24 @@ export const getCompletedAndReviewedSessionsByStudent = async (id) => {
       return bookings;
   } catch (error) {
       throw new Error(`Error fetching completed and reviewed bookings: ${error.message}`);
+  }
+};
+
+export const getCancelledSessionsByStudent = async (id) => {
+  try {
+      // Fetch bookings with 'Cancelled' status
+      const bookings = await Booking.find({
+          student: id,
+          status: 'Cancelled'
+      }).populate('tutor');
+
+      // Check if any cancelled bookings were found
+      if (!bookings.length) { 
+          throw new Error('No cancelled bookings found');
+      }
+      return bookings;
+  } catch (error) {
+      throw new Error(`Error fetching cancelled bookings: ${error.message}`);
   }
 };
 
