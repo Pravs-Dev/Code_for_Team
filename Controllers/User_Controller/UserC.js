@@ -54,7 +54,7 @@ export const loginUser = async (email, password) => {
       { expiresIn: '100h' }
     );
 
-    return { user, token, role: user.role };  
+    return { user, token, role: user.role,courses: user.courses };  
   } catch (error) {
     throw new Error(`Error logging in user: ${error.message}`);
   }

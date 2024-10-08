@@ -90,8 +90,8 @@ router.post('/', upload.single('profilePicture'), async (req, res) => {
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
   try {
-    const { user, token, role } = await loginUser(email, password);
-    res.status(200).json({ userId: user._id, token, role }); // Ensure role is included in the response
+    const { user, token, role,courses } = await loginUser(email, password);
+    res.status(200).json({ userId: user._id, token, role, courses }); // Ensure role is included in the response
   } catch (error) {
     res.status(401).json({ message: 'Login failed', error: error.message });
   }

@@ -120,6 +120,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
 
             if (response.ok) {
+                const data = await response.json();
                 Swal.fire({
                     icon: 'success',
                     title: 'Profile updated',
@@ -129,6 +130,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     timer: 5000, // Auto-close after 3 seconds (optional)
                     timerProgressBar: true, // Progress bar for auto-close (optional)
                 }); 
+                localStorage.setItem('courses',data.courses);
                 console.log('Profile updated successfully');
             } else {
                 const errorData = await response.json();
@@ -299,19 +301,6 @@ document.getElementById('show-courses-btn').addEventListener('click', async func
 });
 
 
-if (Array.isArray(coursesData)) {
-    coursesData.forEach(course => {
-        // Create an 'li' element
-        const listItem = document.createElement('li');
-        
-        // Set the content of the 'li' element
-        listItem.innerHTML = course;
-        
-        // Append the 'li' to the current courses list (UL)
-        currCourseUL.appendChild(listItem);
-    });
-}
-
 
 // Fetch faculties and courses from the API and populate the Swal modal, mark current courses
 async function fetchFacultiesForSwal(currentCourses) {
@@ -419,7 +408,17 @@ async function getCurrentCourses() {
 
         if (response.ok) {
             const user = await response.json();
-            return user.courses ? user.courses.split(', ') : [];
+
+            // Check if courses is already an array
+            if (Array.isArray(user.courses)) {
+                return user.courses; // Return the array directly
+            } else if (typeof user.courses === 'string') {
+                // If it's a string, split it by comma and return as array
+                return user.courses.split(', ');
+            } else {
+                // If courses is neither an array nor a string, return an empty array
+                return [];
+            }
         } else {
             console.error('Failed to fetch current courses');
             return [];
@@ -430,40 +429,53 @@ async function getCurrentCourses() {
     }
 }
 
+
+
 // Save updated courses to the user's profile
-async function saveUpdatedCourses(courses) {
-    const userId = localStorage.getItem('userId');
-    const token = localStorage.getItem('token');
-    const formData = new FormData();
-
-    formData.append('courses', courses.join(', '));
-
+async function saveUpdatedCourses() {
     try {
-        const response = await fetch(`${API_BASE_URL}/users/${userId}`, {
-            method: 'PUT',
+        // Fetch the updated courses from your API
+        const userId = localStorage.getItem('userId'); // Get the userId from localStorage
+        const response = await fetch(`/api/courses?userId=${userId}`, {
+            method: 'GET',
             headers: {
-                'Authorization': `Bearer ${token}`,
-            },
-            body: formData,
+                'Content-Type': 'application/json'
+            }
         });
 
-        if (response.ok) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Courses updated',
-                text: 'Your courses have been updated successfully!',
-                confirmButtonText: 'OK',
-            });
-        } else {
-            const errorData = await response.json();
-            Swal.fire({
-                icon: 'error',
-                title: 'Update failed',
-                text: errorData.message || 'Error updating courses.',
-                confirmButtonText: 'OK',
-            });
+        if (!response.ok) {
+            throw new Error('Failed to fetch updated courses.');
         }
+
+        const updatedCourses = await response.json();
+
+        // Assuming you have a function to display courses
+        displayUpdatedCourses(updatedCourses);
+
+        // Show success popup
+        Swal.fire({
+            icon: 'success',
+            title: 'Courses Updated',
+            text: 'Your courses have been successfully updated!'
+        });
     } catch (error) {
-        console.error('Error updating courses:', error);
+        // Show error popup
+        Swal.fire({
+            icon: 'error',
+            title: 'Update Failed',
+            text: error.message || 'Something went wrong while fetching the courses.'
+        });
     }
+}
+
+// Function to display the fetched courses
+function displayUpdatedCourses(courses) {
+    const coursesContainer = document.getElementById('courses-container'); // Assuming this is where courses are displayed
+    coursesContainer.innerHTML = 'Click update to display updated courses'; // Clear any existing courses
+    // Loop through the courses and display them
+    courses.forEach(course => {
+        const courseElement = document.createElement('div');
+        courseElement.textContent = course.name; // Assuming each course object has a 'name' field
+        coursesContainer.appendChild(courseElement);
+    });
 }

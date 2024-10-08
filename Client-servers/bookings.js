@@ -400,9 +400,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 });          
                 console.log('Booking data:', responseData);
                 bookingForm.reset();
-                localStorage.removeItem('bookingTutor');
                 localStorage.removeItem('selectedSubject');
                 localStorage.removeItem('selectedTutor');
+                localStorage.removeItem('selectedDay'); 
                 localStorage.removeItem('selectedDate'); 
                 localStorage.removeItem('selectedTime'); 
             } else {

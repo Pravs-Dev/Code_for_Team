@@ -16,7 +16,7 @@ export const createBooking = async (payload) => {
   
   
     const tutorNotification = new Notification({
-    message: `You have a new ${savedBooking.meetingType} booking with ${savedBooking.studentName} on ${savedBooking.sessionDate} at ${savedBooking.sessionTime}`,
+    message: `You have a new ${savedBooking.meetingType} booking  on ${savedBooking.sessionDate} at ${savedBooking.sessionTime}`,
     user: savedBooking.tutor, 
   });
   await tutorNotification.save();

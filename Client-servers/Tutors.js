@@ -8,11 +8,25 @@ document.addEventListener('DOMContentLoaded', function() {
         // Attach event listener to the search input
         const searchInput = document.getElementById('searchInput');
         searchInput.addEventListener('input', filterTSections);
+
+        // Attach event listener to the toggle button
+        const toggleTutorsBtn = document.getElementById('toggleTutorsBtn');
+        let showingFilteredTutors = true; // Initially showing filtered tutors
+
+        toggleTutorsBtn.addEventListener('click', () => {
+            showingFilteredTutors = !showingFilteredTutors;
+            fetchTutors(showingFilteredTutors);
+            
+            // Update button text
+            toggleTutorsBtn.textContent = showingFilteredTutors ? 'Show All Tutors' : 'Show Tutors by Subject';
+        });
     }
 });
 
-async function fetchTutors() {
+async function fetchTutors(showingFilteredTutors = true) {
     const token = localStorage.getItem('token');
+    const storedCourses = localStorage.getItem('courses'); // Retrieve courses from local storage
+
     try {
         const response = await fetch(`${API_BASE_URL}/users/`, {
             method: 'GET',
@@ -25,10 +39,19 @@ async function fetchTutors() {
         if (response.ok) {
             const data = await response.json();
 
-            // Filter tutors based on role
-            const tutors = data.filter(user => user.role === 'tutor');
+            let tutors;
+            if (showingFilteredTutors) {
+                // Filter tutors based on role and subjects that match stored courses
+                tutors = data.filter(user => 
+                    user.role === 'tutor' && 
+                    user.subjects.some(subject => storedCourses.includes(subject))
+                );
+            } else {
+                // Show all tutors
+                tutors = data.filter(user => user.role === 'tutor');
+            }
 
-            // Display the tutors
+            // Display the filtered or all tutors
             displayTutors(tutors, token);
         } else {
             console.error('Failed to fetch tutors');
@@ -40,6 +63,8 @@ async function fetchTutors() {
 
 async function displayTutors(tutors, token) {
     const tutorList = document.getElementById('tutor-list');
+    tutorList.innerHTML = ''; // Clear the list before displaying new tutors
+
     const defaultProfilePicture = './Icons/profile2.jpg'; // Path to the default profile picture
 
     for (const tutor of tutors) {

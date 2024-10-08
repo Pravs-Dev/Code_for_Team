@@ -203,6 +203,20 @@ body {
     opacity: 0;
 }
 
+.sidebar:not(.collapsed) ~ .main-content .dashboard-sections {
+    margin-left: 250px; /* Move to the right when sidebar is expanded */
+}
+
+.sidebar:not(.collapsed) ~ .main-content .welcome {
+    margin-left: 250px; /* Move to the right when sidebar is expanded */
+}
+
+.sidebar.collapsed .toggle-button {
+    left: 20px;
+    transform: rotate(180deg);
+}
+
+
 .toggle-button {
     background-color: transparent;
     border: none;
@@ -222,10 +236,6 @@ body {
     z-index: 3;
 }
 
-.sidebar.collapsed .toggle-button {
-    left: 20px;
-    transform: rotate(180deg);
-}
 
 
 .main-content {
@@ -250,13 +260,6 @@ body {
     color: #007acc;
 }
 
-.sidebar:not(.collapsed) ~ .main-content .dashboard-sections {
-    margin-left: 250px; /* Move to the right when sidebar is expanded */
-}
-
-.sidebar:not(.collapsed) ~ .main-content .welcome {
-    margin-left: 250px; /* Move to the right when sidebar is expanded */
-}
 
 .dashboard-sections {
     display: flex;
@@ -1718,4 +1721,29 @@ textarea {
     flex-wrap: wrap; /* Allow items to wrap to the next line */
     gap: 20px; /* Space between items */
     margin-top: 20px;
+}
+
+
+.toggle-container {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.toggle-container button {
+    padding: 10px 20px;
+    background-color: rgb(80, 181, 220);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.toggle-container button:hover {
+    background-color: #4572a0;
+}
+
+#tutor-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }

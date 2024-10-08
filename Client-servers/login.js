@@ -1,5 +1,5 @@
 // Redirect to Google OAuth route when Google login button is clicked
-const API_BASE_URL = 'https://witscampustutoring.azurewebsites.net/api';
+const API_BASE_URL = 'http://localhost:3000/api';
 
 
 function handleGoogleLogin() {
@@ -54,7 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     const data = await response.json();
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('userId', data.userId);
-                    localStorage.setItem('role', data.role); // Store role in localStorage
+                    localStorage.setItem('role', data.role); 
+                    localStorage.setItem('courses', data.courses);// Store role in localStorage
                     document.getElementById("error-msg").innerHTML=`Loading...`
                     document.getElementById("error-msg").style.color = 'white';  // Change text color to white
                     

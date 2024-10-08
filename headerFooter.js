@@ -136,8 +136,11 @@ class AppSidebar extends HTMLElement {
     this.querySelector('#logout').addEventListener('click', () => {
       localStorage.removeItem('token');
       localStorage.removeItem('userId');
+      localStorage.removeItem('courses');
       localStorage.removeItem('selectedTutor');
-      localStorage.removeItem('selectedSubject');
+      localStorage.removeItem('selectedCourses');
+      localStorage.removeItem('selectedDay');
+      localStorage.removeItem('selectedTime');
       localStorage.removeItem('role');
       window.location.href = './login.html';
     });
