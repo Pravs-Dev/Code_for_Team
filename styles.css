@@ -51,13 +51,13 @@ body {
     height: 100%;
   }
 .header {
-    background: linear-gradient(90deg, #62b1f6, #007acc);
+    background: #70bbf0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
     width: 100%;
-    height: 90px;
+    height: 70px;
     position: fixed;
     top: 0;
     z-index: 2;
@@ -131,17 +131,17 @@ body {
 }
 
 .sidebar {
-    width: 250px;
-    height: calc(100vh - 90px);
-    background-color: #62b1f6;
+    width: 240px;
+    height: calc(100vh - 70px);
+    background-color: #70bbf0;
     position: fixed;
-    top: 90px;
+    top: 70px;
     transition: width 0.3s;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 20px;
+    padding-top: 30px;
     z-index: 2;
     box-sizing: border-box;
     transition: background-color 0.3s;
@@ -165,12 +165,13 @@ body {
 .sidebar ul li {
     width: 100%;
     text-align: left;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .sidebar ul li a {
     text-decoration: none;
     color: white;
+    font-weight:750;
     font-size: 18px;
     display: flex;
     align-items: center;
@@ -236,11 +237,32 @@ body {
     z-index: 3;
 }
 
+.dashboard-title {
+    font-size: 70px; /* Large font size for emphasis */
+    font-weight: 700; /* Extra bold font weight */
+    color: grey; /* Darker color for the text */
+    margin: 20px 0; /* Space around the title */
+    text-align: left; /* Align the title to the left */
+    padding-right: 760px; /* Padding from the left edge */
+    
+    /* Adding a text shadow for the shaded effect */
+    /* Adjust for a shadowed look */
+}
 
+.welcome-title {
+    font-size: 40px; /* Large font size for emphasis */
+    font-weight: 700; /* Extra bold font weight */
+    color: #908f8f; /* Darker color for the text */
+    margin: 20px 0; /* Space around the title */
+    text-align: left; /* Align the title to the left */
+    padding-right: 900px; /* Padding from the left edge */
+    
+   
+}
 
 .main-content {
     margin-top: 90px;
-    margin-left: 250px;
+    margin-left: 200px;
     padding: 20px;
     flex-grow: 1;
     background-color: #f5f5f5;
@@ -273,7 +295,7 @@ body {
     width: 250px;
     background-color: white;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
     border: none;
@@ -298,10 +320,30 @@ body {
 }
 
 .section p {
-    font-size: 16px;
+    font-size: 18px;
     color: #666;
     margin-bottom: 20px;
+    text-align: left; /* Align text to the left */
+    line-height: 1.5;
+    overflow-wrap: break-word; /* Ensure long text breaks onto the next line */
+    word-wrap: break-word;
+    max-width: 100%; /* Ensure text doesn't go out of the section */
+    word-break: break-word; /* Break long words if necessary */
+    position: relative; /* Position needed for ::before */
+    padding-left: 20px; /* Add space for the bullet */
 }
+
+/* Add bullet with ::before pseudo-element */
+.section p::before {
+    content: "•"; /* Unicode for bullet point */
+    color: #70bbf0; /* Bullet color */
+    font-size: 24px; /* Bullet size */
+    position: absolute;
+    left: 0; /* Align bullet to the left */
+    top: 0; /* Align bullet with text */
+    line-height: 1.5;
+}
+
 
 .section:hover {
     background-color: #e6f7ff;
@@ -1004,11 +1046,13 @@ input:checked + .slider:before {
 
 /* Flexbox for each tutor card */
 .tutor-card {
+    flex-basis: calc(25% - 20px); /* Ensure 4 cards fit per row (25% of the width minus gap) */
+    min-width: 250px; /* Ensure a minimum width for responsiveness */
+    max-width: 300px; /* Optional: Limit the maximum width */
     display: flex;
     flex-direction: column;
-    width: 300px; /* Set a fixed width for the card */
-    border: 1px solid #ddd;
-    border-radius: 10px;
+    border: 2px solid #70bbf0;
+    border-radius: 20px;
     background-color: #f9f9f9;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     cursor: pointer;
@@ -1018,6 +1062,12 @@ input:checked + .slider:before {
 .tutor-card:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.tutor-header {
+    display: flex;
+    align-items: center; /* Center the image and name vertically */
+    padding: 10px; /* Optional: Adds some space around the header */
 }
 
 /* Style for the profile picture in a circle */
@@ -1038,9 +1088,17 @@ input:checked + .slider:before {
     margin: 0 0 10px;
 }
 
+.detail-icon {
+    width: 20px; /* Adjust size of the icon */
+    height: 20px; /* Keep the icon square */
+    margin-right: 5px; /* Space between icon and text */
+    vertical-align: middle; /* Align icon vertically with text */
+    display: inline-block; /* Ensure it displays inline with text */
+}
+
 .tutor-details p {
     margin: 5px 0;
-    font-size: 14px;
+    font-size: 17px;
 }
 /* Existing styles... */
 
@@ -1317,7 +1375,7 @@ button[type="submit"]:hover {
 .notification-dot {
     width: 10px;
     height: 10px;
-    background-color: red;
+    background-color: rgb(9, 109, 180);
     border-radius: 50%;
     position: absolute;
     top: 0;
@@ -1563,6 +1621,92 @@ textarea {
 .session-completed p {
     margin: 5px 0;
     font-size: 1em;
+}
+#confirmed-list {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 20px; 
+    margin-top: 20px;
+    margin-left: 47px;
+}
+
+/* Each session box */
+.session-confirmed {
+    background-size: cover; /* Make sure the background covers the entire box */
+    background-position: center; /* Center the image in the box */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    padding: 20px; 
+    border-radius: 10px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    flex: 1 1 400px; 
+    min-width: 280px; 
+    margin: 10px; 
+    color: #343a40; /* Change text color for better contrast against the background */
+    position: relative; /* Ensure the content is positioned correctly */
+}
+
+/* Adding a semi-transparent overlay for better text readability */
+.session-confirmed::before {
+    content: "";
+    position: absolute; /* Position it absolutely within the box */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.5); /* White overlay with transparency */
+    border-radius: 10px; /* Match border radius of the box */
+    z-index: 1; /* Place it below the text */
+}
+
+.session-confirmed h3, .session-confirmed p {
+    position: relative; /* Ensure text is above the overlay */
+    z-index: 2;
+    color:  #282c2e; /* Bring the text above the overlay */
+}
+
+.session-tutor::before {
+    content: "•"; /* Adds a dot before the tutor name */
+    color: rgb(66, 146, 192);; /* Color of the dot */
+    font-size: 24px; /* Adjust size if needed */
+    margin-right: 5px; /* Spacing between dot and text */
+}
+
+
+
+/* Session header containing subject and date/time */
+.session-header {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+/* Session info container */
+.session-info {
+    display: flex; 
+    flex-direction: column;
+}
+
+/* Date and Time styling */
+.session-date, .session-time {
+    margin: 0; /* Remove default margin */
+    font-size: 1.5em; /* Increased font size for date and time */
+    color: #495057; /* Medium gray for details */
+}
+
+/* Session title */
+.session-confirmed h3 {
+    margin: 0;
+    font-size: 1.5em; /* Increased font size for subject emphasis */
+    color: #0c3a68; 
+    text-decoration: underline;/* Dark gray for better readability */
+}
+
+
+/* Tutor name styling */
+.session-tutor {
+    margin: 0;
+    font-size: 1em; /* Normal size for tutor name */
+    color: #495057; /* Medium gray for readability */
 }
 
 

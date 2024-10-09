@@ -168,6 +168,25 @@ export const getCancelledSessionsByStudent = async (id) => {
   }
 };
 
+export const getupcomingSessionsByStudent = async (id) => {
+  try {
+      // Fetch bookings with 'Cancelled' status
+      const bookings = await Booking.find({
+          student: id,
+          status: 'Confirmed'
+      }).populate('tutor');
+
+      // Check if any cancelled bookings were found
+      if (!bookings.length) { 
+          throw new Error('No confirmed bookings found');
+      }
+      return bookings;
+  } catch (error) {
+      throw new Error(`Error fetching confirmed bookings: ${error.message}`);
+  }
+};
+
+
 
 export const markSessionAsReviewed = async (sessionId) => {
   try {

@@ -10,6 +10,7 @@ import {
   getCompletedAndReviewedSessionsByStudent,
   markSessionAsReviewed,
   getCancelledSessionsByStudent,
+  getupcomingSessionsByStudent,
 } from '../../Controllers/Booking_Controller/BookingC.js';
 
 const router = express.Router();
@@ -82,11 +83,23 @@ router.put('/cancel/:id', async (req, res) => {
   }
 });
 
+
 router.get('/student/:id/cancelled', async (req, res) => {
   const { id } = req.params;
   try {
       // Fetch cancelled sessions using the updated controller function
       const cancelledSessions = await getCancelledSessionsByStudent(id);
+      res.status(200).json(cancelledSessions); 
+  } catch (error) {
+      res.status(500).json({ message: 'Error fetching cancelled sessions', error: error.message });
+  }
+});
+
+router.get('/student/:id/confirmed', async (req, res) => {
+  const { id } = req.params;
+  try {
+      // Fetch cancelled sessions using the updated controller function
+      const cancelledSessions = await getupcomingSessionsByStudent(id);
       res.status(200).json(cancelledSessions); 
   } catch (error) {
       res.status(500).json({ message: 'Error fetching cancelled sessions', error: error.message });

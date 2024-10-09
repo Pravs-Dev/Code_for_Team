@@ -11,57 +11,54 @@
     <app-header></app-header>
     <app-sidebar></app-sidebar>
     <div class="main-content">
-        <h2 class="welcome">Welcome back!</h2>
+        <h1 class="dashboard-title">Dashboard</h1>
+        <h2 class="welcome-title">Welcome!</h2>
         
-        <img src="./Icons/dash.svg" alt="Beautiful Landscape" style="
-        display: block;
-        width: 100%;
-        max-width: 1000px; /* Maximum width of the image */
-        height: auto; /* Maintain aspect ratio */
-        margin: 20px auto; /* Center image with space above and below */
-        border-radius: 15px; /* Rounded corners */
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-    ">
     
        
         <div class="dashboard-sections" id="dashboardSections">
-            <button class="section" onclick="location.href='AvailableTutors.html'">
-                <img src="./Icons/tutor-dashboard.svg" alt="">
+            <button class="section"  onclick="location.href='AvailableTutors.html'">
+                <img src="./Icons/tutor.png" alt="">
                 <h2>Available Tutors</h2>
                 <p>Find and connect with tutors.</p>
             </button>
             <button class="section" onclick="location.href='virtualTutoring.html'">
-                <img src="./Icons/bvertual.svg" alt="">
+                <img src="./Icons/conference.png" alt="">
                 <h2>Access meeting link</h2>
                 <p>Expecting an online meething with a tutor,Find the link here</p>
             </button>
             <button class="section" onclick="location.href='resource-sharing.html'">
-                <img src="./Icons/resources-dashboard.svg" alt="">
+                <img src="./Icons/human.png" alt="">
                 <h2>Study Resources</h2>
                 <p>Access study materials and resources.</p>
             </button>
             <button class="section" onclick="location.href='csessions.html'">
-                <img src="./Icons/bsessions.svg" alt="">
+                <img src="./Icons/training.png" alt="">
                 <h2>Review Sessions</h2>
                 <p>Review your past sessions and feedback.</p>
             </button>
             <button class="section" onclick="location.href='Events.html'">
-                <img src="./Icons/blackevent.svg" alt="">
+                <img src="./Icons/calendar.png" alt="">
                 <h2>Checkout the latest events</h2>
-                <p>Haave a look at some upcoming events</p>
+                <p>Have a look at some upcoming events</p>
             </button>
             <button class="section" onclick="location.href='CampusSafety.html'">
-                <img src="./Icons/safety.svg" alt="">
+                <img src="./Icons/guard.png" alt="">
                 <h2>Stay Informed About Campus Safety Events</h2>
-                <p>Stay informed and get involved to ensure a safer campus for everyone!</p>
+                <p>Stay informed to ensure a safer campus for everyone!</p>
             </button>
         </div>
+        
+            <h1 style="color: rgb(66, 146, 192);">Your Upcoming Sessions</h1>
+            <div id="confirmed-list"></div>
+    
     </div>
     
 
     
     <script src="./headerFooter.js"></script>
     <script src="./Client-servers/login.js"></script> 
+    <script src="./Client-servers/confirmed.js"></script> 
 </body>
 
 </html>

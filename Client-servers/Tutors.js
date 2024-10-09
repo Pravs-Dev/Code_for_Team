@@ -91,12 +91,18 @@ async function displayTutors(tutors, token) {
 
         // Render tutor details
         tutorElement.innerHTML = `
+            <div class="tutor-header">
             <img src="${profilePicture}" alt="${tutor.fname} ${tutor.lname}" class="tutor-image">
+            <h3>${tutor.fname} ${tutor.lname}</h3>
+            </div>
+            <p  class="tutor-details" style=" font-size: 20px;">${tutor.email}</p>
             <div class="tutor-details">
-                <h3>${tutor.fname} ${tutor.lname}</h3>
-                <p>${tutor.email}</p>
-                <p><strong>Subjects:</strong> ${tutor.subjects.join(', ')}</p>
-                <p><strong>Qualifications:</strong> ${tutor.qualifications.join(', ')}</p>
+                <p>
+                <img src="./Icons/book.png" alt="Subject Icon" class="detail-icon"> 
+                <strong>Subjects:</strong> ${tutor.subjects.join(', ')}</p>
+                <p>
+                 <img src="./Icons/guarantee.png" alt="Qualification Icon" class="detail-icon"> 
+                <strong>Qualifications:</strong> ${tutor.qualifications.join(', ')}</p>
             </div>
         `;
 
@@ -142,8 +148,12 @@ document.addEventListener('DOMContentLoaded', async function () {
     // Populate tutor details on the profile page
     document.getElementById('profile-name').textContent = `${selectedTutor.fname} ${selectedTutor.lname}`;
     document.getElementById('profile-email').innerHTML = `${selectedTutor.email}`;
-    document.getElementById('profile-subjects').innerHTML = `<strong>Subjects:</strong> ${selectedTutor.subjects.join(', ')}`;
-    document.getElementById('profile-qualifications').innerHTML = `<strong>Qualifications:</strong> ${selectedTutor.qualifications.join(', ')}`;
+    document.getElementById('profile-subjects').innerHTML = `
+     <img src="./Icons/book.png" alt="Subject Icon" class="detail-icon"> 
+    <strong>Subjects:</strong> ${selectedTutor.subjects.join(', ')}`;
+    document.getElementById('profile-qualifications').innerHTML = `
+    <img src="./Icons/guarantee.png" alt="Qualification Icon" class="detail-icon"> 
+    <strong>Qualifications:</strong> ${selectedTutor.qualifications.join(', ')}`;
 
     // Fetch and display tutor's profile picture
     const profilePictureElement = document.getElementById('profile-picture');
