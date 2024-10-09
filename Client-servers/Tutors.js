@@ -27,6 +27,9 @@ async function fetchTutors(showingFilteredTutors = true) {
     const token = localStorage.getItem('token');
     const storedCourses = localStorage.getItem('courses'); // Retrieve courses from local storage
 
+    // Show skeleton loader
+    showSkeletonLoader();
+
     try {
         const response = await fetch(`${API_BASE_URL}/users/`, {
             method: 'GET',
@@ -51,7 +54,7 @@ async function fetchTutors(showingFilteredTutors = true) {
                 tutors = data.filter(user => user.role === 'tutor');
             }
 
-            // Display the filtered or all tutors
+            // Hide skeleton loader and display the filtered or all tutors
             displayTutors(tutors, token);
         } else {
             console.error('Failed to fetch tutors');
@@ -60,6 +63,38 @@ async function fetchTutors(showingFilteredTutors = true) {
         console.error('Error fetching tutors:', error);
     }
 }
+
+// Function to show the skeleton loader
+function showSkeletonLoader() {
+    const tutorList = document.getElementById('tutor-list');
+    tutorList.innerHTML = `
+        <div class="skeleton-card">
+            <div class="skeleton-img"></div>
+            <div class="skeleton-text skeleton-title"></div>
+            <div class="skeleton-text skeleton-line"></div>
+            <div class="skeleton-text skeleton-line"></div>
+        </div>
+        <div class="skeleton-card">
+            <div class="skeleton-img"></div>
+            <div class="skeleton-text skeleton-title"></div>
+            <div class="skeleton-text skeleton-line"></div>
+            <div class="skeleton-text skeleton-line"></div>
+        </div>
+        <div class="skeleton-card">
+            <div class="skeleton-img"></div>
+            <div class="skeleton-text skeleton-title"></div>
+            <div class="skeleton-text skeleton-line"></div>
+            <div class="skeleton-text skeleton-line"></div>
+        </div>
+        <div class="skeleton-card">
+            <div class="skeleton-img"></div>
+            <div class="skeleton-text skeleton-title"></div>
+            <div class="skeleton-text skeleton-line"></div>
+            <div class="skeleton-text skeleton-line"></div>
+        </div>
+    `;
+}
+
 
 async function displayTutors(tutors, token) {
     const tutorList = document.getElementById('tutor-list');
