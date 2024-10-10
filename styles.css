@@ -893,146 +893,335 @@ input:checked + .slider:before {
     color: white;
 }
 
+
+@media (max-width: 480px) {
+    .section {
+        width: calc(100% - 10px); /* Adjust for very small screens, 1 item per row */
+    }
+
+    .notifications-container {
+        width: calc(100% - 10px); /* Full width for very small screens */
+        
+    }
+    
+}
 /* Base Styles for Mobile Devices */
 @media screen and (max-width: 768px) {
     body {
-        font-size: 14px;
+        font-size: 14px; /* Maintain base font size */
     }
 
+    .notifications-container {
+        width: 95%; /* Full width for mobile with slight padding */
+        padding: 20px; /* Reduce padding for smaller screens */
+        height: auto; /* Auto height for better fit */
+        margin-left: 0; /* Remove the margin-left */
+    }
+
+    .notifications-header {
+        font-size: 1.5em; /* Smaller header font size */
+        margin-bottom: 15px; /* Adjust margin */
+    }
+
+    .notification {
+        flex-direction: column; /* Stack elements vertically */
+        padding: 10px; /* Reduce padding for notifications */
+    }
+
+    .notification-message {
+        font-size: 1em; /* Adjust font size */
+        margin-right: 0; /* Remove extra margin */
+        margin-bottom: 10px; /* Add margin below for spacing */
+    }
+    /* Header adjustments */
     .header {
-        flex-direction: column;
-        height: auto;
-        padding: 10px;
-        align-items: flex-start;
+        background: #70bbf0; /* Maintain background color */
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        padding: 10px 15px; /* Add padding for spacing */
+        align-items: center; /* Center align items */
+        text-align: center; /* Center text */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+        position: fixed; /* Fixed position for the header */
+        top: 0; /* Stick to the top */
+        width: 100%; /* Full width */
+        z-index: 999; /* Above all other content */
     }
 
+    /* Logo and Search Bar */
+        /* Logo and Search Bar */
     .logo {
-        padding-right: 0;
+        font-size: 30px; /* Scale logo size down for mobile */
+        padding: 0;
+        margin-right: 20px; /* Reduce margin */
     }
 
     .search {
-        max-width: 100%;
-        margin: 10px 0;
-        width: 100%;
+        width: 50%; 
+        height: 50%;
+        font-size: 10px; /* Adjust font size for mobile */
+        margin: 0; /* Reset margin to fit in line */
+        position: relative; /* Allow for positioning */
+        top: 0;
+        margin-right: 20px; /* Reset top positioning */
     }
 
+    /* Header Container */
+    .header {
+        display: flex; /* Use flexbox for layout */
+        flex-direction: row; /* Arrange items in a row */
+        align-items: center; /* Center items vertically */
+        justify-content: space-between; /* Space items evenly */
+        padding: 10px; /* Add padding around header */
+    }
+
+    /* Navigation Links */
     .header ul {
-        margin: 10px 0 0 0;
-        justify-content: flex-start;
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        align-items: center;
     }
 
+    .header ul li {
+        margin: 0 -2px;
+         /* Add some margin between items */
+    }
+
+    .header ul li a {
+        padding: 5px 8px; /* Reduce padding for smaller size */
+        font-size: 1.5em; /* Set a smaller font size */
+    }
+    .header ul li a img {
+        width: 17px; /* Set the desired width */
+        height: 17px; /* Set the desired height */
+        margin: 0; /* Adjust margin if necessary */
+    }
+    
+
+    /* Profile Picture */
+    .profile-picture {
+        width: 20px; /* Smaller size for mobile */
+        height: 20px; /* Smaller size for mobile */
+        border-radius: 50%; /* Keep circular shape */
+        margin-right: 10px; /* Add space between picture and name */
+        object-fit: cover; /* Ensure image fits well */
+    }
+
+    /* Adjust Profile Name */
+    .profile-name {
+        font-size: -0.8em; /* Set a smaller font size for mobile */
+        margin: 0; /* Reset margin */
+    }
+
+    
+    
+   /* Sidebar adjustments */
     .sidebar {
-        width: 60px; /* Collapse sidebar */
+        width: 250px; /* Sidebar width */
+        height: calc(100vh - 70px); /* Full height minus header */
+        position: fixed; /* Fixed position for sidebar */
+        top: 70px; /* Below header */
+        background-color: #70bbf0; /* Maintain background color */
+        transition: width 0.3s, left 0.3s; /* Smooth transition for width and position */
+        z-index: 2; /* Above main content */
+        overflow-y: auto; /* Enable scrolling if content exceeds height */
     }
 
     .sidebar.collapsed {
-        width: 60px;
+        width: 60px; /* Collapsed width */
+    
     }
 
-    .sidebar ul li a span {
-        display: none; /* Hide text labels on mobile */
-    }
-
+    /* Main content adjustments */
     .main-content {
-        padding: 15px;
-        margin-left: 60px; /* Adjust for collapsed sidebar */
-        margin-top: 100px; /* Adjust for header */
-        width: calc(100% - 60px);
-        overflow-y: auto;
+        padding: 15px; /* Maintain padding for spacing */
+        margin-top: 100px; /* Space for header */
+        margin-left: 0; /* Initial margin */
+        height: calc(100vh - 100px); /* Adjust height for header */
+        overflow-y: auto; /* Enable vertical scrolling */
+        overflow-x: hidden; /* Disable horizontal scrolling */
+        box-sizing: border-box; /* Include padding and borders in total width/height */
+        transition: margin-left 0.3s; /* Smooth transition for margin */
     }
 
+    /* Adjust main content margin when sidebar is open */
+    .sidebar:not(.collapsed) ~ .main-content {
+        margin-left: 250px; /* Space for expanded sidebar */
+    }
+
+    .sidebar.collapsed ~ .main-content {
+        margin-left: 60px; /* Adjust margin for collapsed sidebar */
+    }
+
+    .main-content h1{
+        width: 50%;
+        height: 50%;
+    }
+
+    
+
+    .main-content .dashboard-title{
+        margin-left: 175%;
+    }
+    .main-content .welcome-title{
+        margin-left: 200%;
+    }
+
+    .main-content .notifications-container{
+        margin-right: 53%;
+        width: 80%;
+    }
+
+    
+    .section img {
+        width: 50px; /* Smaller icon size for mobile */
+        height: 50px; /* Maintain aspect ratio */
+    }
+
+    .section h2 {
+        font-size: 1.2em; /* Smaller heading for mobile */
+    }
+
+    .section p {
+        font-size: 0.9em; /* Smaller paragraph for mobile */
+    }
+
+    .section {
+        width: calc(50% - 10px); /* Adjust for smaller screens, 2 items per row */
+    }
+
+    /* Adjust main content margin when sidebar is collapsed */
+    .sidebar.collapsed ~ .main-content {
+        margin-left: 60px; /* Adjust margin for collapsed sidebar */
+    }
+
+
+    /* Resource Sharing Section */
     .resource-sharing-section {
-        width: 100%; /* Full-width on mobile */
-        margin-top: 20px;
-        padding: 15px;
+        width: 100%; /* Full width on mobile */
+        margin-top: 20px; /* Space above section */
+        padding: 15px; /* Padding inside section */
     }
 
     .resource-container {
-        flex-direction: column;
-        gap: 15px;
+        display: flex; /* Keep container as flex */
+        flex-direction: column; /* Stack items vertically */
+        gap: 15px; /* Space between items */
     }
 
-    .resource-upload,
-    .resource-list {
-        flex-basis: 100%;
-    }
-
-    .chat-section {
-        width: 60px; /* Collapse chat section */
-    }
-
-    .chat-section.collapsed {
-        width: 60px;
-    }
-
-    .chat-header h2 {
-        font-size: 1rem;
-    }
-
-    .message {
-        font-size: 12px;
-        padding: 8px 12px;
-    }
-
-    .chat-input {
-        padding: 10px;
-    }
-
-    .chat-input button {
-        width: 35px;
-        height: 35px;
+    .resource-upload, .resource-list {
+        flex-basis: 100%; /* Full width for both sections */
     }
 
     .upload-btn {
-        padding: 10px 20px;
+        padding: 10px 20px; /* Adjust button padding */
+        font-size: 14px; /* Keep button font size readable */
+    }
+
+    .video-link-section {
+        padding: 15px; /* Reduce padding */
+        border-radius: 10px; /* Smaller border radius */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Adjust shadow */
+    }
+
+    /* Heading inside video section */
+    .video-link-section h2 {
+        font-size: 20px; /* Smaller heading font size for mobile */
+        margin-bottom: 15px; /* Adjust margin */
+    }
+
+    /* Session Details font size */
+    .session-details p {
+        font-size: 16px; /* Smaller font size for details */
+    }
+
+    /* Adjust the size of the join link button */
+    .video-link {
+        padding: 10px 20px; /* Slightly smaller padding */
+        font-size: 16px; /* Reduce font size */
+        border-radius: 6px; /* Adjust border radius */
+    }
+
+    /* Main content padding */
+    .main-content {
+        padding: 10px; /* Reduce padding for smaller screens */
+    }
+}
+
+/* Extra small devices (like mobile phones) */
+@media (max-width: 480px) {
+    /* Further reduce padding and font sizes for very small screens */
+    .video-link-section {
+        padding: 10px;
+    }
+
+    .video-link-section h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .session-details p {
         font-size: 14px;
     }
 
-    /* Dark Mode Adjustments for Mobile */
-    .dark-mode-toggle {
-        margin-top: 10px;
-        margin-right: 0;
+    .video-link {
+        padding: 8px 18px;
+        font-size: 14px;
     }
-
+    /* Upcoming Lessons Section */
     .upcoming-lessons {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 20px;
-        padding: 20px;
+        display: grid; /* Grid layout for lessons */
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive columns */
+        gap: 15px; /* Space between lesson boxes */
+        padding: 20px; /* Padding around section */
     }
-    
+
     .lesson-box {
-        background-color: #fff;
-        border-radius: 20px;
-        padding: 20px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s ease;
-        text-align: center;
+        background-color: #fff; /* White background for lessons */
+        border-radius: 15px; /* Rounded corners */
+        padding: 15px; /* Padding inside lesson boxes */
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        transition: transform 0.2s ease; /* Smooth transition on hover */
+        text-align: center; /* Center text inside lesson boxes */
     }
-    
+
     .lesson-box:hover {
-        transform: translateY(-5px);
+        transform: translateY(-5px); /* Lift effect on hover */
     }
-    
+
     .lesson-box h3 {
-        font-size: 1.4em;
-        margin-bottom: 10px;
+        font-size: 1.2em; /* Reduce title size */
+        margin-bottom: 10px; /* Space below title */
     }
-    
+
     .lesson-box p {
-        font-size: 1.1em;
-        margin: 5px 0;
+        font-size: 1em; /* Smaller paragraph size */
+        margin: 5px 0; /* Space above/below paragraphs */
     }
-    
-    .welcome {
-        font-size: 1.8em;
-        margin-bottom: 20px;
-        text-align: center;
+
+    /* Dashboard Title */
+    .dashboard-title {
+        font-size: 28px; /* Smaller font size for mobile */
+        font-weight: 700; /* Keep bold */
+        color: grey; /* Consistent color */
+        margin: 10px 0; /* Space around title */
+        text-align: center; /* Center align */
     }
-    
+
+    /* Welcome Title */
+    .welcome-title {
+        font-size: 20px; /* Smaller font size for mobile */
+        font-weight: 700; /* Keep bold */
+        color: #908f8f; /* Consistent color */
+        margin: 10px 0; /* Space around title */
+        text-align: center; /* Center align */
+    }
     
 
-    /* Ensure any other elements are adjusted to fit smaller screens */
+    /* Additional adjustments for any other elements */
 }
 
 
@@ -1279,14 +1468,6 @@ button[type="submit"]:hover {
     margin-left: 250px;
 }
 
-/* Make the container responsive */
-@media (max-width: 768px) {
-    .notifications-container {
-        width: 95%; /* Reduce width slightly for smaller screens */
-        padding: 20px;
-        height: 80vh; /* Adjust height on smaller screens */
-    }
-}
 
 /* Notifications Header */
 /* Notifications Container - Full Page Styling */
@@ -1406,7 +1587,7 @@ th, td {
 }
 
 thead {
-    background-color: #d32f2f;
+    background-color: #6d6363;
     color: white;
 }
 
@@ -1599,6 +1780,7 @@ textarea {
     flex-wrap: wrap; /* Allow items to wrap to the next line */
     gap: 20px; /* Space between items */
     margin-top: 20px;
+    margin-left: 47px;
 }
 
 /* Each session box */
@@ -1716,6 +1898,7 @@ textarea {
     flex-wrap: wrap; /* Allow items to wrap to the next line */
     gap: 20px; /* Space between items */
     margin-top: 20px;
+    margin-left: 47px;
 }
 
 /* Each session box */
@@ -1865,6 +2048,7 @@ textarea {
     flex-wrap: wrap; /* Allow items to wrap to the next line */
     gap: 20px; /* Space between items */
     margin-top: 20px;
+    margin-left: 47px;
 }
 
 
