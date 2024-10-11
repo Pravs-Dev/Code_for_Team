@@ -903,6 +903,8 @@ input:checked + .slider:before {
         width: calc(100% - 10px); /* Full width for very small screens */
         
     }
+
+    
     
 }
 /* Base Styles for Mobile Devices */
@@ -995,9 +997,14 @@ input:checked + .slider:before {
         font-size: 1.5em; /* Set a smaller font size */
     }
     .header ul li a img {
-        width: 17px; /* Set the desired width */
-        height: 17px; /* Set the desired height */
+        width: 25px; /* Set the desired width */
+        height: 25px; /* Set the desired height */
         margin: 0; /* Adjust margin if necessary */
+        margin-top: 11px;
+    }
+
+    .notification-dot{
+        margin-top: 11px;
     }
     
 
@@ -1016,7 +1023,9 @@ input:checked + .slider:before {
         margin: 0; /* Reset margin */
     }
 
-    
+    .main-content .profile-container{
+        margin-left: 60px;
+    }
     
    /* Sidebar adjustments */
     .sidebar {
@@ -1035,12 +1044,14 @@ input:checked + .slider:before {
     
     }
 
+    
+
     /* Main content adjustments */
     .main-content {
         padding: 15px; /* Maintain padding for spacing */
         margin-top: 100px; /* Space for header */
         margin-left: 0; /* Initial margin */
-        height: calc(100vh - 100px); /* Adjust height for header */
+        height: calc(100vh - 150px); /* Adjust height for header */
         overflow-y: auto; /* Enable vertical scrolling */
         overflow-x: hidden; /* Disable horizontal scrolling */
         box-sizing: border-box; /* Include padding and borders in total width/height */
@@ -1075,6 +1086,36 @@ input:checked + .slider:before {
         width: 80%;
     }
 
+    .bus-schedule-section{
+        width: 70%;
+        margin-left: 50px;
+    }
+
+    .bus-schedule-section h1{
+        height: 10%;
+    }
+
+    
+    
+    .main-content .form-group {
+        width: 90%; /* Make the form-group narrower on mobile */
+        max-width: 100%; /* Ensure it spans the full width of the container */
+        margin: 0 5%; /* Center the form-group with even margins */
+    }
+
+    .main-content .form-group input {
+        width: 90%; /* Make the input field fill the form-group */
+        padding: 12px; /* Slightly increase padding for better touch interaction */
+        font-size: 15px; /* Maintain a readable font size on mobile */
+        margin-bottom: 15px; /* Add space between input fields */
+        box-sizing: border-box; /* Ensure padding is included in width */
+        margin-left: 40px;
+    }
+
+    .main-content .booking-section{
+        margin-left: 60px;
+        width: 65%;
+    }
     
     .section img {
         width: 50px; /* Smaller icon size for mobile */
@@ -1093,28 +1134,54 @@ input:checked + .slider:before {
         width: calc(50% - 10px); /* Adjust for smaller screens, 2 items per row */
     }
 
+    
+    
     /* Adjust main content margin when sidebar is collapsed */
     .sidebar.collapsed ~ .main-content {
         margin-left: 60px; /* Adjust margin for collapsed sidebar */
     }
 
 
-    /* Resource Sharing Section */
-    .resource-sharing-section {
-        width: 100%; /* Full width on mobile */
-        margin-top: 20px; /* Space above section */
-        padding: 15px; /* Padding inside section */
-    }
+            /* Resource Sharing Section */
+        .resource-sharing-section {
+            width: 80%; /* Reduce to 90% for a little margin on sides */
+            max-width: 500px; /* Set a max width for larger screens */
+            margin: 20px auto; /* Centered with space above and below */
+            padding: 20px; /* Increase padding inside section */
+            border-radius: 10px; /* Optional: Add rounded corners for aesthetics */
+            background-color: #f9f9f9; /* Optional: Set a light background color */
+            margin-left: 60px;
+        }
 
-    .resource-container {
-        display: flex; /* Keep container as flex */
-        flex-direction: column; /* Stack items vertically */
-        gap: 15px; /* Space between items */
-    }
+        .resource-container {
+            display: flex; /* Keep container as flex */
+            flex-direction: column; /* Stack items vertically */
+            gap: 20px; /* Increase gap between items */
+        }
 
-    .resource-upload, .resource-list {
-        flex-basis: 100%; /* Full width for both sections */
-    }
+        .resource-upload, .resource-list {
+            flex-basis: 100%; /* Full width for both sections */
+        }
+
+        h2, h3 {
+            font-size: 1.5rem; /* Increase heading sizes */
+            margin-bottom: 10px; /* Space below headings */
+        }
+
+        .upload-url-form {
+            display: flex; /* Use flex for form layout */
+            flex-direction: column; /* Stack form elements vertically */
+        }
+
+        .upload-url-form label {
+            margin-bottom: 5px; /* Space between label and input */
+        }
+
+        .upload-url-form input {
+            margin-bottom: 15px; /* Space between inputs */
+            padding: 10px; /* Padding for input fields */
+            font-size: 1rem; /* Increase input font size */
+        }
 
     .upload-btn {
         padding: 10px 20px; /* Adjust button padding */
@@ -1124,7 +1191,8 @@ input:checked + .slider:before {
     .video-link-section {
         padding: 15px; /* Reduce padding */
         border-radius: 10px; /* Smaller border radius */
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Adjust shadow */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+        margin-left: 50px;/* Adjust shadow */
     }
 
     /* Heading inside video section */
@@ -1137,6 +1205,7 @@ input:checked + .slider:before {
     .session-details p {
         font-size: 16px; /* Smaller font size for details */
     }
+    
 
     /* Adjust the size of the join link button */
     .video-link {
@@ -1149,6 +1218,7 @@ input:checked + .slider:before {
     .main-content {
         padding: 10px; /* Reduce padding for smaller screens */
     }
+    
 }
 
 /* Extra small devices (like mobile phones) */
@@ -1171,6 +1241,9 @@ input:checked + .slider:before {
         padding: 8px 18px;
         font-size: 14px;
     }
+
+    
+
     /* Upcoming Lessons Section */
     .upcoming-lessons {
         display: grid; /* Grid layout for lessons */
@@ -1676,17 +1749,6 @@ tbody tr:hover {
     border-bottom: none;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .bus-card {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .bus-card .bus-status {
-        text-align: left;
-        margin-top: 10px;
-    }
-}
 
 .delete-profile-container {
     display: flex;                 /* Use flexbox */
