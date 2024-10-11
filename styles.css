@@ -1008,6 +1008,14 @@ input:checked + .slider:before {
     }
     
 
+    input {
+        font-size: 16px; /* Prevent zooming on focus */
+        padding: 10px; /* Optional: Add some padding for better usability */
+        border: 1px solid #ccc; /* Optional: Style the input field */
+        border-radius: 4px; /* Optional: Add rounded corners */
+    }
+
+
     /* Profile Picture */
     .profile-picture {
         width: 20px; /* Smaller size for mobile */
@@ -1051,7 +1059,7 @@ input:checked + .slider:before {
         padding: 15px; /* Maintain padding for spacing */
         margin-top: 100px; /* Space for header */
         margin-left: 0; /* Initial margin */
-        height: calc(100vh - 150px); /* Adjust height for header */
+        height: calc(100vh - 200px); /* Adjust height for header */
         overflow-y: auto; /* Enable vertical scrolling */
         overflow-x: hidden; /* Disable horizontal scrolling */
         box-sizing: border-box; /* Include padding and borders in total width/height */
