@@ -1103,7 +1103,16 @@ input:checked + .slider:before {
         height: 10%;
     }
 
-    
+    .feedback-form{
+        margin-left: 15%;
+        
+    }
+
+    .main-content .feedback-form{
+        width: 70%;
+    }
+
+
     
     .main-content .form-group {
         width: 90%; /* Make the form-group narrower on mobile */
