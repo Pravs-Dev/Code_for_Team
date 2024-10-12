@@ -35,9 +35,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="session-date">${(session.sessionDate).slice(0, 10)}</p>
                     <p class="session-time">${session.sessionTime}</p>
                    </div>
-                   <p class="session-tutor">Tutor: ${session.tutor.fname} ${session.tutor.lname}</p>      
+                   <p class="session-tutor">Tutor: ${session.tutor.fname} ${session.tutor.lname}</p>  
+                    <span class="hint">Click for location details</span>    
                 `;
-                confirmedSessions.appendChild(sessionElement);
+                sessionElement.addEventListener('click', () => {
+                    // Show swal popup with locationMessage
+                    Swal.fire({
+                        title: "Meeting Location",
+                        text: session.locationMessage || "Location details not available",
+                        icon: "info",
+                        button: "Close",
+                    });
+                });
+                confirmedSessions.appendChild(sessionElement);      
             }
         });
     };

@@ -11,9 +11,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 throw new Error('Failed to fetch notifications');
             }
             const notifications = await response.json();
-            
-            // Store fetched notifications in localStorage
-            localStorage.setItem('notifications', JSON.stringify(notifications));
 
             // If there are no notifications, update the UI accordingly
             if (notifications.length === 0) {

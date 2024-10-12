@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Handle Scheduled Sessions
             else if (session.status === "Scheduled" && pendingSessions) {
                 sessionsElement.innerHTML += `
+                    <input id="location${session._id}" placeholder="Enter meeting location"></input>
                     <button class="confirm-btn" onclick="confirmBooking(this)">Confirm</button>
                     <button class="modify-btn" onclick="modifyBooking(this)">Modify</button>
                 `;
@@ -212,24 +213,49 @@ function modifyBooking(button) {
 
 // Function to confirm a booking
 function confirmBooking(button) {
-    const id = button.parentElement.querySelector('h3').textContent.split(':')[1].trim();
-    
-    fetch(`${API_BASE_URL}/bookings/${id}`, {
+    const sessionElement = button.closest('form');
+    const sessionId = sessionElement.querySelector('h3').textContent.split(': ')[1].trim();
+    const locationInput = sessionElement.querySelector(`#location${sessionId}`);
+    let locationMessage = locationInput ? locationInput.value.trim() : ''; // Get location if it's in-person
+    const meetingType = sessionElement.querySelector('p').textContent.split(': ')[1].trim(); // Get meeting type
+
+    // For in-person sessions, validate the location field
+    if (meetingType === "In-Person" && !locationMessage) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Missing Required Field',
+            text: 'Please enter the meeting location for in-person sessions.',
+            confirmButtonText: 'OK',
+        });
+        return;
+    }
+
+    // Prepare the payload with location and status
+    const payload = {
+        status: 'Confirmed'
+    };
+    if (locationMessage) {
+        payload.locationMessage = locationMessage; // Include location only for in-person sessions
+    }
+
+    // Update the booking with the location (if applicable) and confirmation status
+    fetch(`${API_BASE_URL}/bookings/${sessionId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ status: 'Confirmed' })
+        body: JSON.stringify(payload) // Send status and possibly location
     })
     .then(response => response.json())
     .then(data => {
         console.log(data);
-        location.reload(); // Reload the page
+        location.reload(); // Optionally, reload the page to see the changes
     })
     .catch(error => {
         console.error('Error:', error);
     });
 }
+
 
 // Function to delete a booking
 function deleteBooking(button) {

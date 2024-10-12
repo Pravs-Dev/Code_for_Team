@@ -11,7 +11,6 @@ body {
     line-height: 1.6;
     display: flex;
     flex-direction: column;
-    height: 100vh;
     overflow: hidden;
     transition: background-color 0.3s, color 0.3s;
     
@@ -950,6 +949,7 @@ input:checked + .slider:before {
         z-index: 999; /* Above all other content */
     }
 
+
     /* Logo and Search Bar */
         /* Logo and Search Bar */
     .logo {
@@ -1007,14 +1007,12 @@ input:checked + .slider:before {
         margin-top: 11px;
     }
     
-
     input {
         font-size: 16px; /* Prevent zooming on focus */
         padding: 10px; /* Optional: Add some padding for better usability */
         border: 1px solid #ccc; /* Optional: Style the input field */
         border-radius: 4px; /* Optional: Add rounded corners */
     }
-
 
     /* Profile Picture */
     .profile-picture {
@@ -1047,12 +1045,11 @@ input:checked + .slider:before {
         overflow-y: auto; /* Enable scrolling if content exceeds height */
     }
 
+
     .sidebar.collapsed {
         width: 60px; /* Collapsed width */
     
     }
-
-    
 
     /* Main content adjustments */
     .main-content {
@@ -1065,11 +1062,12 @@ input:checked + .slider:before {
         box-sizing: border-box; /* Include padding and borders in total width/height */
         transition: margin-left 0.3s; /* Smooth transition for margin */
     }
-
+    
     /* Adjust main content margin when sidebar is open */
     .sidebar:not(.collapsed) ~ .main-content {
         margin-left: 250px; /* Space for expanded sidebar */
     }
+
 
     .sidebar.collapsed ~ .main-content {
         margin-left: 60px; /* Adjust margin for collapsed sidebar */
@@ -1079,9 +1077,7 @@ input:checked + .slider:before {
         width: 50%;
         height: 50%;
     }
-
     
-
     .main-content .dashboard-title{
         margin-left: 175%;
     }
@@ -1111,7 +1107,6 @@ input:checked + .slider:before {
     .main-content .feedback-form{
         width: 70%;
     }
-
 
     
     .main-content .form-group {
@@ -1151,8 +1146,12 @@ input:checked + .slider:before {
         width: calc(50% - 10px); /* Adjust for smaller screens, 2 items per row */
     }
 
+    .calendar-day:hover {
+        background-color: #f0f8ff; /* Slight hover effect for better user experience */
+        border-color: #007bff; /* Change border color on hover */
+    }
     
-    
+
     /* Adjust main content margin when sidebar is collapsed */
     .sidebar.collapsed ~ .main-content {
         margin-left: 60px; /* Adjust margin for collapsed sidebar */
@@ -1904,6 +1903,8 @@ textarea {
     margin: 10px; 
     color: #343a40; /* Change text color for better contrast against the background */
     position: relative; /* Ensure the content is positioned correctly */
+    cursor: pointer; /* Add pointer cursor to indicate clickability */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
 /* Adding a semi-transparent overlay for better text readability */
@@ -1932,6 +1933,32 @@ textarea {
     margin-right: 5px; /* Spacing between dot and text */
 }
 
+.session-confirmed:hover {
+    transform: scale(1.05); /* Slightly enlarge the session box on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increase shadow on hover for a more prominent effect */
+}
+
+.hint {
+    visibility: hidden; /* Hidden by default */
+    width: 160px;
+    background-color: #70bbf0;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%; /* Position above the session box */
+    left: 50%;
+    margin-left: 90px; /* Center the tooltip */
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.3s; /* Fade effect */
+}
+
+.session-confirmed:hover .hint {
+    visibility: visible; /* Show on hover */
+    opacity: 1; /* Fade in */
+}
 
 
 /* Session header containing subject and date/time */
@@ -2203,3 +2230,74 @@ textarea {
         background-color: #e0e0e0;
     }
 }
+
+.review-slider-container {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap; /* Allow cards to wrap onto a new line */
+    padding: 10px;
+    gap: 15px; /* Add spacing between the cards */
+    margin-left: 90px;
+}
+
+.review-card {
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: 250px;
+    margin-left: 50px;
+    text-align: center;
+    vertical-align: top;
+    margin-bottom: 15px;
+}
+
+.review-card img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.review-card h3 {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.stars {
+    margin-top: 5px;
+    margin-left: 70px;
+}
+
+.star {
+    color: gold;
+    font-size: 1.2rem;
+}
+
+.review-comment {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.average-rating {
+    margin-top: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.loading-spinner {
+    position: absolute;  
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: bold;
+    color: #70bbf0; /* Spinner color */
+    margin-left: 60px;
+}
+
+

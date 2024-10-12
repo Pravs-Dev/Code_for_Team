@@ -36,13 +36,14 @@ export const getFeedbackBySession = async (id) => {
 };
 
 
+// Updated getTutorFeedback to populate tutor details
 export const getTutorFeedback = async (id, page = 0) => {
     try {
         const feedback = await Feedback.find({ tutor: id })
-            .select('-uploader')  // Exclude the uploader (student) field
+            .populate('tutor','fname lname')
             .limit(10)
             .skip(page * 10);
-            
+
         if (!feedback) throw new Error('Feedback not found');
         return feedback;
     } catch (error) {

@@ -50,6 +50,11 @@ const BookingSchema = new mongoose.Schema({
     required: function () { return this.status === 'Cancelled'; },
   },
 
+  locationMessage: {
+    type: String,
+    required: function () { return this.status === 'Confirmed'; },
+  },
+
 
   createdAt: {
     type: Date,

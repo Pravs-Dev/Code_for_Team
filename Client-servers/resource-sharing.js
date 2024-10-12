@@ -127,6 +127,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     // Function to fetch resources from the backend
     const fetchResources = async (url) => {
+        document.getElementById('loading-spinner').style.display = 'block';
         try {
             const response = await fetch(url);
             if (!response.ok) {
@@ -137,6 +138,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         } catch (error) {
             console.error(`Error fetching from ${url}:`, error);
             return [];
+        }finally {
+            // Hide the loading spinner
+            document.getElementById('loading-spinner').style.display = 'none';
         }
     };
 
