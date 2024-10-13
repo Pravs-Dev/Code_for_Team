@@ -989,12 +989,13 @@ input:checked + .slider:before {
 
     .header ul li {
         margin: 0 -2px;
+         font-size: 1.5em;
          /* Add some margin between items */
     }
 
     .header ul li a {
         padding: 5px 8px; /* Reduce padding for smaller size */
-        font-size: 1.5em; /* Set a smaller font size */
+          display: inline-block;
     }
     .header ul li a img {
         width: 25px; /* Set the desired width */
@@ -1108,7 +1109,8 @@ input:checked + .slider:before {
         width: 70%;
     }
 
-    
+   
+
     .main-content .form-group {
         width: 90%; /* Make the form-group narrower on mobile */
         max-width: 100%; /* Ensure it spans the full width of the container */
@@ -1146,12 +1148,8 @@ input:checked + .slider:before {
         width: calc(50% - 10px); /* Adjust for smaller screens, 2 items per row */
     }
 
-    .calendar-day:hover {
-        background-color: #f0f8ff; /* Slight hover effect for better user experience */
-        border-color: #007bff; /* Change border color on hover */
-    }
     
-
+    
     /* Adjust main content margin when sidebar is collapsed */
     .sidebar.collapsed ~ .main-content {
         margin-left: 60px; /* Adjust margin for collapsed sidebar */
@@ -1233,6 +1231,38 @@ input:checked + .slider:before {
     /* Main content padding */
     .main-content {
         padding: 10px; /* Reduce padding for smaller screens */
+    }
+
+    .alert-section {
+        padding: 0 50px; /* Add some padding on the sides */
+    }
+
+    table, th, td {
+        font-size: 6px; /* Decrease font size for better readability on small screens */
+        margin: 0;
+
+    }
+
+    
+    table {
+        margin-top: 7px; /* Reduce top margin for mobile */
+    }
+    th, td {
+        white-space: nowrap; /* Prevent breaking long words */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 1px 2px;
+    }
+    .alert-section {
+        overflow-x: auto;
+    }
+
+    div:where(.swal2-container) .swal2-html-container {
+        display: flex;                /* Use flexbox for layout */
+        overflow-x: auto;            /* Enable horizontal scrolling */
+        white-space: nowrap;         /* Prevent line breaks */
+        padding: 10px;               /* Add padding around the container */
+        scrollbar-width: thin; 
     }
     
 }
@@ -1468,7 +1498,7 @@ input:checked + .slider:before {
 }
 
 
-form input {
+form#profile-form input {
     width: 100%;
     padding: 10px; /* Increase padding for better user experience */
     font-size: 16px; /* Increase font size */
@@ -1477,7 +1507,6 @@ form input {
     border-radius: 4px;
     margin-bottom: 10px;
 }
-
 
 .profile-picture {
     border-radius: 50%;
@@ -1940,7 +1969,7 @@ textarea {
 
 .hint {
     visibility: hidden; /* Hidden by default */
-    width: 160px;
+    width: 130px;
     background-color: #70bbf0;
     color: #fff;
     text-align: center;
@@ -1949,8 +1978,7 @@ textarea {
     position: absolute;
     z-index: 1;
     bottom: 100%; /* Position above the session box */
-    left: 50%;
-    margin-left: 90px; /* Center the tooltip */
+    left: 55%;  
     opacity: 0; /* Hidden by default */
     transition: opacity 0.3s; /* Fade effect */
 }
@@ -2288,16 +2316,4 @@ textarea {
     font-weight: bold;
     color: #333;
 }
-
-.loading-spinner {
-    position: absolute;  
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 24px;
-    font-weight: bold;
-    color: #70bbf0; /* Spinner color */
-    margin-left: 60px;
-}
-
 

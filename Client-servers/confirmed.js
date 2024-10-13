@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="session-time">${session.sessionTime}</p>
                    </div>
                    <p class="session-tutor">Tutor: ${session.tutor.fname} ${session.tutor.lname}</p>  
-                    <span class="hint">Click for location details</span>    
+                    <span class="hint">Click for location</span>    
                 `;
                 sessionElement.addEventListener('click', () => {
                     // Show swal popup with locationMessage

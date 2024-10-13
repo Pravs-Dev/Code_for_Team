@@ -8,13 +8,6 @@
     margin-bottom: 10px;
 }
 
-#current-course-list li {
-    list-style: none;
-}
-
-#courses {
-    display: none;
-}
 
 #password-eye:hover {
     cursor: pointer;
