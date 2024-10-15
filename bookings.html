@@ -19,7 +19,7 @@
             <form id="bookingForm" action="/api/bookings" method="POST">
                 <!-- Tutor -->
                 <label for="tutor">Select Tutor:</label>
-                <select id="tutor" name="tutor" class="form-select" required>
+                <select disabled id="tutor" name="tutor" class="form-select" required>
                     <!-- Tutors will be populated here -->
                 </select>
 
@@ -33,7 +33,7 @@
                 <div>
                     <span id="calendarIcon" style="cursor: pointer; margin-left: 5px;">📅</span>
                     <label for="sessionDate">Session Date:</label>
-                    <input id="sessionDate" name="sessionDate" class="form-input" required>
+                    <input id="sessionDate" disabled name="sessionDate" class="form-input" placeholder="Click calendar-Icon to select date" required>
                 </div>
                 <!-- Session Time -->
                 <label for="sessionTime">Session Time:</label>

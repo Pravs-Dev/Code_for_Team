@@ -651,6 +651,10 @@ body {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+.upload-url-form input{
+    width: 100%;
+}
+
 .resource-list ul {
     list-style: none;
     padding: 0;
@@ -1237,15 +1241,20 @@ input:checked + .slider:before {
         padding: 0 50px; /* Add some padding on the sides */
     }
 
-    table, th, td {
+    .alert-section th,.alert-section td {
         font-size: 6px; /* Decrease font size for better readability on small screens */
-        margin: 0;
 
     }
 
-    
+    th:nth-child(6), td:nth-child(6),
+    th:nth-child(6), td:nth-child(6),  /* Age */
+    th:nth-child(8), td:nth-child(8),  /* Details */
+    th:nth-child(9), td:nth-child(9),  /* Coordinates */
+    th:nth-child(11), td:nth-child(11) { /* Alert ID */
+        display: none;
+    }
     table {
-        margin-top: 7px; /* Reduce top margin for mobile */
+        margin-top: 20px; /* Reduce top margin for mobile */
     }
     th, td {
         white-space: nowrap; /* Prevent breaking long words */
@@ -1257,12 +1266,14 @@ input:checked + .slider:before {
         overflow-x: auto;
     }
 
-    div:where(.swal2-container) .swal2-html-container {
-        display: flex;                /* Use flexbox for layout */
-        overflow-x: auto;            /* Enable horizontal scrolling */
-        white-space: nowrap;         /* Prevent line breaks */
-        padding: 10px;               /* Add padding around the container */
-        scrollbar-width: thin; 
+
+    div:where(.swal2-container) .swal2-html-container .calendar-day {
+        width: 60%;
+    }
+
+    div:where(.swal2-container) .swal2-html-container .calendar-header-day {
+        font-size: 10px;
+        margin-right: -2px;
     }
     
 }
@@ -1687,6 +1698,9 @@ button[type="submit"]:hover {
     margin: auto;
 }
 
+.alert-section th, .alert-section td{
+    padding: 5px;
+}
 
 table {
     width: 100%;
@@ -2114,8 +2128,9 @@ textarea {
 .dates-container {
     display: grid; /* Use grid layout for the date cells */
     grid-template-columns: repeat(7, 1fr); /* 7 columns for each day */
-    gap: 5px; /* Reduce gap between calendar cells */
 }
+
+
 
 .calendar-day {
     width: 50px; /* Increase width for more balanced appearance */

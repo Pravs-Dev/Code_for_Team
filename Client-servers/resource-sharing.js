@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
             title: urlName,
             description: urlDescription,
             fileUrl: url,
-            uploadedBy: userId, // Use the actual user ID
+            uploadedBy: userId,
         };
 
         try {
