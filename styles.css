@@ -651,9 +651,7 @@ body {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.upload-url-form input{
-    width: 100%;
-}
+
 
 .resource-list ul {
     list-style: none;
@@ -1510,6 +1508,16 @@ input:checked + .slider:before {
 
 
 form#profile-form input {
+    width: 100%;
+    padding: 10px; /* Increase padding for better user experience */
+    font-size: 16px; /* Increase font size */
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+form#upload-url-form input {
     width: 100%;
     padding: 10px; /* Increase padding for better user experience */
     font-size: 16px; /* Increase font size */
