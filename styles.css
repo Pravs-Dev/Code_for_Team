@@ -911,44 +911,44 @@ input:checked + .slider:before {
 /* Base Styles for Mobile Devices */
 @media screen and (max-width: 768px) {
     body {
-        font-size: 14px; /* Maintain base font size */
+        font-size: 14px; 
     }
 
     .notifications-container {
-        width: 95%; /* Full width for mobile with slight padding */
-        padding: 20px; /* Reduce padding for smaller screens */
-        height: auto; /* Auto height for better fit */
-        margin-left: 0; /* Remove the margin-left */
+        width: 95%;
+        padding: 20px; 
+        height: auto; 
+        margin-left: 0; 
     }
 
     .notifications-header {
-        font-size: 1.5em; /* Smaller header font size */
-        margin-bottom: 15px; /* Adjust margin */
+        font-size: 1.5em;
+        margin-bottom: 15px; 
     }
 
     .notification {
-        flex-direction: column; /* Stack elements vertically */
-        padding: 10px; /* Reduce padding for notifications */
+        flex-direction: column; 
+        padding: 10px; 
     }
 
     .notification-message {
-        font-size: 1em; /* Adjust font size */
-        margin-right: 0; /* Remove extra margin */
-        margin-bottom: 10px; /* Add margin below for spacing */
+        font-size: 1em; 
+        margin-right: 0; 
+        margin-bottom: 10px; 
     }
     /* Header adjustments */
     .header {
-        background: #70bbf0; /* Maintain background color */
+        background: #70bbf0; 
         display: flex;
-        flex-direction: column; /* Stack items vertically */
-        padding: 10px 15px; /* Add padding for spacing */
-        align-items: center; /* Center align items */
-        text-align: center; /* Center text */
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
-        position: fixed; /* Fixed position for the header */
-        top: 0; /* Stick to the top */
-        width: 100%; /* Full width */
-        z-index: 999; /* Above all other content */
+        flex-direction: column; 
+        padding: 10px 15px; 
+        align-items: center;
+        text-align: center; 
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+        position: fixed; 
+        top: 0; 
+        width: 100%; 
+        z-index: 999; 
     }
 
 

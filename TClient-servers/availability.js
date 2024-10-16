@@ -22,8 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
         const displayAvailabilitys = (availability) => {
-            availabilityList.innerHTML = `
-                    <h3>Change this month's availability</h3>`;
                 const availabilityElement = document.createElement('form');
                 availabilityElement.classList.add('availability-card');
                 availabilityElement.innerHTML = ``;

@@ -415,69 +415,7 @@ body {
 }
 
 /* Base Styles for Mobile Devices */
-@media screen and (max-width: 768px) {
-    body {
-        font-size: 14px;
-    }
 
-    .header {
-        flex-direction: column;
-        height: auto;
-        padding: 10px;
-        align-items: flex-start;
-    }
-
-    .logo {
-        padding-right: 0;
-    }
-
-    .search {
-        max-width: 100%;
-        margin: 10px 0;
-        width: 100%;
-    }
-
-    .header ul {
-        margin: 10px 0 0 0;
-        justify-content: flex-start;
-    }
-
-    .sidebar {
-        width: 60px; /* Collapse sidebar */
-    }
-
-    .sidebar.collapsed {
-        width: 60px;
-    }
-
-    .sidebar ul li a span {
-        display: none; /* Hide text labels on mobile */
-    }
-
-    .main-content {
-        padding: 15px;
-        margin-left: 60px; /* Adjust for collapsed sidebar */
-        margin-top: 100px; /* Adjust for header */
-        width: calc(100% - 60px);
-        overflow-y: auto;
-    }
-
-    .resource-sharing-section {
-        width: 100%; /* Full-width on mobile */
-        margin-top: 20px;
-        padding: 15px;
-    }
-
-    .resource-container {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .resource-upload,
-    .resource-list {
-        flex-basis: 100%;
-    }
-}
 
 /* Hide the modal by default */
 .hidden {
@@ -495,7 +433,7 @@ body {
 }
 
 
-form input {
+form#profile-form input {
     width: 100%;
     padding: 10px; /* Increase padding for better user experience */
     font-size: 16px; /* Increase font size */
@@ -505,6 +443,26 @@ form input {
     margin-bottom: 10px;
 }
 
+
+form#upload-url-form input {
+    width: 100%;
+    padding: 10px; /* Increase padding for better user experience */
+    font-size: 16px; /* Increase font size */
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+form input {
+    width: 100%;
+    padding: 10px; /* Increase padding for better user experience */
+    font-size: 16px; /* Increase font size */
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
 
 .profile-picture {
     border-radius: 50%;
@@ -609,10 +567,369 @@ button[type="submit"]:hover {
 
 /* Make the container responsive */
 @media (max-width: 768px) {
+    body {
+        font-size: 14px; 
+    }
     .notifications-container {
-        width: 95%; /* Reduce width slightly for smaller screens */
+        width: 95%; /* Full width for mobile with slight padding */
+        padding: 20px; /* Reduce padding for smaller screens */
+        height: auto; /* Auto height for better fit */
+        margin-left: 0; /* Remove the margin-left */
+    }
+
+    .notifications-header {
+        font-size: 1.5em; /* Smaller header font size */
+        margin-bottom: 15px; /* Adjust margin */
+    }
+
+    .notification {
+        flex-direction: column; /* Stack elements vertically */
+        padding: 10px; /* Reduce padding for notifications */
+    }
+
+    .notification-message {
+        font-size: 1em; /* Adjust font size */
+        margin-right: 0; /* Remove extra margin */
+        margin-bottom: 10px; /* Add margin below for spacing */
+    }
+    /* Header adjustments */
+    .header {
+        background:  #3376b1; /* Maintain background color */
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        padding: 10px 15px; /* Add padding for spacing */
+        align-items: center; /* Center align items */
+        text-align: center; /* Center text */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+        position: fixed; /* Fixed position for the header */
+        top: 0; /* Stick to the top */
+        width: 100%; /* Full width */
+        z-index: 999; /* Above all other content */
+    }
+
+
+    /* Logo and Search Bar */
+        /* Logo and Search Bar */
+    .logo {
+        font-size: 30px; /* Scale logo size down for mobile */
+        padding: 0;
+        margin-right: 20px; /* Reduce margin */
+    }
+
+    .search {
+        width: 50%; 
+        height: 30px;
+        font-size: 10px; /* Adjust font size for mobile */
+        margin: 0; /* Reset margin to fit in line */
+        position: relative; /* Allow for positioning */
+        top: 0;
+        margin-right: 20px; /* Reset top positioning */
+    }
+
+    /* Header Container */
+    .header {
+        display: flex; /* Use flexbox for layout */
+        flex-direction: row; /* Arrange items in a row */
+        align-items: center; /* Center items vertically */
+        justify-content: space-between; /* Space items evenly */
+        padding: 10px; /* Add padding around header */
+        height: 70px;
+    }
+
+    /* Navigation Links */
+    .header ul {
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        align-items: center;
+    }
+
+    .header ul li {
+        margin: 0 -2px;
+         font-size: 1.5em;
+         /* Add some margin between items */
+    }
+
+    .header ul li a {
+        padding: 5px 8px; /* Reduce padding for smaller size */
+          display: inline-block;
+    }
+    .header ul li a img {
+        width: 25px; /* Set the desired width */
+        height: 25px; /* Set the desired height */
+        margin: 0; /* Adjust margin if necessary */
+        margin-top: 11px;
+    }
+
+    .notification-dot{
+        margin-top: 11px;
+    }
+
+    /* Profile Picture */
+    .profile-picture {
+        border-radius: 50%; /* Keep circular shape */
+        margin-right: 10px; /* Add space between picture and name */
+        object-fit: cover; /* Ensure image fits well */
+    }
+
+    /* Adjust Profile Name */
+    .profile-name {
+        font-size: -0.8em; /* Set a smaller font size for mobile */
+        margin: 0; /* Reset margin */
+    }
+
+    .main-content .profile-container{
+        margin-left: 60px;
+    }
+    
+   /* Sidebar adjustments */
+    .sidebar {
+        width: 250px; /* Sidebar width */
+        height: calc(100vh - 70px); /* Full height minus header */
+        position: fixed; /* Fixed position for sidebar */
+        top: 70px; /* Below header */
+        background-color:  #3376b1; /* Maintain background color */
+        transition: width 0.3s, left 0.3s; /* Smooth transition for width and position */
+        z-index: 2; /* Above main content */
+        overflow-y: auto; /* Enable scrolling if content exceeds height */
+    }
+
+
+    .sidebar.collapsed {
+        width: 60px; /* Collapsed width */
+    
+    }
+
+    /* Main content adjustments */
+    .main-content {
+        padding: 15px; /* Maintain padding for spacing */
+        margin-top: 100px; /* Space for header */
+        margin-left: 0; /* Initial margin */
+        height: calc(100vh - 200px); /* Adjust height for header */
+        overflow-y: auto; /* Enable vertical scrolling */
+        overflow-x: hidden; /* Disable horizontal scrolling */
+        box-sizing: border-box; /* Include padding and borders in total width/height */
+        transition: margin-left 0.3s; /* Smooth transition for margin */
+    }
+    
+    /* Adjust main content margin when sidebar is open */
+    .sidebar:not(.collapsed) ~ .main-content {
+        margin-left: 250px; /* Space for expanded sidebar */
+    }
+
+
+    .sidebar.collapsed ~ .main-content {
+        margin-left: 60px; /* Adjust margin for collapsed sidebar */
+    }
+
+    .main-content h1{
+       margin-left: 50px;
+    }
+    
+    .main-content .dashboard-title{
+        margin-left: 175%;
+    }
+    .main-content .welcome-title{
+        margin-left: 200%;
+    }
+
+    .main-content .notifications-container{
+        margin-right: 53%;
+        width: 80%;
+    }
+
+    
+    .main-content .form-group {
+        width: 90%; /* Make the form-group narrower on mobile */
+        max-width: 100%; /* Ensure it spans the full width of the container */
+        margin: 0 5%; /* Center the form-group with even margins */
+    }
+
+    .main-content .form-group input {
+        width: 90%; /* Make the input field fill the form-group */
+        padding: 12px; /* Slightly increase padding for better touch interaction */
+        font-size: 15px; /* Maintain a readable font size on mobile */
+        margin-bottom: 15px; /* Add space between input fields */
+        box-sizing: border-box; /* Ensure padding is included in width */
+        margin-left: 30px;
+    }
+
+    .sidebar.collapsed ~ .main-content {
+        margin-left: 60px; /* Adjust margin for collapsed sidebar */
+    }
+
+     /* Resource Sharing Section */
+     .resource-sharing-section {
+        width: 80%; /* Reduce to 90% for a little margin on sides */
+        max-width: 500px; /* Set a max width for larger screens */
+        margin: 20px auto; /* Centered with space above and below */
+        padding: 20px; /* Increase padding inside section */
+        border-radius: 10px; /* Optional: Add rounded corners for aesthetics */
+        background-color: #f9f9f9; /* Optional: Set a light background color */
+        margin-left: 60px;
+    }
+
+    .resource-container {
+        display: flex; /* Keep container as flex */
+        flex-direction: column; /* Stack items vertically */
+        gap: 20px; /* Increase gap between items */
+    }
+
+    .resource-upload, .resource-list {
+        flex-basis: 100%; /* Full width for both sections */
+    }
+
+    h2, h3 {
+        font-size: 1.5rem; /* Increase heading sizes */
+        margin-bottom: 10px; /* Space below headings */
+    }
+
+    .upload-url-form {
+        display: flex; /* Use flex for form layout */
+        flex-direction: column; /* Stack form elements vertically */
+    }
+
+    .upload-url-form label {
+        margin-bottom: 5px; /* Space between label and input */
+    }
+
+    .upload-url-form input {
+        margin-bottom: 15px; /* Space between inputs */
+        padding: 10px; /* Padding for input fields */
+        font-size: 1rem; /* Increase input font size */
+    }
+
+    .upload-btn {
+        padding: 10px 20px; /* Adjust button padding */
+        font-size: 14px; /* Keep button font size readable */
+    }
+
+    .session-highlighted {
+        line-height: 1.2;
+        box-sizing: border-box;
+        overflow: hidden;
+        padding: 15px; /* Add some padding to ensure content isn't too cramped */
+    }
+    
+    .session-highlighted h3 {
+        font-size: 12px; /* Slightly increase the font size */
+    }
+    
+    #pending-list.session-container {
+        display: grid;
+        grid-template-columns: 1fr; /* Change to one column per row */
+        grid-gap: 15px;  /* Increase gap between boxes for better spacing */
+        margin-right: 0;
+        margin-left: 50px;
+    }
+    
+    #pending-list.session-container .session-highlighted {
+        height: auto;  /* Height adjusts automatically based on content */
+        min-height: 200px;  /* Set a larger minimum height */
+        max-height: 500px;  /* Set a larger maximum height */
+        width: 100%;  /* Ensure it takes up full width of the container */
+    }
+    #confirmed-list.session-container {
+        display: grid;
+        grid-template-columns: 1fr; /* Change to one column per row */
+        grid-gap: 15px;  /* Increase gap between boxes for better spacing */
+        margin-right: 0;
+        margin-left: 50px;
+    }
+    
+    
+    #confirmed-list.session-container .session-highlighted {
+        height: auto;  /* Height adjusts automatically based on content */
+        min-height: 200px;  /* Set a larger minimum height */
+        max-height: 600px;  /* Set a larger maximum height */
+        width: 100%;  /* Ensure it takes up full width of the container */
+    }
+    #cancelled-list.session-container {
+        display: grid;
+        grid-template-columns: 1fr; /* Change to one column per row */
+        grid-gap: 15px;  /* Increase gap between boxes for better spacing */
+        margin-right: 0;
+        margin-left: 50px;
+    }
+    
+    
+    #cancelled-list.session-container .session-highlighted {
+        height: auto;  /* Height adjusts automatically based on content */
+        min-height: 200px;  /* Set a larger minimum height */
+        max-height: 500px;  /* Set a larger maximum height */
+        width: 100%;  /* Ensure it takes up full width of the container */
+    }
+    #completed-list.session-container {
+        display: grid;
+        grid-template-columns: 1fr; /* Change to one column per row */
+        grid-gap: 15px;  /* Increase gap between boxes for better spacing */
+        margin-right: 0;
+        margin-left: 50px;
+    }
+    
+    
+    #completed-list.session-container .session-highlighted {
+        height: auto;  /* Height adjusts automatically based on content */
+        min-height: 200px;  /* Set a larger minimum height */
+        max-height: 500px;  /* Set a larger maximum height */
+        width: 100%;  /* Ensure it takes up full width of the container */
+    }
+
+
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;  /* Allow the cards to wrap to the next row */
+        justify-content: space-around;  /* Distribute space between cards */
+        margin: 20px 0;
+    }
+    
+    .card-pending, .card-completed, .card-confirmed, .card-cancelled {
+        flex: 1 1 45%;  /* Each card takes up about 45% of the row, ensuring two cards fit */
+        max-width: 45%;  /* Set a maximum width for each card */
+        height: 60vh;  /* Keep the card height at 60% of the viewport height */
         padding: 20px;
-        height: 80vh; /* Adjust height on smaller screens */
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: transform 0.2s ease-in-out;
+        margin: 10px;  /* Add margin for spacing between cards */
+    }
+    
+    .card-pending, .card-confirmed, .card-completed, .card-cancelled {
+        background-size: cover;  /* Ensures the image covers the container */
+        background-position: center;  /* Centers the image */
+        background-repeat: no-repeat;  /* Prevents image repetition */
+    }
+    
+    .card-pending {
+        background-image: url('../Icons/pending.webp');
+    }
+    
+    .card-confirmed {
+        background-image: url('../Icons/confirmed.webp');
+    }
+    
+    .card-completed {
+        background-image: url('../Icons/completed.webp');
+    }
+    
+    .card-cancelled {
+        background-image: url('../Icons/cancelled.webp');
+    }
+    
+    .card-pending:hover, .card-confirmed:hover, .card-completed:hover, .card-cancelled:hover {
+        transform: scale(1.05);
+    }
+    
+    .main-content .instruction-box{
+        margin-left: 30px;
+    }
+    
+    .availability-card{
+        margin-left: 50px;
     }
 }
 
@@ -680,7 +997,7 @@ button[type="submit"]:hover {
 .notification-dot {
     width: 10px;
     height: 10px;
-    background-color: red;
+    background-color: rgb(3, 5, 86);
     border-radius: 50%;
     position: absolute;
     top: 0;

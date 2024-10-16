@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Resource Sharing Interface</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -21,7 +21,7 @@
                 <div class="resource-upload">
                     <h3>Upload Resources</h3>
                     <input type="file" id="upload" hidden />
-                    <form class="upload-url-form">
+                    <form id="upload-url-form" class="upload-url-form">
                         <label for="urlName">URL name:</label><br>
                         <input type="text" id="urlName" required><br>
                         <label for="urlDescription">URL Description:</label><br>
@@ -34,6 +34,7 @@
                 </div>
                 <div class="resource-list">
                     <h3>Available Resources</h3>
+                    <div id="loading-spinner" class="loading-spinner" style="display: none;"></div>
                     <ul></ul>
                 </div>
             </div>
