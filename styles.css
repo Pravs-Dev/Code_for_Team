@@ -2310,16 +2310,6 @@ textarea {
     color: #333;
 }
 
-.stars {
-    margin-top: 5px;
-    margin-left: 70px;
-}
-
-.star {
-    color: gold;
-    font-size: 1.2rem;
-}
-
 .review-comment {
     margin-top: 10px;
     font-size: 0.9rem;
