@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const displayAvailabilitys = (availability) => {
                 const availabilityElement = document.createElement('form');
+                availabilityElement.setAttribute('id', 'sessions');
                 availabilityElement.classList.add('availability-card');
                 availabilityElement.innerHTML = ``;
                 let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];

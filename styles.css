@@ -1102,6 +1102,8 @@ input:checked + .slider:before {
         height: 10%;
     }
 
+    
+
     .feedback-form{
         margin-left: 15%;
         
@@ -1251,15 +1253,7 @@ input:checked + .slider:before {
     th:nth-child(11), td:nth-child(11) { /* Alert ID */
         display: none;
     }
-    table {
-        margin-top: 20px; /* Reduce top margin for mobile */
-    }
-    th, td {
-        white-space: nowrap; /* Prevent breaking long words */
-        overflow: hidden;
-        text-overflow: ellipsis;
-        padding: 1px 2px;
-    }
+    
     .alert-section {
         overflow-x: auto;
     }

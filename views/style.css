@@ -454,7 +454,7 @@ form#upload-url-form input {
     margin-bottom: 10px;
 }
 
-form input {
+form#sessions input {
     width: 100%;
     padding: 10px; /* Increase padding for better user experience */
     font-size: 16px; /* Increase font size */
@@ -931,6 +931,20 @@ button[type="submit"]:hover {
     .availability-card{
         margin-left: 50px;
     }
+
+    .review-card {
+       margin-left: 60px;
+    }
+
+    .review-card h2 {
+        font-size: 1.2rem;  /* Adjust font size for headings */
+        margin-bottom: 8px;  /* Adjust margin for tighter layout */
+    }
+    .review-card h3 {
+        font-size: 1.2rem;  /* Adjust font size for headings */
+        margin-bottom: 8px;  /* Adjust margin for tighter layout */
+    }
+    
 }
 
 /* Notifications Header */

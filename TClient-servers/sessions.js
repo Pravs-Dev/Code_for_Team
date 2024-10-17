@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const displaySessions = (sessions) => {
         sessions.forEach(session => {
             const sessionsElement = document.createElement('form');
+            sessionsElement.setAttribute('id', 'sessions');
             sessionsElement.classList.add('session-highlighted');
             sessionsElement.innerHTML = `
                 <h3>Session: ${session._id}</h3>
