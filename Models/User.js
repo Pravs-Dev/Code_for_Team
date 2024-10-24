@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
         // - Contains at least one uppercase letter
         // - Contains at least one number
         // - Contains at least one special character
-        return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(value);
+        return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/.test(value);
       },
       message:
         'Password must be at least 8 characters long, contain at least one lowercase letter, one uppercase letter, one number, and one special character',
