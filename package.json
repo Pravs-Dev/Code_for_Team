@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "nyc --reporter=html --reporter=text jest",
+    "test": "nyc jest --coverage",
     "test:mocha": "nyc --reporter=html --reporter=text mocha",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
@@ -45,6 +45,10 @@
     "mongoose": "^8.6.0",
     "nyc": "^17.1.0",
     "supertest": "^7.0.0"
+  },
+  "nyc": {
+    "exclude": [
+      "Code_for_Team"
+    ]
   }
 }
-

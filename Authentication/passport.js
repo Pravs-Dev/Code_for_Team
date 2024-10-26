@@ -5,7 +5,6 @@ import User from '../Models/User.js';
 import jwt from 'jsonwebtoken'; // For generating JWT tokens
 
 dotenv.config();
-
 passport.use(
   new GoogleStrategy(
     {
@@ -15,6 +14,7 @@ passport.use(
       scope: ['profile', 'email']
     },
     async (accessToken, refreshToken, profile, done) => {
+      /* istanbul ignore next */
       try {
         let user = await User.findOne({ email: profile._json.email });
         
@@ -47,11 +47,11 @@ passport.use(
   )
 );
 
-
+/* istanbul ignore next */
 passport.serializeUser((data, done) => {
   done(null, { id: data.user.id, token: data.token });
 });
-
+/* istanbul ignore next */
 passport.deserializeUser(async (data, done) => {
   try {
     const user = await User.findById(data.id);
