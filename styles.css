@@ -684,6 +684,70 @@ body {
     color: #005f99;
 }
 
+/* Base styles for the shared resource section */
+.shared-resource-section {
+    padding: 15px;
+    border: 1px solid #e0e0e0; /* Light border for separation */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background color */
+    flex-basis: 100%;
+}
+
+/* Title for the shared resources */
+.shared-resource-section h3 {
+    font-size: 24px; /* Larger font size for the title */
+    color: #333; /* Darker text color */
+    margin-bottom: 10px; /* Space below the title */
+}
+
+/* Styling for the list of shared resources */
+.shared-resource-list ul {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0; /* Remove default padding */
+}
+
+/* Each item in the shared resources list */
+.shared-resource-list li {
+    display: flex; /* Flexbox for alignment */
+    justify-content: space-between; /* Space between link and any actions */
+    align-items: center; /* Center items vertically */
+    padding: 10px; /* Padding around items */
+    margin-bottom: 8px; /* Space between items */
+    background-color: #fff; /* White background for items */
+    border: 1px solid #e0e0e0; /* Light border around items */
+    border-radius: 5px; /* Rounded corners for items */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for shared resource items */
+.shared-resource-list li:hover {
+    background-color: #f1f1f1; /* Slightly darker background on hover */
+}
+
+/* Styling for resource links */
+.shared-resource-list a {
+    text-decoration: none; /* Remove underline from links */
+    color: #007bff; /* Primary color for links */
+    font-size: 16px; /* Font size for links */
+    flex-grow: 1; /* Allow link to take available space */
+}
+
+/* Styling for any buttons that might be added later */
+.shared-resource-list button {
+    background-color: #007bff; /* Button color */
+    color: white; /* Text color for buttons */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners for buttons */
+    padding: 6px 12px; /* Padding for buttons */
+    cursor: pointer; /* Pointer cursor for buttons */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for buttons */
+.shared-resource-list button:hover {
+    background-color: #0056b3; /* Darker button color on hover */
+}
+
 /* Dark Mode Styles */
 .resource-sharing-section.dark-mode {
     background-color: #1e1e1e;

@@ -762,13 +762,13 @@ button[type="submit"]:hover {
 
      /* Resource Sharing Section */
      .resource-sharing-section {
-        width: 80%; /* Reduce to 90% for a little margin on sides */
+        width: 87%; /* Reduce to 90% for a little margin on sides */
         max-width: 500px; /* Set a max width for larger screens */
         margin: 20px auto; /* Centered with space above and below */
         padding: 20px; /* Increase padding inside section */
         border-radius: 10px; /* Optional: Add rounded corners for aesthetics */
         background-color: #f9f9f9; /* Optional: Set a light background color */
-        margin-left: 60px;
+        margin-left: 55px;
     }
 
     .resource-container {
@@ -779,6 +779,7 @@ button[type="submit"]:hover {
 
     .resource-upload, .resource-list {
         flex-basis: 100%; /* Full width for both sections */
+        width: 90%;
     }
 
     h2, h3 {
@@ -1019,14 +1020,6 @@ button[type="submit"]:hover {
     display: none; /* Initially hidden */
 }
 
-
-
-.delete-profile-container {
-    display: flex;                 /* Use flexbox */
-    justify-content: center;       /* Center horizontally */
-    align-items: center;           /* Center vertically if needed */
-    height: 100%;                  /* Set height if needed */
-}
 
 .upload-url-form{
     display: flex;
@@ -1484,4 +1477,20 @@ body.dark-theme {
 .slot {
     display: flex;
     flex-direction: row;
+}
+
+.share-btn {
+    background-color: #007bff; /* Blue background */
+    color: #fff;              /* White text */
+    border: none;             /* No border */
+    border-radius: 5px;      /* Rounded corners */
+    padding: 10px 15px;      /* Padding around the text */
+    cursor: pointer;          /* Pointer cursor on hover */
+    margin-top: 18px;
+    margin-left: 10px;
+    transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+.share-btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
 }

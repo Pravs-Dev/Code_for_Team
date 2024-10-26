@@ -6,6 +6,8 @@ import {
   modifyResource,
   getUserResources,
   deleteResourceById,
+  shareResourceWithStudentByName,
+  getResourcesSharedWithStudent, 
 } from "../../Controllers/Resource_Controller/ResourceC.js"; 
 
 const router = express.Router();
@@ -69,6 +71,30 @@ router.put('/:id', async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ message: 'Error updating resource', error: error.message });
+  }
+});
+
+// Share a resource with a specific student by name
+router.post('/:id/share', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const { studentName, tutorId } = req.body;
+    const userId = req.user?.id || tutorId; // Use tutorId from the request body if req.user is unavailable
+    const result = await shareResourceWithStudentByName(id, studentName, userId);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ message: 'Error sharing resource', error: error.message });
+  }
+});
+
+// Get resources shared with a specific student
+router.get('/shared-with/:studentId', async (req, res) => {
+  const { studentId } = req.params;
+  try {
+    const resources = await getResourcesSharedWithStudent(studentId);
+    res.status(200).json(resources); // Return the resources directly
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching shared resources', error: error.message });
   }
 });
 

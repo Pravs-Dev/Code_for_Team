@@ -20,6 +20,10 @@ const ResourcefileSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
+  sharedWith: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', // Refers to students
+    },
   tags: [{ type: String }],
 }, { timestamps: true });
 
