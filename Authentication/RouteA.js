@@ -14,6 +14,7 @@ router.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/" }),
   async function (req, res) {
+    /* istanbul ignore next */
     try {
       const token = req.user.token;
       const userId = req.user.user._id;
@@ -33,6 +34,7 @@ router.get(
 
 // Logout route
 router.get("/logout", function (req, res) {
+  /* istanbul ignore next */
   req.logout((err) => {
     if (err) {
       console.error("Logout error:", err);

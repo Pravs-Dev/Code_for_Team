@@ -70,6 +70,7 @@ export const deleteSessionById = async (id) => {
   }
 };
 
+
 export const getSessionsByStudentId = async (studentId) => {
   try {
     const sessions = await VirtualTutoring.find({ studentId })

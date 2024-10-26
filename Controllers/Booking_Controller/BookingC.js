@@ -3,6 +3,7 @@ import Notification from "../../Models/Notification.js";
 
 
 export const createBooking = async (payload) => {
+  
   try {
     const newBooking = new Booking(payload);
     const savedBooking = await newBooking.save();

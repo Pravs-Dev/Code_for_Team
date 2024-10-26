@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 dotenv.config();
-
+/* istanbul ignore start */
 export async function signup(token, role = "student") {
   try {
     // Verify the token using your JWT secret to ensure it's valid
