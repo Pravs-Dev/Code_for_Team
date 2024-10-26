@@ -189,6 +189,83 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
+    const removeSharedResource = async (resourceId, studentId) => {
+    studentId=localStorage.getItem('userId');
+    const result = await Swal.fire({
+        title: 'Are you sure?',
+        text: "You will remove the shared access for this resource!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, remove it!',
+        cancelButtonText: 'Cancel',
+    });
+
+    if (result.isConfirmed) {
+        // Construct the URL for both resources and resourcesfile
+        const resourcesUrl = `${API_BASE_URL}/resources/${resourceId}/remove/${studentId}`;
+        const filesUrl = `${API_BASE_URL}/resourcesfile/${resourceId}/remove/${studentId}`;
+
+        try {
+            // Execute the fetch calls in parallel for both resource types
+            const [resourcesResponse, filesResponse] = await Promise.all([
+                fetch(resourcesUrl, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+                    },
+                }),
+                fetch(filesUrl, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+                    },
+                })
+            ]);
+
+            // Handle responses for both resource types
+            if (resourcesResponse.ok || filesResponse.ok) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Shared resource removed successfully!',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#007bff',
+                    timer: 5000,
+                    timerProgressBar: true,
+                });
+
+                // Refresh the list after removal
+                await fetchSharedResources();
+            } else {
+                console.error('Error removing shared resource or files:', {
+                    resourcesError: await resourcesResponse.json(),
+                    filesError: await filesResponse.json()
+                });
+                Swal.fire({
+                    icon: 'error',
+                    title: 'An error occurred while removing the shared resource.',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#007bff',
+                    timer: 5000,
+                    timerProgressBar: true,
+                });
+            }
+        } catch (error) {
+            console.error('Error removing shared resource:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'An error occurred while removing the shared resource.',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#007bff',
+                timer: 5000,
+                timerProgressBar: true,
+            });
+        }
+    }
+};
+
+    
     const fetchSharedResources = async () => {
         const studentId = localStorage.getItem('userId');
         const resourcesUrl = `${API_BASE_URL}/resources/shared-with/${studentId}`;
@@ -286,6 +363,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const { value: formValues } = await Swal.fire({
             title: 'Share Resource',
             html: `
+            <div style="margin-bottom: 10px;">
+                <strong>Note:</strong> Please ensure the name of the file you are sending is properly labeled so the student knows where it’s coming from.
+            </div>
                 <input id="firstName" class="swal2-input" placeholder="Student's First Name" required>
                 <input id="lastName" class="swal2-input" placeholder="Student's Last Name" required>
             `,
@@ -375,12 +455,12 @@ const renderSharedResources = (resources, files) => {
         resourceItem.appendChild(resourceLink);
         
         // Add a delete button if the resource was shared with the user
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Remove';
-        deleteButton.classList.add('delete-btn');
-        deleteButton.onclick = () => deleteResource(resource._id, 'resource');
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove';
+        removeButton.classList.add('delete-btn');
+        removeButton.onclick = () => removeSharedResource(resource._id, 'resource');
         
-        resourceItem.appendChild(deleteButton);
+        resourceItem.appendChild(removeButton);
         sharedResourceList.appendChild(resourceItem);
     });
 
@@ -391,13 +471,13 @@ const renderSharedResources = (resources, files) => {
         fileLink.href = `${API_BASE_URL}/resourcesfile/${file._id}`; // Adjust URL as needed
         fileLink.textContent = `${file.file.originalName}`;
 
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Remove';
-        deleteButton.classList.add('delete-btn');
-        deleteButton.onclick = () => deleteResource(file._id, 'file');
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove';
+        removeButton.classList.add('delete-btn');
+        removeButton.onclick = () => removeSharedResource(file._id, 'file');
 
         fileItem.appendChild(fileLink);
-        fileItem.appendChild(deleteButton);
+        fileItem.appendChild(removeButton);
         sharedResourceList.appendChild(fileItem);
     });
 };

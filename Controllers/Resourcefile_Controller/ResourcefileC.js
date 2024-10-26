@@ -98,6 +98,24 @@ export const getResourcesSharedWithStudent = async (studentId) => {
 };
 
 
+export const removeSharedResource = async (id,studentId) => {
+  try {
+    const resource = await Resourcefile.findByIdAndUpdate(
+      id,
+      { $pull: { sharedWith: studentId } },
+      { new: true }
+    );
+
+    if (!resource) {
+      throw new Error('Resource not found');
+    }
+
+    return resource;
+  } catch (error) {
+    throw new Error(`Error removing resource: ${error.message}`);
+  }
+};
+
 
 export const deleteResourcefileById = async (id) => {
   try {

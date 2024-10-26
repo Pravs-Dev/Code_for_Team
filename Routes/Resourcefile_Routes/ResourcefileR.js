@@ -7,6 +7,7 @@ import {
   deleteResourcefileById,
   shareResourceWithStudentByName,
   getResourcesSharedWithStudent, 
+  removeSharedResource,
 } from '../../Controllers/Resourcefile_Controller/ResourcefileC.js';
 import { uploadFile } from '../../multerconfig.js';
 import Resourcefile from '../../Models/Resourcefile.js'; 
@@ -97,6 +98,20 @@ router.get('/shared-with/:studentId', async (req, res) => {
   }
 });
 
+router.delete('/:id/remove/:studentId', async (req, res) => {
+  const { id, studentId } = req.params; // Resource ID
+
+  try {
+    const result = await removeSharedResource(id, studentId); // Call controller function
+    if (result) {
+      res.status(200).json( { message: 'Resource removed successfully' });
+    } else {
+      res.status(404).json({ message: 'Resource not found or not shared with this student' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Error removing resource', error: error.message });
+  }
+});
 
 router.delete('/:id', async (req, res) => {
   const { id } = req.params;
