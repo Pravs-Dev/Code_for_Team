@@ -80,17 +80,4 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-app.get('/api/proxy-bus-schedule', async (req, res) => {
-  try {
-      // Make the request to the external API
-      const response = await axios.get('http://52.40.184.137/api/v1/bus-schedule/');
-      
-      // Send the external API's response data back to the client
-      res.json(response.data);
-  } catch (error) {
-      console.error('Error fetching bus schedule:', error);
-      res.status(500).json({ error: 'Failed to fetch bus schedule' });
-  }
-});
-
 export default router;

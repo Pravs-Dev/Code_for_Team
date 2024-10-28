@@ -155,7 +155,7 @@
 
 
     try {
-        const response = await fetch(`${API_BASE_URL}/notifications/api/proxy-bus-schedule`);
+        const response = await fetch('http://52.40.184.137/api/v1/bus-schedule/');
         if (!response.ok) throw new Error('Network response was not ok');
         const busData = await response.json();
         console.log('Fetched data from API');

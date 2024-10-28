@@ -1,5 +1,5 @@
 // Redirect to Google OAuth route when Google login button is clicked
-const API_BASE_URL = 'https://witscampustutoring.azurewebsites.net/api';
+const API_BASE_URL = 'http://localhost:3000/api';
 
 
 function handleGoogleLogin() {
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const password = document.getElementById('password').value;
 
             if (!email || !password) {
-                alert('Please fill in all the required fields.');
+                document.getElementById("error-msg").innerHTML=`Please fill in all the required fields.`
                 return;
             }
 
