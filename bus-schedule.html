@@ -56,106 +56,119 @@
     </div>
 
     <script>
-        function fetchBusSchedule() {
-            // Mock data to use instead of fetching from API
-            const busData = [
-                {
-                    "scheduleId": "SCH001",
-                    "routeId": "R001",
-                    "routeName": "Full circuit",
-                    "stops": [
-                        {
-                            "stopId": "S001",
-                            "stopName": "AMIC",
-                            "arrivalTime": "08:20",
-                            "departureTime": "08:25",
-                            "coordinates": {
-                                "latitude": -26.1924,
-                                "longitude": 28.0306
-                            }
-                        },
-                        {
-                            "stopId": "S002",
-                            "stopName": "Knockando",
-                            "arrivalTime": "08:30",
-                            "departureTime": "08:35",
-                            "coordinates": {
-                                "latitude": -26.1932,
-                                "longitude": 28.032
-                            }
-                        }
-                    ],
-                    "busInfo": {
-                        "busId": "BUS001",
-                        "capacity": 40
-                    }
-                },
-                {
-                    "scheduleId": "SCH002",
-                    "routeId": "R002",
-                    "routeName": "Reverse circuit",
-                    "stops": [
-                        {
-                            "stopId": "S001",
-                            "stopName": "Knockando",
-                            "arrivalTime": "08:00",
-                            "departureTime": "08:05",
-                            "coordinates": {
-                                "latitude": -26.1924,
-                                "longitude": 28.0306
-                            }
-                        },
-                        {
-                            "stopId": "S002",
-                            "stopName": "AMIC",
-                            "arrivalTime": "08:15",
-                            "departureTime": "08:20",
-                            "coordinates": {
-                                "latitude": -26.1932,
-                                "longitude": 28.032
-                            }
-                        }
-                    ],
-                    "busInfo": {
-                        "busId": "BUS002",
-                        "capacity": 20
-                    }
-                },
-                {
-                    "scheduleId": "SCH003",
-                    "routeId": "R003",
-                    "routeName": "Wits Junction to Education Campus",
-                    "stops": [
-                        {
-                            "stopId": "S001",
-                            "stopName": "Wits Junction",
-                            "arrivalTime": "09:00",
-                            "departureTime": "09:05",
-                            "coordinates": {
-                                "latitude": -26.1924,
-                                "longitude": 28.0306
-                            }
-                        },
-                        {
-                            "stopId": "S002",
-                            "stopName": "Education Campus",
-                            "arrivalTime": "10:00",
-                            "departureTime": "10:05",
-                            "coordinates": {
-                                "latitude": -26.1932,
-                                "longitude": 28.032
-                            }
-                        }
-                    ],
-                    "busInfo": {
-                        "busId": "BUS003",
-                        "capacity": 30
-                    }
+        async function fetchBusSchedule() {
+            const mockbusData = [
+    {
+        "scheduleId": "SCH001",
+        "routeId": "R001",
+        "routeName": "Full Circuit",
+        "stops": [
+            {
+                "stopId": "S001",
+                "stopName": "AMIC",
+                "arrivalTime": "08:20",
+                "departureTime": "08:25",
+                "coordinates": {
+                    "latitude": -26.1924,
+                    "longitude": 28.0306
                 }
-            ];
-
-            displayBusSchedule(busData);
+            },
+            {
+                "stopId": "S002",
+                "stopName": "Knockando",
+                "arrivalTime": "08:30",
+                "departureTime": "08:35",
+                "coordinates": {
+                    "latitude": -26.1932,
+                    "longitude": 28.032
+                }
+            }
+        ],
+        "busInfo": {
+            "busId": "BUS001",
+            "capacity": 40
         }
+    },
+    {
+        "scheduleId": "SCH002",
+        "routeId": "R002",
+        "routeName": "Reverse Circuit",
+        "stops": [
+            {
+                "stopId": "S001",
+                "stopName": "Knockando",
+                "arrivalTime": "08:00",
+                "departureTime": "08:05",
+                "coordinates": {
+                    "latitude": -26.1924,
+                    "longitude": 28.0306
+                }
+            },
+            {
+                "stopId": "S002",
+                "stopName": "AMIC",
+                "arrivalTime": "08:15",
+                "departureTime": "08:20",
+                "coordinates": {
+                    "latitude": -26.1932,
+                    "longitude": 28.032
+                }
+            }
+        ],
+        "busInfo": {
+            "busId": "BUS002",
+            "capacity": 20
+        }
+    },
+    {
+        "scheduleId": "SCH003",
+        "routeId": "R003",
+        "routeName": "Wits Junction to Education Campus",
+        "stops": [
+            {
+                "stopId": "S001",
+                "stopName": "Wits Junction",
+                "arrivalTime": "09:00",
+                "departureTime": "09:05",
+                "coordinates": {
+                    "latitude": -26.1924,
+                    "longitude": 28.0306
+                }
+            },
+            {
+                "stopId": "S002",
+                "stopName": "Education Campus",
+                "arrivalTime": "10:00",
+                "departureTime": "10:05",
+                "coordinates": {
+                    "latitude": -26.1932,
+                    "longitude": 28.032
+                }
+            }
+        ],
+        "busInfo": {
+            "busId": "BUS003",
+            "capacity": 30
+        }
+    }
+];
+
+
+    try {
+        const response = await fetch('http://52.40.184.137/api/v1/bus-schedule/');
+        if (!response.ok) throw new Error('Network response was not ok');
+        const busData = await response.json();
+        console.log('Fetched data from API');
+        displayBusSchedule(busData); // Use busData directly
+    } catch (error) {
+        console.error('Error fetching bus schedule, using mock data:', error);
+        console.log('Using mock data due to fetch error');
+        displayBusSchedule(mockbusData);
+    }
+}
+
+
+        
 
         function displayBusSchedule(data) {
             const busScheduleList = document.getElementById('bus-schedule-list');
@@ -166,7 +179,7 @@
                 busCard.className = 'bus-card';
                 busCard.innerHTML = `
                     <div class="route-info">
-                        <h2>Route: ${schedule.routeName}</h2>
+                        <h2>Route: ${schedule.routeId}</h2>
                         <p><strong>Schedule ID:</strong> ${schedule.scheduleId}</p>
                         <p><strong>Route ID:</strong> ${schedule.routeId}</p>
                         <p><strong>Bus ID:</strong> ${schedule.busInfo.busId}</p>
