@@ -8,6 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Get All Sessions of a tutor
     const getAllSessionsByTutor = async (tutor) => {
+        if (pendingSessions) showSkeletonLoaderForSessions(pendingSessions);
+        if (upcomingSessions) showSkeletonLoaderForSessions(upcomingSessions);
+        if (completedSessions) showSkeletonLoaderForSessions(completedSessions);
+        if (cancelledSessions) showSkeletonLoaderForSessions(cancelledSessions);
         try {
             const response = await fetch(`${API_BASE_URL}/bookings/tutor/${tutor}`, {
                 method: 'GET',
@@ -17,6 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             const data = await response.json();
             console.log(data);
+            removeSkeletonLoaderForSessions(pendingSessions);
+            removeSkeletonLoaderForSessions(upcomingSessions);
+            removeSkeletonLoaderForSessions(completedSessions);
+            removeSkeletonLoaderForSessions(cancelledSessions);
             displaySessions(data);
         } catch (error) {
             console.error('Error:', error);
@@ -298,4 +306,41 @@ function cancelBooking(button) {
     .catch(error => {
         console.error('Error:', error);
     });
+}
+
+// Function to show skeleton loader for sessions
+function showSkeletonLoaderForSessions(listElement) {
+
+    listElement.innerHTML = `
+        <div class="skeleton-session">
+            <div class="skeleton-text skeleton-session-title"></div>
+            <div class="skeleton-text skeleton-date"></div>
+            <div class="skeleton-info">
+                <div class="skeleton-text skeleton-subject"></div>
+                <div class="skeleton-text skeleton-time"></div>
+                <div class="skeleton-text skeleton-student"></div>
+                <div class="skeleton-text skeleton-meeting-type"></div>
+            </div>
+        </div>
+        <div class="skeleton-session">
+            <div class="skeleton-text skeleton-session-title"></div>
+            <div class="skeleton-text skeleton-date"></div>
+            <div class="skeleton-info">
+                <div class="skeleton-text skeleton-subject"></div>
+                <div class="skeleton-text skeleton-time"></div>
+                <div class="skeleton-text skeleton-student"></div>
+                <div class="skeleton-text skeleton-meeting-type"></div>
+            </div>
+        </div>
+        
+    `;
+}
+
+// Function to remove skeleton loader for sessions
+function removeSkeletonLoaderForSessions(listElement) {
+    // Check if the listElement exists and is not null
+    if (listElement) {
+        // Clear the inner HTML to remove skeletons
+        listElement.innerHTML = '';
+    }
 }

@@ -81,8 +81,14 @@ class AppSidebar extends HTMLElement {
     // Handle sidebar toggle
     const sidebar = this.querySelector('#sidebar');
     const toggleButton = this.querySelector('#toggleButton');
+
+    const sidebarState = localStorage.getItem('sidebar-collapsed');
+    if (sidebarState === 'true') {
+        sidebar.classList.add('collapsed');
+    }
     toggleButton.addEventListener('click', () => {
       sidebar.classList.toggle('collapsed');
+      localStorage.setItem('sidebar-collapsed', sidebar.classList.contains('collapsed'));
     });
   }
 }

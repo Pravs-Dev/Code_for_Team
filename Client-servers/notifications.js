@@ -5,13 +5,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Fetch notifications for the logged-in user
     async function fetchNotifications() {
+        showSkeletonLoaderForSessions(notificationsContainer);
         try {
             const response = await fetch(`${API_BASE_URL}/notifications?user=${userId}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch notifications');
             }
             const notifications = await response.json();
-
             // If there are no notifications, update the UI accordingly
             if (notifications.length === 0) {
                 notificationsContainer.innerHTML = '<p>No new notifications.</p>';
@@ -135,3 +135,38 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Fetch notifications on page load
     fetchNotifications();
 });
+function showSkeletonLoaderForSessions(listElement) {
+
+    listElement.innerHTML = `
+        <div class="skeleton-session">
+            <div class="skeleton-text skeleton-session-title"></div>
+            <div class="skeleton-text skeleton-date"></div>
+            <div class="skeleton-info">
+                <div class="skeleton-text skeleton-subject"></div>
+                <div class="skeleton-text skeleton-time"></div>
+                <div class="skeleton-text skeleton-student"></div>
+                <div class="skeleton-text skeleton-meeting-type"></div>
+            </div>
+        </div>
+        <div class="skeleton-session">
+            <div class="skeleton-text skeleton-session-title"></div>
+            <div class="skeleton-text skeleton-date"></div>
+            <div class="skeleton-info">
+                <div class="skeleton-text skeleton-subject"></div>
+                <div class="skeleton-text skeleton-time"></div>
+                <div class="skeleton-text skeleton-student"></div>
+                <div class="skeleton-text skeleton-meeting-type"></div>
+            </div>
+        </div>
+        
+    `;
+}
+
+// Function to remove skeleton loader for sessions
+function removeSkeletonLoaderForSessions(listElement) {
+    // Check if the listElement exists and is not null
+    if (listElement) {
+        // Clear the inner HTML to remove skeletons
+        listElement.innerHTML = '';
+    }
+}

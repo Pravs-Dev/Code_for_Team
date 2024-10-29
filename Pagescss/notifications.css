@@ -124,3 +124,74 @@
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
+
+
+/* Container for each session skeleton card */
+.skeleton-session {
+    width: 150px;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    animation: skeleton-loading 1.5s infinite;
+}
+
+/* Styling each text skeleton */
+.skeleton-session-title {
+    width: 40%;
+    height: 25px;
+    background-color: #d0d0d0;
+    border-radius: 5px;
+}
+
+.skeleton-date {
+    width: 30%;
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.skeleton-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.skeleton-subject,
+.skeleton-time,
+.skeleton-student,
+.skeleton-meeting-type {
+    width: 80%;
+    height: 15px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+}
+
+.skeleton-subject {
+    width: 60%;
+}
+
+.skeleton-time {
+    width: 40%;
+}
+
+.skeleton-student,
+.skeleton-meeting-type {
+    width: 70%;
+}
+
+/* Keyframes for pulsing animation */
+@keyframes skeleton-loading {
+    0% {
+        background-color: #e0e0e0;
+    }
+    50% {
+        background-color: #f0f0f0;
+    }
+    100% {
+        background-color: #e0e0e0;
+    }
+}

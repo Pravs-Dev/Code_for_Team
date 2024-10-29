@@ -539,31 +539,9 @@ button[type="submit"]:hover {
     height: 90vh; /* Take up almost the full viewport height */
     margin: 20px auto; /* Center it horizontally */
     overflow-y: auto; /* Allow scrolling if content overflows */
-    margin-left: 250px;
+    margin-left: 180px;
 }
 
-/* Make the container responsive */
-@media (max-width: 768px) {
-    .notifications-container {
-        width: 95%; /* Reduce width slightly for smaller screens */
-        padding: 20px;
-        height: 80vh; /* Adjust height on smaller screens */
-    }
-}
-
-/* Notifications Header */
-/* Notifications Container - Full Page Styling */
-.notifications-container {
-    padding: 40px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 70%; /* Make the container take up almost the full page width */
-    height: 90vh; /* Take up almost the full viewport height */
-    margin: 20px auto; /* Center it horizontally */
-    overflow-y: auto; /* Allow scrolling if content overflows */
-    margin-left: 250px;
-}
 
 /* Make the container responsive */
 @media (max-width: 768px) {
@@ -574,7 +552,7 @@ button[type="submit"]:hover {
         width: 95%; /* Full width for mobile with slight padding */
         padding: 20px; /* Reduce padding for smaller screens */
         height: auto; /* Auto height for better fit */
-        margin-left: 0; /* Remove the margin-left */
+        margin-left: 250px; /* Remove the margin-left */
     }
 
     .notifications-header {
@@ -1493,4 +1471,74 @@ body.dark-theme {
 
 .share-btn:hover {
     background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Container for each session skeleton card */
+.skeleton-session {
+    width: 150px;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    animation: skeleton-loading 1.5s infinite;
+}
+
+/* Styling each text skeleton */
+.skeleton-session-title {
+    width: 40%;
+    height: 25px;
+    background-color: #d0d0d0;
+    border-radius: 5px;
+}
+
+.skeleton-date {
+    width: 30%;
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.skeleton-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.skeleton-subject,
+.skeleton-time,
+.skeleton-student,
+.skeleton-meeting-type {
+    width: 80%;
+    height: 15px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+}
+
+.skeleton-subject {
+    width: 60%;
+}
+
+.skeleton-time {
+    width: 40%;
+}
+
+.skeleton-student,
+.skeleton-meeting-type {
+    width: 70%;
+}
+
+/* Keyframes for pulsing animation */
+@keyframes skeleton-loading {
+    0% {
+        background-color: #e0e0e0;
+    }
+    50% {
+        background-color: #f0f0f0;
+    }
+    100% {
+        background-color: #e0e0e0;
+    }
 }
