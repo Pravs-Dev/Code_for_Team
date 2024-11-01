@@ -19,11 +19,11 @@
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "Backup1" ]
   workflow_dispatch:
 
 env:
-  AZURE_WEBAPP_NAME: WitsCampusTutoring    # set this to your application's name
+  AZURE_WEBAPP_NAME: BackEnd2077    # set this to your application's name
   NODE_VERSION: '20.x'                # set this to the node version to use
 
 permissions:
@@ -51,7 +51,7 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_P }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_P2 }}
 
 
   
